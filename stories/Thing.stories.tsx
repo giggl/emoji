@@ -23,4 +23,6 @@ const Template: Story<Props> = (args) => <GigglEmojiPicker {...args} />;
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+  children: 'Hey',
+};

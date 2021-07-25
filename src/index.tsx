@@ -1,16 +1,18 @@
 import React, { HTMLAttributes, ReactChild } from 'react';
-import styled from 'styled-components';
+import { styled } from './css';
 
 interface ContainerTheme {
   background: string;
+  color: string;
   width: number;
   height: number;
 }
 
 const defaultContainerTheme: ContainerTheme = {
   background: '#161214',
-  width: 400,
-  height: 250,
+  color: '#cccccc',
+  width: 250,
+  height: 400,
 };
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -26,10 +28,11 @@ export function GigglEmojiPicker(props: Props) {
   );
 }
 
-const StyledContainer = styled.div<ContainerTheme>`
-  position: relative;
-
-  height: ${(p) => p.height};
-  width: ${(p) => p.width};
-  background: ${(p) => p.background};
-`;
+const StyledContainer = styled('div')<ContainerTheme>({
+  background: (p) => p.background,
+  width: (p) => p.width,
+  height: (p) => p.height,
+  color: (p) => p.color,
+  borderRadius: 20,
+  boxSizing: 'border-box',
+});
