@@ -22,7 +22,7 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=17"
   },
   "husky": {
     "hooks": {
@@ -36,7 +36,7 @@
     "trailingComma": "es5"
   },
   "name": "giggl_emoji_picker",
-  "author": "Alistair Smith",
+  "author": "Giggl",
   "module": "dist/giggl_emoji_picker.esm.js",
   "size-limit": [
     {
@@ -58,7 +58,12 @@
     "@storybook/react": "^6.3.5",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
     "babel-loader": "^8.2.2",
+    "eslint": "^7.31.0",
+    "eslint-config-xo": "^0.37.0",
+    "eslint-plugin-react": "^7.24.0",
     "husky": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -67,5 +72,28 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^4.3.5"
+  },
+  "description": "Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giggl/giggl_emoji_picker.git"
+  },
+  "keywords": [
+    "react",
+    "emoji",
+    "picker",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/giggl/giggl_emoji_picker/issues"
+  },
+  "homepage": "https://github.com/giggl/giggl_emoji_picker#readme",
+  "dependencies": {
+    "@types/styled-components": "^5.1.11",
+    "styled-components": "^5.3.0"
   }
 }
