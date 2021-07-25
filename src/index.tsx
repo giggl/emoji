@@ -18,6 +18,7 @@ const defaultContainerTheme: ContainerTheme = {
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   children?: ReactChild;
   theme?: Partial<ContainerTheme>;
+  onPick: (item: string) => unknown;
 }
 
 export function GigglEmojiPicker(props: Props) {

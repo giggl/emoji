@@ -94,5 +94,7 @@
     "url": "https://github.com/giggl/giggl_emoji_picker/issues"
   },
   "homepage": "https://github.com/giggl/giggl_emoji_picker#readme",
-  "dependencies": {}
+  "dependencies": {
+    "react-virtual": "^2.8.0"
+  }
 }

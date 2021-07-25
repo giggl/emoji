@@ -17,12 +17,13 @@ const meta: Meta<Props> = {
   },
 };
 
-export default meta;
-
 const Template: Story<Props> = (args) => <GigglEmojiPicker {...args} />;
 
-export const Default = Template.bind({});
+const Default = Template.bind({});
 
 Default.args = {
   children: 'Hey',
 };
+
+export { Default };
+export default meta;
