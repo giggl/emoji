@@ -67,6 +67,7 @@
     "eslint-config-xo-typescript": "^0.43.0",
     "eslint-plugin-react": "^7.24.0",
     "husky": "^7.0.1",
+    "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",

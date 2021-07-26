@@ -1,4 +1,10 @@
-import { createElement, ReactHTML, CSSProperties, useDebugValue } from 'react';
+import {
+  createElement,
+  ReactHTML,
+  CSSProperties,
+  useDebugValue,
+  FC,
+} from 'react';
 
 type StyledProps<P> = {
   [Key in keyof CSSProperties]:
@@ -6,42 +12,38 @@ type StyledProps<P> = {
     | ((props: P) => CSSProperties[Key]);
 };
 
-export function styled<Tag extends keyof ReactHTML>(tag: Tag) {
-  return <P>(style: StyledProps<P>) => {
+export function styled<Tag extends keyof ReactHTML | FC>(tag: Tag) {
+  return <P>(componentStyles: StyledProps<P>) => {
     return function CSSStyledComponent(props: P) {
-      const mergedStyled: CSSProperties = {};
+      const style: CSSProperties = {};
 
-      for (const key in style) {
-        const value = style[key as keyof typeof style];
+      for (const key in componentStyles) {
+        const value = componentStyles[key as keyof typeof componentStyles];
 
         if (!value) {
           continue;
         }
 
-        if (typeof value === 'function') {
-          const result = value(props);
-          // @ts-expect-error
-          mergedStyled[key] = result;
-        } else {
-          // @ts-expect-error
-          mergedStyled[key] = value;
-        }
+        // @ts-expect-error
+        style[key] = typeof value === 'function' ? value(props) : value;
       }
 
-      const mergedProps: P = {} as P;
+      const mergedProps = {} as P;
 
       for (const key in props) {
+        // If the key exists as a style, we don't want to add it to props,
+        // we should just ignore it.
         // @ts-expect-error
-        if (mergedStyled[key]) {
+        if (style[key]) {
           continue;
         }
 
         mergedProps[key] = props[key];
       }
 
-      useDebugValue({ mergedProps, mergedStyled });
+      useDebugValue({ mergedProps, mergedStyled: style });
 
-      return createElement(tag, { ...mergedProps, style: mergedStyled });
+      return createElement<P>(tag, { ...mergedProps, style });
     };
   };
 }
