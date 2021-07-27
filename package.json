@@ -73,7 +73,7 @@
 		"tslib": "^2.3.0",
 		"typescript": "^4.3.5"
 	},
-	"description": "Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.",
+	"description": "React emoji picker powered by Twemoji. Maintained by the Giggl team.",
 	"directories": {
 		"example": "example",
 		"test": "test"
