@@ -57,6 +57,7 @@
 		"@typescript-eslint/parser": "^4.28.5",
 		"babel-loader": "^8.2.2",
 		"eslint": "^7.31.0",
+		"eslint-config-react-app": "^6.0.0",
 		"eslint-config-xo": "^0.37.0",
 		"eslint-config-xo-react": "^0.25.0",
 		"eslint-config-xo-typescript": "^0.43.0",
