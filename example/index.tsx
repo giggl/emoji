@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import {GigglEmojiPicker} from '../.';
 
 export const App = () => {
@@ -14,5 +13,3 @@ export const App = () => {
 		</div>
 	);
 };
-
-ReactDOM.render(<App />, document.getElementById('root'));
