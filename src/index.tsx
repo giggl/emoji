@@ -1,39 +1,32 @@
-import React, { HTMLAttributes, ReactChild } from 'react';
-import { styled } from './css';
+import React, {HTMLAttributes, ReactChild} from 'react';
+import {styled} from 'goober';
 
 interface ContainerTheme {
-  background: string;
-  color: string;
-  width: number;
-  height: number;
+	background: string;
+	color: string;
+	width: string;
+	height: string;
 }
 
 const defaultContainerTheme: ContainerTheme = {
-  background: '#161214',
-  color: '#cccccc',
-  width: 250,
-  height: 400,
+	background: '#161214',
+	color: '#cccccc',
+	width: '250px',
+	height: '400px',
 };
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactChild;
-  theme?: Partial<ContainerTheme>;
-  onPick: (item: string) => unknown;
+	children?: ReactChild;
+	theme?: Partial<ContainerTheme>;
+	onPick: (item: string) => unknown;
 }
 
-export function GigglEmojiPicker(props: Props) {
-  return (
-    <StyledContainer {...defaultContainerTheme} {...props.theme}>
-      {props.children}
-    </StyledContainer>
-  );
-}
+export const GigglEmojiPicker = (props: Props) => (
+	<StyledContainer containerTheme={props.theme}>{props.children}</StyledContainer>
+);
 
-const StyledContainer = styled('div')<ContainerTheme>({
-  background: (p) => p.background,
-  width: (p) => p.width,
-  height: (p) => p.height,
-  color: (p) => p.color,
-  borderRadius: 20,
-  boxSizing: 'border-box',
-});
+const StyledContainer = styled('div')<{containerTheme?: Partial<ContainerTheme>}>(props => ({
+	...defaultContainerTheme,
+	...props.containerTheme,
+	borderRadius: '20px',
+}));
