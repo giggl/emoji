@@ -27,7 +27,7 @@ export const GigglEmojiPicker = (props: Props) => {
 	const parentRef = useRef<HTMLDivElement | null>(null);
 
 	const rowVirtualizer = useVirtual({
-		size: 500,
+		size: 5000,
 		parentRef,
 		estimateSize: useCallback(() => 35, []),
 	});
