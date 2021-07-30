@@ -27,16 +27,17 @@ export const GigglEmojiPicker = (props: Props) => {
 	const parentRef = useRef<HTMLDivElement | null>(null);
 
 	const rowVirtualizer = useVirtual({
-		size: 5000,
+		size: emojis.length,
 		parentRef,
 		estimateSize: useCallback(() => 35, []),
+		overscan: 5,
 	});
 
 	return (
 		<StyledContainer containerTheme={props.theme}>
 			<div ref={parentRef}>
 				{rowVirtualizer.virtualItems.map(item => (
-					<div key={item.start}>{JSON.stringify(emojis[item.index])}</div>
+					<div key={item.index}>{JSON.stringify(emojis[item.index])}</div>
 				))}
 			</div>
 		</StyledContainer>
