@@ -16,6 +16,7 @@ module.exports = {
 	plugins: ['react', '@typescript-eslint'],
 	rules: {
 		'react/jsx-tag-spacing': 0,
+		'react/function-component-definition': 0,
 	},
 	ignorePatterns: ['**/*.js'],
 };
