@@ -10,7 +10,11 @@ import {styled, setup} from 'goober';
 import {useVirtual} from 'react-virtual';
 import emojis from './emoji.json';
 import {enforceInferType} from './utils/types';
+import {EmojiList} from './types';
 
+// Goober requires it idk
+// ask goober not me i did not make goober
+// guys
 setup(h);
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
@@ -19,13 +23,20 @@ const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	width: '250px',
 	height: '400px',
 	borderRadius: '20px',
+	display: 'grid',
+	overflow: 'hidden',
+	overflowY: 'auto',
+	gridTemplateColumns: 'repeat(3, 1fr)',
+	padding: '5px',
+	boxSizing: 'border-box',
+	fontSize: '80%',
 });
 
 export type ContainerTheme = typeof defaultContainerTheme;
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactChild;
-	theme?: Partial<ContainerTheme>;
+	style?: Partial<ContainerTheme>;
 	onPick: (item: string) => unknown;
 	debug?: boolean;
 }
@@ -36,7 +47,7 @@ export const GigglEmojiPicker = (props: Props) => {
 	const rowVirtualizer = useVirtual({
 		size: emojis.length,
 		parentRef,
-		estimateSize: useCallback(() => 50000, []),
+		estimateSize: useCallback(() => 50, []),
 		overscan: 5,
 	});
 
@@ -47,18 +58,25 @@ export const GigglEmojiPicker = (props: Props) => {
 	}
 
 	return (
-		<StyledContainer containerTheme={props.theme}>
+		<StyledContainer containerTheme={props.style}>
 			{props.debug && (
 				<div style={{position: 'fixed', top: 20, left: 20, background: 'black'}}>
 					{JSON.stringify(rest)}
 				</div>
 			)}
 			<div ref={parentRef}>
-				{rowVirtualizer.virtualItems.map(item => (
-					<div ref={item.measureRef} key={item.index}>
-						{JSON.stringify(emojis[item.index])}
-					</div>
-				))}
+				{rowVirtualizer.virtualItems.map(item => {
+					const emoji = (emojis as EmojiList[])[item.index];
+					return (
+						<div
+							ref={item.measureRef}
+							key={item.index}
+							style={{height: '51px', overflow: 'hidden'}}
+						>
+							{emoji.name}
+						</div>
+					);
+				})}
 			</div>
 		</StyledContainer>
 	);

@@ -1,4 +1,4 @@
-export interface Emoji {
+export interface EmojiList {
 	name: string;
 	unified: string;
 	non_qualified?: string;
