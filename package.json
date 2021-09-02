@@ -18,7 +18,8 @@
 		"lint": "eslint ./src/**/*.ts*",
 		"size": "size-limit",
 		"analyze": "size-limit --why",
-		"dev": "parcel ./example/index.html"
+		"dev": "parcel ./example/index.html",
+		"build-example": "parcel build ./example/index.html"
 	},
 	"peerDependencies": {
 		"react": ">=17"
