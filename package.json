@@ -17,7 +17,8 @@
 		"build": "tsup src/index.ts --format esm,cjs --dts --minify",
 		"lint": "eslint ./src/**/*.ts*",
 		"size": "size-limit",
-		"analyze": "size-limit --why"
+		"analyze": "size-limit --why",
+		"dev": "parcel ./example/index.html"
 	},
 	"peerDependencies": {
 		"react": ">=17"
