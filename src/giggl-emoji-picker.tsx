@@ -1,7 +1,9 @@
-import React, {HTMLAttributes, ReactChild, useCallback, useRef} from 'react';
-import {styled} from 'goober';
+import React, {HTMLAttributes, ReactChild, useCallback, useRef, createElement as h} from 'react';
+import {styled, setup} from 'goober';
 import {useVirtual} from 'react-virtual';
 import emojis from './emoji.json';
+
+setup(h);
 
 interface ContainerTheme {
 	background: string;
