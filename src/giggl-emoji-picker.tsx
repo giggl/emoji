@@ -65,17 +65,22 @@ export const GigglEmojiPicker = (props: Props) => {
 					{JSON.stringify(rest)}
 				</div>
 			)}
+
 			<div ref={parentRef}>
 				{rowVirtualizer.virtualItems.map(item => {
 					const emoji = (emojis as EmojiListItem[])[item.index];
+					const codes = emoji.unified.split('-').map(char => {
+						const code = parseInt(char, 16);
+						return String.fromCodePoint(code);
+					});
 
 					return (
 						<div
 							ref={item.measureRef}
-							key={item.index}
+							key={emoji.name}
 							style={{height: '50px', overflow: 'hidden'}}
 						>
-							{emoji.name}
+							{codes[0]}
 						</div>
 					);
 				})}
