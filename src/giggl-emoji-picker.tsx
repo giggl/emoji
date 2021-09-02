@@ -10,7 +10,7 @@ import {styled, setup} from 'goober';
 import {useVirtual} from 'react-virtual';
 import emojis from './emoji.json';
 import {enforceInferType} from './utils/types';
-import {EmojiList} from './types';
+import {EmojiListItem} from './types';
 
 // Goober requires it idk
 // ask goober not me i did not make goober
@@ -18,11 +18,11 @@ import {EmojiList} from './types';
 setup(h);
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
-	background: '#161214',
+	background: '#202023',
 	color: '#cccccc',
 	width: '250px',
 	height: '400px',
-	borderRadius: '20px',
+	borderRadius: '10px',
 	display: 'grid',
 	overflow: 'hidden',
 	overflowY: 'auto',
@@ -30,6 +30,7 @@ const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	padding: '5px',
 	boxSizing: 'border-box',
 	fontSize: '80%',
+	border: '1px solid #49494a',
 });
 
 export type ContainerTheme = typeof defaultContainerTheme;
@@ -48,7 +49,7 @@ export const GigglEmojiPicker = (props: Props) => {
 		size: emojis.length,
 		parentRef,
 		estimateSize: useCallback(() => 50, []),
-		overscan: 5,
+		overscan: 200,
 	});
 
 	const {virtualItems, ...rest} = rowVirtualizer;
@@ -66,12 +67,13 @@ export const GigglEmojiPicker = (props: Props) => {
 			)}
 			<div ref={parentRef}>
 				{rowVirtualizer.virtualItems.map(item => {
-					const emoji = (emojis as EmojiList[])[item.index];
+					const emoji = (emojis as EmojiListItem[])[item.index];
+
 					return (
 						<div
 							ref={item.measureRef}
 							key={item.index}
-							style={{height: '51px', overflow: 'hidden'}}
+							style={{height: '50px', overflow: 'hidden'}}
 						>
 							{emoji.name}
 						</div>

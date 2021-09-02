@@ -1,4 +1,4 @@
-export interface EmojiList {
+export interface EmojiListItem {
 	name: string;
 	unified: string;
 	non_qualified?: string;
@@ -27,44 +27,44 @@ export interface EmojiList {
 }
 
 export interface SkinVariations {
-	'1F3FB'?: EmojiWithObseletes;
-	'1F3FC'?: EmojiWithObseletes;
-	'1F3FD'?: EmojiWithObseletes;
-	'1F3FE'?: EmojiWithObseletes;
-	'1F3FF'?: EmojiWithObseletes;
-	'1F3FB-1F3FB'?: Emoji;
-	'1F3FB-1F3FC'?: Emoji;
-	'1F3FB-1F3FD'?: Emoji;
-	'1F3FB-1F3FE'?: Emoji;
-	'1F3FB-1F3FF'?: Emoji;
-	'1F3FC-1F3FB'?: Emoji;
-	'1F3FC-1F3FC'?: Emoji;
-	'1F3FC-1F3FD'?: Emoji;
-	'1F3FC-1F3FE'?: Emoji;
-	'1F3FC-1F3FF'?: Emoji;
-	'1F3FD-1F3FB'?: Emoji;
-	'1F3FD-1F3FC'?: Emoji;
-	'1F3FD-1F3FD'?: Emoji;
-	'1F3FD-1F3FE'?: Emoji;
-	'1F3FD-1F3FF'?: Emoji;
-	'1F3FE-1F3FB'?: Emoji;
-	'1F3FE-1F3FC'?: Emoji;
-	'1F3FE-1F3FD'?: Emoji;
-	'1F3FE-1F3FE'?: Emoji;
-	'1F3FE-1F3FF'?: Emoji;
-	'1F3FF-1F3FB'?: Emoji;
-	'1F3FF-1F3FC'?: Emoji;
-	'1F3FF-1F3FD'?: Emoji;
-	'1F3FF-1F3FE'?: Emoji;
-	'1F3FF-1F3FF'?: Emoji;
+	'1F3FB'?: SkinVariantWithObseletes;
+	'1F3FC'?: SkinVariantWithObseletes;
+	'1F3FD'?: SkinVariantWithObseletes;
+	'1F3FE'?: SkinVariantWithObseletes;
+	'1F3FF'?: SkinVariantWithObseletes;
+	'1F3FB-1F3FB'?: BaseSkinVariant;
+	'1F3FB-1F3FC'?: BaseSkinVariant;
+	'1F3FB-1F3FD'?: BaseSkinVariant;
+	'1F3FB-1F3FE'?: BaseSkinVariant;
+	'1F3FB-1F3FF'?: BaseSkinVariant;
+	'1F3FC-1F3FB'?: BaseSkinVariant;
+	'1F3FC-1F3FC'?: BaseSkinVariant;
+	'1F3FC-1F3FD'?: BaseSkinVariant;
+	'1F3FC-1F3FE'?: BaseSkinVariant;
+	'1F3FC-1F3FF'?: BaseSkinVariant;
+	'1F3FD-1F3FB'?: BaseSkinVariant;
+	'1F3FD-1F3FC'?: BaseSkinVariant;
+	'1F3FD-1F3FD'?: BaseSkinVariant;
+	'1F3FD-1F3FE'?: BaseSkinVariant;
+	'1F3FD-1F3FF'?: BaseSkinVariant;
+	'1F3FE-1F3FB'?: BaseSkinVariant;
+	'1F3FE-1F3FC'?: BaseSkinVariant;
+	'1F3FE-1F3FD'?: BaseSkinVariant;
+	'1F3FE-1F3FE'?: BaseSkinVariant;
+	'1F3FE-1F3FF'?: BaseSkinVariant;
+	'1F3FF-1F3FB'?: BaseSkinVariant;
+	'1F3FF-1F3FC'?: BaseSkinVariant;
+	'1F3FF-1F3FD'?: BaseSkinVariant;
+	'1F3FF-1F3FE'?: BaseSkinVariant;
+	'1F3FF-1F3FF'?: BaseSkinVariant;
 }
 
-export interface Obseletes {
+export interface SkinVariantObseletes {
 	obsoleted_by?: string;
 	obsoletes?: string;
 }
 
-export interface Emoji {
+export interface BaseSkinVariant {
 	unified: string;
 	non_qualified?: string;
 	image: string;
@@ -77,4 +77,4 @@ export interface Emoji {
 	has_img_facebook: boolean;
 }
 
-export type EmojiWithObseletes = Emoji & Obseletes;
+export type SkinVariantWithObseletes = BaseSkinVariant & SkinVariantObseletes;
