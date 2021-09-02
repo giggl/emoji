@@ -8,3 +8,41 @@ export function enforceInferType<T>() {
 		return data;
 	};
 }
+
+/**
+ * TypeScript lacks a way of typing a record of keys only but not values.
+ * we need this because we want an object of typed keys but we want to leave the values inferred.
+ * thankfully, we can do this with generics. This function allows the second generic's values to be inferred
+ * so that our object is fully type safe for hugely complex types, but we can guarantee that all the keys we need exist.
+ * It's not perfect, but it gets the job done for the time being
+ */
+export function ensureKeys<T>() {
+	/**
+	 * Function that returns the value that gets put in, values are type-safely inferred
+	 */
+	return function <X extends Record<keyof T, unknown>>(data: X) {
+		return data;
+	};
+}
+
+/**
+ * TypeScript currently lacks a way of typing a record of values whilst inferring the keys.
+ * This is the opposite of ensureKeys as the keys are what happen to be inferred here. Values must be consistent from each property.
+ */
+export function ensureValues<T>() {
+	return function <X extends Record<string, T>>(record: X) {
+		return record;
+	};
+}
+
+/**
+ * Pick a subset of keys from an object in a type-safe fashion
+ * @param obj
+ * @param keys
+ */
+export function pick<T, K extends Array<keyof T>>(obj: T, keys: K): Pick<T, K[number]> {
+	return Object.fromEntries(keys.filter(key => key in obj).map(key => [key, obj[key]])) as Pick<
+		T,
+		K[number]
+	>;
+}

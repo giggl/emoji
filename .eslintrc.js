@@ -17,6 +17,7 @@ module.exports = {
 	rules: {
 		'react/jsx-tag-spacing': 0,
 		'react/function-component-definition': 0,
+		'@typescript-eslint/indent': 0,
 	},
 	ignorePatterns: ['**/*.js'],
 };
