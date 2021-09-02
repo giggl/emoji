@@ -31,8 +31,7 @@ export const GigglEmojiPicker = (props: Props) => {
 	const rowVirtualizer = useVirtual({
 		size: emojis.length,
 		parentRef,
-		estimateSize: useCallback(() => 35, []),
-		overscan: 5,
+		overscan: 0,
 	});
 
 	return (
