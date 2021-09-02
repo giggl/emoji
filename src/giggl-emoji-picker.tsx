@@ -11,25 +11,25 @@ import {useVirtual} from 'react-virtual';
 import emojis from './emoji.json';
 import {enforceInferType} from './utils/types';
 import {EmojiListItem} from './types';
+import {useInputFilter} from 'use-input-filter';
 
 // Goober requires it idk
 // ask goober not me i did not make goober
 // guys
 setup(h);
 
+const CONTAINER_HEIGHT = '400px';
+const EMOJI_DIMENSION = 40;
+
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	background: '#202023',
 	color: '#cccccc',
 	width: '250px',
-	height: '400px',
 	borderRadius: '10px',
-	display: 'grid',
 	overflow: 'hidden',
 	overflowY: 'auto',
-	gridTemplateColumns: 'repeat(3, 1fr)',
 	padding: '5px',
 	boxSizing: 'border-box',
-	fontSize: '80%',
 	border: '1px solid #49494a',
 });
 
@@ -44,12 +44,22 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export const GigglEmojiPicker = (props: Props) => {
 	const parentRef = useRef<HTMLDivElement | null>(null);
+	const {state, setState, filtered} = useInputFilter((item, state) => {
+		const trimmed = state.trim().toLowerCase();
+
+		if (trimmed === '') {
+			return true;
+		}
+
+		return (item.name + item.short_name + item.category).toLowerCase().includes(trimmed);
+	}, emojis as EmojiListItem[]);
 
 	const rowVirtualizer = useVirtual({
-		size: emojis.length,
+		size: filtered.length,
 		parentRef,
-		estimateSize: useCallback(() => 50, []),
-		overscan: 200,
+		estimateSize: useCallback(() => EMOJI_DIMENSION, []),
+		overscan: filtered.length / 10,
+		keyExtractor: idx => filtered[idx].name,
 	});
 
 	const {virtualItems, ...rest} = rowVirtualizer;
@@ -66,28 +76,55 @@ export const GigglEmojiPicker = (props: Props) => {
 				</div>
 			)}
 
-			<div ref={parentRef}>
+			<Input
+				type="text"
+				value={state}
+				onChange={e => {
+					setState(e.target.value);
+				}}
+			/>
+
+			<EmojiGrid ref={parentRef}>
 				{rowVirtualizer.virtualItems.map(item => {
-					const emoji = (emojis as EmojiListItem[])[item.index];
-					const codes = emoji.unified.split('-').map(char => {
-						const code = parseInt(char, 16);
-						return String.fromCodePoint(code);
-					});
+					const emoji = filtered[item.index];
+					const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 
 					return (
-						<div
-							ref={item.measureRef}
-							key={emoji.name}
-							style={{height: '50px', overflow: 'hidden'}}
-						>
-							{codes[0]}
-						</div>
+						<EmojiCell ref={item.measureRef} key={emoji.name}>
+							{String.fromCodePoint(...codes)}
+						</EmojiCell>
 					);
 				})}
-			</div>
+			</EmojiGrid>
 		</StyledContainer>
 	);
 };
+
+const Input = styled('input')({
+	display: 'block',
+	position: 'sticky',
+	top: 0,
+	width: '100%',
+	background: 'black',
+	border: 'none',
+	padding: '3px 5px',
+	borderRadius: '5px',
+	color: 'white',
+	boxSizing: 'border-box',
+});
+
+const EmojiCell = styled('div')({
+	width: EMOJI_DIMENSION,
+	height: EMOJI_DIMENSION,
+	display: 'inline-block',
+	fontSize: '1.4em',
+});
+
+const EmojiGrid = styled('div')({
+	display: 'grid',
+	gridTemplateColumns: 'repeat(6, 1fr)',
+	height: CONTAINER_HEIGHT,
+});
 
 const StyledContainer = styled('div')<{containerTheme?: Partial<ContainerTheme>}>(props => ({
 	...defaultContainerTheme,
