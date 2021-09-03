@@ -1,12 +1,5 @@
-import React, {
-	HTMLAttributes,
-	ReactChild,
-	useRef,
-	createElement as h,
-	useCallback,
-	CSSProperties,
-} from 'react';
-import {styled, setup} from 'goober';
+import React, {createElement as h, CSSProperties, HTMLAttributes, ReactChild, useRef} from 'react';
+import {setup, styled} from 'goober';
 import {useVirtual} from 'react-virtual';
 import emojis from './emoji.json';
 import {enforceInferType} from './utils/types';
@@ -19,7 +12,7 @@ import {useInputFilter} from 'use-input-filter';
 setup(h);
 
 const CONTAINER_HEIGHT = '400px';
-const EMOJI_DIMENSION = 40;
+const EMOJI_DIMENSION = 40 as number;
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	background: '#202023',
@@ -55,11 +48,10 @@ export const GigglEmojiPicker = (props: Props) => {
 	}, emojis as EmojiListItem[]);
 
 	const rowVirtualizer = useVirtual({
-		size: filtered.length,
 		parentRef,
-		estimateSize: useCallback(() => EMOJI_DIMENSION, []),
-		overscan: filtered.length / 10,
+		size: filtered.length,
 		keyExtractor: idx => filtered[idx].name,
+		overscan: 100,
 	});
 
 	const {virtualItems, ...rest} = rowVirtualizer;
@@ -90,7 +82,7 @@ export const GigglEmojiPicker = (props: Props) => {
 					const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 
 					return (
-						<EmojiCell ref={item.measureRef} key={emoji.name}>
+						<EmojiCell ref={item.measureRef} key={item.index}>
 							{String.fromCodePoint(...codes)}
 						</EmojiCell>
 					);
@@ -114,8 +106,8 @@ const Input = styled('input')({
 });
 
 const EmojiCell = styled('div')({
-	width: EMOJI_DIMENSION,
-	height: EMOJI_DIMENSION,
+	width: `${EMOJI_DIMENSION}px`,
+	height: `${EMOJI_DIMENSION}px`,
 	display: 'inline-block',
 	fontSize: '1.4em',
 });
