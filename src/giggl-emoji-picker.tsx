@@ -58,7 +58,7 @@ export const GigglEmojiPicker = (props: Props) => {
 
 			<FixedSizeGrid
 				columnCount={GRID_WIDTH}
-				columnWidth={GRID_WIDTH * GRID_WIDTH}
+				columnWidth={EMOJI_DIMENSION}
 				height={CONTAINER_HEIGHT}
 				rowCount={chunked.length}
 				rowHeight={EMOJI_DIMENSION}
