@@ -19,7 +19,7 @@ const CONTAINER_HEIGHT = EMOJI_DIMENSION + (EMOJI_DIMENSION * COLUMN_COUNT);
 
 const containerWidthSetting = {
 	padding: CONTAINER_PADDING * 2,
-	width: EMOJI_DIMENSION * GRID_WIDTH,
+	width: (cols: number) => EMOJI_DIMENSION * cols,
 };
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
@@ -31,7 +31,6 @@ const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	padding: `${CONTAINER_PADDING}px`,
 	boxSizing: 'border-box',
 	border: '1px solid #49494a',
-	width: `${containerWidthSetting.padding + containerWidthSetting.width}px`,
 });
 
 export type ContainerTheme = typeof defaultContainerTheme;
@@ -41,6 +40,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 	style?: Partial<ContainerTheme>;
 	onPick: (item: string) => unknown;
 	debug?: boolean;
+
+	columns?: number;
+	rows?: number;
 }
 
 export const GigglEmojiPicker = (props: Props) => {
@@ -54,10 +56,17 @@ export const GigglEmojiPicker = (props: Props) => {
 		return (item.name + item.short_name + item.category).toLowerCase().includes(trimmed);
 	}, emojis as EmojiListItem[]);
 
-	const chunked = chunk(filtered, GRID_WIDTH);
+	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
+	const containerColsWidth =
+		containerWidthSetting.padding + containerWidthSetting.width(props.columns ?? GRID_WIDTH);
 
 	return (
-		<StyledContainer containerTheme={props.style}>
+		<StyledContainer
+			containerTheme={{
+				...props.style,
+				width: `${containerColsWidth}px`,
+			}}
+		>
 			<RelativeWrapper>
 				<Input
 					placeholder="🧭 Search..."
@@ -69,12 +78,12 @@ export const GigglEmojiPicker = (props: Props) => {
 				/>
 
 				<FixedSizeGrid
-					columnCount={GRID_WIDTH}
+					columnCount={props.columns ?? GRID_WIDTH}
 					columnWidth={EMOJI_DIMENSION}
 					height={CONTAINER_HEIGHT}
 					rowCount={chunked.length}
 					rowHeight={EMOJI_DIMENSION}
-					width={GRID_WIDTH * EMOJI_DIMENSION}
+					width={(props.columns ?? GRID_WIDTH) * EMOJI_DIMENSION}
 				>
 					{virtualProps => {
 						const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
@@ -151,7 +160,7 @@ const EmojiCell = styled('button')({
 
 const StyledContainer = styled<
 	HTMLAttributes<HTMLDivElement> & {
-		containerTheme?: Partial<ContainerTheme>;
+		containerTheme?: Partial<ContainerTheme | CSSProperties | (ContainerTheme & CSSProperties)>;
 	}
 >(props => {
 	// Pull containerTheme out because we don't want to apply it as a DOM property

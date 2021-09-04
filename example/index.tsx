@@ -21,6 +21,7 @@ function App() {
 
 			<GigglEmojiPicker
 				debug={debug}
+				columns={20}
 				onPick={value => {
 					// eslint-disable-next-line no-alert
 					alert(value);
