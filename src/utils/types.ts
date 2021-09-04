@@ -46,3 +46,19 @@ export function pick<T, K extends Array<keyof T>>(obj: T, keys: K): Pick<T, K[nu
 		K[number]
 	>;
 }
+
+/**
+ * Chunk an array into subsets of that array
+ * @param arr
+ * @param len
+ */
+export function chunk<T>(arr: T[], len: number) {
+	const chunks: T[][] = [];
+	let i = 0;
+
+	while (i < arr.length) {
+		chunks.push(arr.slice(i, (i += len)));
+	}
+
+	return chunks;
+}

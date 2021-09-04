@@ -1,14 +1,16 @@
 import React, {createElement as h, CSSProperties, HTMLAttributes, ReactChild} from 'react';
 import {setup, styled} from 'goober';
 import emojis from './emoji.json';
-import {enforceInferType} from './utils/types';
+import {chunk, enforceInferType} from './utils/types';
 import {EmojiListItem} from './types';
 import {useInputFilter} from 'use-input-filter';
-import {FixedSizeList as List} from 'react-window';
+import {FixedSizeGrid} from 'react-window';
 
 setup(h);
 
 const EMOJI_DIMENSION = 40;
+const GRID_WIDTH = 6;
+const CONTAINER_HEIGHT = 400;
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	background: '#202023',
@@ -42,6 +44,8 @@ export const GigglEmojiPicker = (props: Props) => {
 		return (item.name + item.short_name + item.category).toLowerCase().includes(trimmed);
 	}, emojis as EmojiListItem[]);
 
+	const chunked = chunk(filtered, GRID_WIDTH);
+
 	return (
 		<StyledContainer containerTheme={props.style}>
 			<Input
@@ -52,13 +56,30 @@ export const GigglEmojiPicker = (props: Props) => {
 				}}
 			/>
 
-			<List height={EMOJI_DIMENSION} itemSize={20} itemCount={20} width={200}>
+			<FixedSizeGrid
+				columnCount={GRID_WIDTH}
+				columnWidth={GRID_WIDTH * GRID_WIDTH}
+				height={CONTAINER_HEIGHT}
+				rowCount={chunked.length}
+				rowHeight={EMOJI_DIMENSION}
+				width={GRID_WIDTH * EMOJI_DIMENSION}
+			>
 				{props => {
-					const emoji = filtered[props.index];
+					const emoji = chunked[props.rowIndex][props.columnIndex];
+
+					if (!emoji) {
+						return null;
+					}
+
 					const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
-					return <EmojiCell key={emoji.name}>{String.fromCodePoint(...codes)}</EmojiCell>;
+
+					return (
+						<EmojiCell key={emoji.name} style={props.style}>
+							{String.fromCodePoint(...codes)}
+						</EmojiCell>
+					);
 				}}
-			</List>
+			</FixedSizeGrid>
 		</StyledContainer>
 	);
 };
