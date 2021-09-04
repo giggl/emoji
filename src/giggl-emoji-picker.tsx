@@ -10,18 +10,24 @@ setup(h);
 
 const EMOJI_DIMENSION = 40;
 const GRID_WIDTH = 6;
-const CONTAINER_HEIGHT = 400;
+const CONTAINER_HEIGHT = 450;
+const CONTAINER_PADDING = 10;
+
+const containerWidthSetting = {
+	padding: CONTAINER_PADDING * 2,
+	width: EMOJI_DIMENSION * GRID_WIDTH,
+};
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	background: '#202023',
 	color: '#cccccc',
-	width: '250px',
 	borderRadius: '10px',
 	overflow: 'hidden',
 	overflowY: 'auto',
-	padding: '5px',
+	padding: `${CONTAINER_PADDING}px`,
 	boxSizing: 'border-box',
 	border: '1px solid #49494a',
+	width: `${containerWidthSetting.padding + containerWidthSetting.width}px`,
 });
 
 export type ContainerTheme = typeof defaultContainerTheme;
@@ -48,60 +54,73 @@ export const GigglEmojiPicker = (props: Props) => {
 
 	return (
 		<StyledContainer containerTheme={props.style}>
-			<Input
-				type="text"
-				value={state}
-				onChange={e => {
-					setState(e.target.value);
-				}}
-			/>
+			<RelativeWrapper>
+				<Input
+					placeholder="🧭 Search..."
+					type="text"
+					value={state}
+					onChange={e => {
+						setState(e.target.value);
+					}}
+				/>
 
-			<FixedSizeGrid
-				columnCount={GRID_WIDTH}
-				columnWidth={EMOJI_DIMENSION}
-				height={CONTAINER_HEIGHT}
-				rowCount={chunked.length}
-				rowHeight={EMOJI_DIMENSION}
-				width={GRID_WIDTH * EMOJI_DIMENSION}
-			>
-				{virtualProps => {
-					const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
+				<FixedSizeGrid
+					columnCount={GRID_WIDTH}
+					columnWidth={EMOJI_DIMENSION}
+					height={CONTAINER_HEIGHT}
+					rowCount={chunked.length}
+					rowHeight={EMOJI_DIMENSION}
+					width={GRID_WIDTH * EMOJI_DIMENSION}
+				>
+					{virtualProps => {
+						const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
 
-					if (!emoji) {
-						return null;
-					}
+						if (!emoji) {
+							return null;
+						}
 
-					const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
+						const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 
-					return (
-						<EmojiCell
-							key={emoji.name}
-							type="button"
-							style={virtualProps.style}
-							onClick={() => {
-								props.onPick(emoji.name);
-							}}
-						>
-							{String.fromCodePoint(...codes)}
-						</EmojiCell>
-					);
-				}}
-			</FixedSizeGrid>
+						return (
+							<EmojiCell
+								key={emoji.name}
+								type="button"
+								style={virtualProps.style}
+								onClick={() => {
+									props.onPick(emoji.name);
+								}}
+							>
+								{String.fromCodePoint(...codes)}
+							</EmojiCell>
+						);
+					}}
+				</FixedSizeGrid>
+			</RelativeWrapper>
 		</StyledContainer>
 	);
 };
 
+const RelativeWrapper = styled('div')({
+	position: 'relative',
+});
+
 const Input = styled('input')({
 	display: 'block',
-	position: 'sticky',
-	top: 0,
+	position: 'absolute',
+	zIndex: 2,
 	width: '100%',
-	background: 'black',
+	backdropFilter: 'blur(8px)',
+	background: 'rgba(77,77,80, 0.8)',
 	border: 'none',
-	padding: '3px 5px',
+	height: '34px',
+	padding: '0 10px',
 	borderRadius: '5px',
 	color: 'white',
 	boxSizing: 'border-box',
+
+	'&:focus': {
+		outline: 'none',
+	},
 });
 
 const EmojiCell = styled('button')({
@@ -115,6 +134,7 @@ const EmojiCell = styled('button')({
 	cursor: 'pointer',
 	border: 'none',
 	borderRadius: '5px',
+	paddingTop: '60px',
 
 	'&:hover': {
 		background: 'rgba(255, 255, 255, 0.1)',
@@ -126,11 +146,11 @@ const EmojiCell = styled('button')({
 });
 
 const StyledContainer = styled<
-	HTMLAttributes<HTMLDivElement> & {containerTheme?: Partial<ContainerTheme>}
+	HTMLAttributes<HTMLDivElement> & {
+		containerTheme?: Partial<ContainerTheme>;
+	}
 >(props => {
+	// Pull containerTheme out because we don't want to apply it as a DOM property
 	const {containerTheme, ...rest} = props;
 	return <div {...rest} />;
-})(props => ({
-	...defaultContainerTheme,
-	...props.containerTheme,
-}));
+})(props => ({...defaultContainerTheme, ...props.containerTheme}));
