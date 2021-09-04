@@ -76,6 +76,7 @@ export const GigglEmojiPicker = (props: Props) => {
 					return (
 						<EmojiCell
 							key={emoji.name}
+							type="button"
 							style={virtualProps.style}
 							onClick={() => {
 								props.onPick(emoji.name);
@@ -110,6 +111,18 @@ const EmojiCell = styled('button')({
 	fontSize: '1.4em',
 	justifyContent: 'center',
 	alignItems: 'center',
+	background: 'transparent',
+	cursor: 'pointer',
+	border: 'none',
+	borderRadius: '5px',
+
+	'&:hover': {
+		background: 'rgba(255, 255, 255, 0.1)',
+	},
+
+	'&:active': {
+		background: 'rgba(255, 255, 255, 0.2)',
+	},
 });
 
 const StyledContainer = styled<

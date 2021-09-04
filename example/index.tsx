@@ -19,7 +19,13 @@ function App() {
 				<span>debug</span>
 			</label>
 
-			<GigglEmojiPicker debug={debug} onPick={console.log} />
+			<GigglEmojiPicker
+				debug={debug}
+				onPick={value => {
+					// eslint-disable-next-line no-alert
+					alert(value);
+				}}
+			/>
 		</div>
 	);
 }
