@@ -44,6 +44,7 @@
 		"@size-limit/preset-small-lib": "^5.0.3",
 		"@types/react": "^17.0.19",
 		"@types/react-dom": "^17.0.9",
+		"@types/react-window": "^1.8.5",
 		"@typescript-eslint/eslint-plugin": "^4.30.0",
 		"@typescript-eslint/parser": "^4.30.0",
 		"babel-loader": "^8.2.2",
@@ -86,7 +87,7 @@
 	"homepage": "https://github.com/giggl/giggl_emoji_picker#readme",
 	"dependencies": {
 		"goober": "^2.0.41",
-		"react-virtual": "^2.8.1",
+		"react-window": "^1.8.6",
 		"use-input-filter": "^0.1.2"
 	},
 	"packageManager": "yarn@3.0.1"

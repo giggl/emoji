@@ -1,18 +1,14 @@
-import React, {createElement as h, CSSProperties, HTMLAttributes, ReactChild, useRef} from 'react';
+import React, {createElement as h, CSSProperties, HTMLAttributes, ReactChild} from 'react';
 import {setup, styled} from 'goober';
-import {useVirtual} from 'react-virtual';
 import emojis from './emoji.json';
 import {enforceInferType} from './utils/types';
 import {EmojiListItem} from './types';
 import {useInputFilter} from 'use-input-filter';
+import {FixedSizeList as List} from 'react-window';
 
-// Goober requires it idk
-// ask goober not me i did not make goober
-// guys
 setup(h);
 
-const CONTAINER_HEIGHT = '400px';
-const EMOJI_DIMENSION = 40 as number;
+const EMOJI_DIMENSION = 40;
 
 const defaultContainerTheme = enforceInferType<CSSProperties>()({
 	background: '#202023',
@@ -36,7 +32,6 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const GigglEmojiPicker = (props: Props) => {
-	const parentRef = useRef<HTMLDivElement | null>(null);
 	const {state, setState, filtered} = useInputFilter((item, state) => {
 		const trimmed = state.trim().toLowerCase();
 
@@ -47,27 +42,8 @@ export const GigglEmojiPicker = (props: Props) => {
 		return (item.name + item.short_name + item.category).toLowerCase().includes(trimmed);
 	}, emojis as EmojiListItem[]);
 
-	const rowVirtualizer = useVirtual({
-		parentRef,
-		size: filtered.length,
-		keyExtractor: idx => filtered[idx].name,
-		overscan: 100,
-	});
-
-	const {virtualItems, ...rest} = rowVirtualizer;
-
-	if (props.debug) {
-		console.log('[GIGGL EMOJI PICKER]', rest);
-	}
-
 	return (
 		<StyledContainer containerTheme={props.style}>
-			{props.debug && (
-				<div style={{position: 'fixed', top: 20, left: 20, background: 'black'}}>
-					{JSON.stringify(rest)}
-				</div>
-			)}
-
 			<Input
 				type="text"
 				value={state}
@@ -76,18 +52,13 @@ export const GigglEmojiPicker = (props: Props) => {
 				}}
 			/>
 
-			<EmojiGrid ref={parentRef}>
-				{rowVirtualizer.virtualItems.map(item => {
-					const emoji = filtered[item.index];
+			<List height={EMOJI_DIMENSION} itemSize={20} itemCount={20} width={200}>
+				{props => {
+					const emoji = filtered[props.index];
 					const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
-
-					return (
-						<EmojiCell ref={item.measureRef} key={item.index}>
-							{String.fromCodePoint(...codes)}
-						</EmojiCell>
-					);
-				})}
-			</EmojiGrid>
+					return <EmojiCell key={emoji.name}>{String.fromCodePoint(...codes)}</EmojiCell>;
+				}}
+			</List>
 		</StyledContainer>
 	);
 };
@@ -112,13 +83,12 @@ const EmojiCell = styled('div')({
 	fontSize: '1.4em',
 });
 
-const EmojiGrid = styled('div')({
-	display: 'grid',
-	gridTemplateColumns: 'repeat(6, 1fr)',
-	height: CONTAINER_HEIGHT,
-});
-
-const StyledContainer = styled('div')<{containerTheme?: Partial<ContainerTheme>}>(props => ({
+const StyledContainer = styled<
+	HTMLAttributes<HTMLDivElement> & {containerTheme?: Partial<ContainerTheme>}
+>(props => {
+	const {containerTheme, ...rest} = props;
+	return <div {...rest} />;
+})(props => ({
 	...defaultContainerTheme,
 	...props.containerTheme,
 }));
