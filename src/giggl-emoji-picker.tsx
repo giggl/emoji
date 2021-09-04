@@ -100,8 +100,10 @@ const Input = styled('input')({
 const EmojiCell = styled('div')({
 	width: `${EMOJI_DIMENSION}px`,
 	height: `${EMOJI_DIMENSION}px`,
-	display: 'inline-block',
+	display: 'inline-flex',
 	fontSize: '1.4em',
+	justifyContent: 'center',
+	alignItems: 'center',
 });
 
 const StyledContainer = styled<
