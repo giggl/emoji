@@ -114,10 +114,6 @@ export const GigglEmojiPicker = (props: Props) => {
 	);
 };
 
-const RelativeWrapper = styled('div')({
-	position: 'relative',
-});
-
 const Input = styled('input')({
 	display: 'block',
 	position: 'absolute',
@@ -149,14 +145,21 @@ const EmojiCell = styled('button')({
 	border: 'none',
 	borderRadius: '5px',
 	marginTop: `${EMOJI_DIMENSION}px`,
+	transition: 'all 0.15s',
+	willChange: 'transform',
 
 	'&:hover': {
 		background: 'rgba(255, 255, 255, 0.1)',
+		transform: 'scale(0.9)',
 	},
 
 	'&:active': {
 		background: 'rgba(255, 255, 255, 0.2)',
 	},
+});
+
+const RelativeWrapper = styled('div')({
+	position: 'relative',
 });
 
 const StyledContainer = styled<

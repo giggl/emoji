@@ -40,14 +40,12 @@
 		}
 	],
 	"devDependencies": {
-		"@babel/core": "^7.15.0",
 		"@size-limit/preset-small-lib": "^5.0.3",
 		"@types/react": "^17.0.19",
 		"@types/react-dom": "^17.0.9",
 		"@types/react-window": "^1.8.5",
 		"@typescript-eslint/eslint-plugin": "^4.30.0",
 		"@typescript-eslint/parser": "^4.30.0",
-		"babel-loader": "^8.2.2",
 		"eslint": "^7.32.0",
 		"eslint-config-react-app": "^6.0.0",
 		"eslint-config-xo": "^0.38.0",
@@ -60,7 +58,6 @@
 		"prettier": "^2.3.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-is": "^17.0.2",
 		"size-limit": "^5.0.3",
 		"tslib": "^2.3.1",
 		"tsup": "^4.14.0",
