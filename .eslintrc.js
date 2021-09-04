@@ -18,6 +18,7 @@ module.exports = {
 		'react/jsx-tag-spacing': 0,
 		'react/function-component-definition': 0,
 		'@typescript-eslint/indent': 0,
+		'operator-linebreak': 0,
 	},
 	ignorePatterns: ['**/*.js'],
 };

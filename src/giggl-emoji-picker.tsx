@@ -1,5 +1,5 @@
-import React, {createElement as h, CSSProperties, HTMLAttributes, ReactChild} from 'react';
-import {setup, styled} from 'goober';
+import React, {createElement as h, HTMLAttributes, ReactChild} from 'react';
+import {setup, styled, CSSAttribute} from 'goober';
 import emojis from './emoji.json';
 import {chunk, enforceInferType} from './utils/types';
 import {EmojiListItem} from './types';
@@ -22,7 +22,7 @@ const containerWidthSetting = {
 	width: (cols: number) => EMOJI_DIMENSION * cols,
 };
 
-const defaultContainerTheme = enforceInferType<CSSProperties>()({
+const defaultContainerTheme = enforceInferType<CSSAttribute>()({
 	background: '#202023',
 	color: '#cccccc',
 	borderRadius: '10px',
@@ -57,6 +57,7 @@ export const GigglEmojiPicker = (props: Props) => {
 	}, emojis as EmojiListItem[]);
 
 	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
+
 	const containerColsWidth =
 		containerWidthSetting.padding + containerWidthSetting.width(props.columns ?? GRID_WIDTH);
 
@@ -160,10 +161,13 @@ const EmojiCell = styled('button')({
 
 const StyledContainer = styled<
 	HTMLAttributes<HTMLDivElement> & {
-		containerTheme?: Partial<ContainerTheme | CSSProperties | (ContainerTheme & CSSProperties)>;
+		containerTheme?: Partial<CSSAttribute>;
 	}
 >(props => {
 	// Pull containerTheme out because we don't want to apply it as a DOM property
 	const {containerTheme, ...rest} = props;
 	return <div {...rest} />;
-})(props => ({...defaultContainerTheme, ...props.containerTheme}));
+})(props => ({
+	...defaultContainerTheme,
+	...props.containerTheme,
+}));
