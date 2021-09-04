@@ -10,8 +10,12 @@ setup(h);
 
 const EMOJI_DIMENSION = 40;
 const GRID_WIDTH = 6;
-const CONTAINER_HEIGHT = 450;
 const CONTAINER_PADDING = 10;
+const COLUMN_COUNT = 7;
+
+// Prettier removes the parens around the last expr
+// prettier-ignore
+const CONTAINER_HEIGHT = EMOJI_DIMENSION + (EMOJI_DIMENSION * COLUMN_COUNT);
 
 const containerWidthSetting = {
 	padding: CONTAINER_PADDING * 2,
@@ -134,7 +138,7 @@ const EmojiCell = styled('button')({
 	cursor: 'pointer',
 	border: 'none',
 	borderRadius: '5px',
-	paddingTop: '60px',
+	marginTop: `${EMOJI_DIMENSION}px`,
 
 	'&:hover': {
 		background: 'rgba(255, 255, 255, 0.1)',
