@@ -3,16 +3,16 @@
 	"license": "MIT",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
-	"files": [
-		"dist",
-		"src"
-	],
-	"name": "giggl_emoji_picker",
+	"name": "@giggl/emoji-picker",
 	"author": "Giggl <devs@giggl.app> (https://giggl.app)",
 	"module": "dist/index.mjs",
 	"engines": {
 		"node": ">=10"
 	},
+	"files": [
+		"dist",
+		"src"
+	],
 	"scripts": {
 		"build": "tsup src/index.ts --format esm,cjs --dts --minify",
 		"lint": "eslint ./src/**/*.ts*",
