@@ -19,7 +19,7 @@ function App() {
 				<span>debug</span>
 			</label>
 
-			<GigglEmojiPicker debug={debug} onPick={alert} />
+			<GigglEmojiPicker debug={debug} onPick={console.log} />
 		</div>
 	);
 }

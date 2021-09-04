@@ -64,8 +64,8 @@ export const GigglEmojiPicker = (props: Props) => {
 				rowHeight={EMOJI_DIMENSION}
 				width={GRID_WIDTH * EMOJI_DIMENSION}
 			>
-				{props => {
-					const emoji = chunked[props.rowIndex][props.columnIndex];
+				{virtualProps => {
+					const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
 
 					if (!emoji) {
 						return null;
@@ -74,7 +74,13 @@ export const GigglEmojiPicker = (props: Props) => {
 					const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 
 					return (
-						<EmojiCell key={emoji.name} style={props.style}>
+						<EmojiCell
+							key={emoji.name}
+							style={virtualProps.style}
+							onClick={() => {
+								props.onPick(emoji.name);
+							}}
+						>
 							{String.fromCodePoint(...codes)}
 						</EmojiCell>
 					);
@@ -97,7 +103,7 @@ const Input = styled('input')({
 	boxSizing: 'border-box',
 });
 
-const EmojiCell = styled('div')({
+const EmojiCell = styled('button')({
 	width: `${EMOJI_DIMENSION}px`,
 	height: `${EMOJI_DIMENSION}px`,
 	display: 'inline-flex',
