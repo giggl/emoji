@@ -9,7 +9,7 @@ import {Input} from './components/input';
 import {
 	CONTAINER_HEIGHT,
 	CONTAINER_PADDING,
-	containerWidthSetting,
+	containerWidthCalculator,
 	EMOJI_DIMENSION,
 	GRID_WIDTH,
 } from './constants';
@@ -56,7 +56,7 @@ export const GigglEmojiPicker = (props: Props) => {
 	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
 
 	const containerColsWidth =
-		containerWidthSetting.padding + containerWidthSetting.width(props.columns ?? GRID_WIDTH);
+		containerWidthCalculator.padding + containerWidthCalculator.width(props.columns ?? GRID_WIDTH);
 
 	return (
 		<StyledContainer
