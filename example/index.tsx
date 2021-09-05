@@ -14,6 +14,7 @@ function App() {
 			<GigglEmojiPicker
 				debug={debug}
 				columns={6}
+				rows={7}
 				onPick={value => {
 					alert(value);
 				}}

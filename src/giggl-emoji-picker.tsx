@@ -7,9 +7,9 @@ import {useInputFilter} from 'use-input-filter';
 import {FixedSizeGrid} from 'react-window';
 import {Input} from './components/input';
 import {
-	CONTAINER_HEIGHT,
+	COLUMN_COUNT,
 	CONTAINER_PADDING,
-	containerWidthCalculator,
+	containerBoundsCalculator,
 	EMOJI_DIMENSION,
 	GRID_WIDTH,
 } from './constants';
@@ -56,12 +56,20 @@ export const GigglEmojiPicker = (props: Props) => {
 	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
 
 	const containerColsWidth =
-		containerWidthCalculator.padding + containerWidthCalculator.width(props.columns ?? GRID_WIDTH);
+		containerBoundsCalculator.padding +
+		containerBoundsCalculator.width(props.columns ?? GRID_WIDTH);
+
+	const containerRowsHeight =
+		containerBoundsCalculator.padding +
+		containerBoundsCalculator.height(props.rows ?? COLUMN_COUNT);
 
 	return (
 		<StyledContainer
 			containerTheme={{
 				...props.style,
+
+				// Set the bounds to be dynamic from the amount
+				// of columns set. Allows for runtime defaults
 				width: `${containerColsWidth}px`,
 			}}
 		>
@@ -78,7 +86,7 @@ export const GigglEmojiPicker = (props: Props) => {
 				<FixedSizeGrid
 					columnCount={props.columns ?? GRID_WIDTH}
 					columnWidth={EMOJI_DIMENSION}
-					height={CONTAINER_HEIGHT}
+					height={containerRowsHeight}
 					rowCount={chunked.length}
 					rowHeight={EMOJI_DIMENSION}
 					width={(props.columns ?? GRID_WIDTH) * EMOJI_DIMENSION}
