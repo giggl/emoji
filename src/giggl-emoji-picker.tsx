@@ -1,26 +1,21 @@
 import React, {createElement as h, HTMLAttributes, ReactChild} from 'react';
-import {setup, styled, CSSAttribute} from 'goober';
+import {CSSAttribute, setup, styled} from 'goober';
 import emojis from './emoji.json';
 import {chunk, enforceInferType} from './utils/types';
 import {EmojiListItem} from './types';
 import {useInputFilter} from 'use-input-filter';
 import {FixedSizeGrid} from 'react-window';
+import {Input} from './components/input';
+import {
+	CONTAINER_HEIGHT,
+	CONTAINER_PADDING,
+	containerWidthSetting,
+	EMOJI_DIMENSION,
+	GRID_WIDTH,
+} from './constants';
+import {EmojiCell} from './components/emoji-cell';
 
 setup(h);
-
-const EMOJI_DIMENSION = 40;
-const GRID_WIDTH = 6;
-const CONTAINER_PADDING = 10;
-const COLUMN_COUNT = 7;
-
-// Prettier removes the parens around the last expr
-// prettier-ignore
-const CONTAINER_HEIGHT = EMOJI_DIMENSION + (EMOJI_DIMENSION * COLUMN_COUNT);
-
-const containerWidthSetting = {
-	padding: CONTAINER_PADDING * 2,
-	width: (cols: number) => EMOJI_DIMENSION * cols,
-};
 
 const defaultContainerTheme = enforceInferType<CSSAttribute>()({
 	background: '#202023',
@@ -53,7 +48,9 @@ export const GigglEmojiPicker = (props: Props) => {
 			return true;
 		}
 
-		return (item.name + item.short_name + item.category).toLowerCase().includes(trimmed);
+		return (item.name + item.short_names.join(',') + item.short_name + item.category)
+			.toLowerCase()
+			.includes(trimmed);
 	}, emojis as EmojiListItem[]);
 
 	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
@@ -114,53 +111,7 @@ export const GigglEmojiPicker = (props: Props) => {
 	);
 };
 
-const Input = styled('input')({
-	display: 'block',
-	position: 'absolute',
-	zIndex: 2,
-	width: '100%',
-	backdropFilter: 'blur(8px)',
-	background: 'rgba(77,77,80, 0.8)',
-	border: 'none',
-	height: '34px',
-	padding: '0 10px',
-	borderRadius: '5px',
-	color: 'white',
-	boxSizing: 'border-box',
-
-	'&:focus': {
-		outline: 'none',
-	},
-});
-
-const EmojiCell = styled('button')({
-	width: `${EMOJI_DIMENSION}px`,
-	height: `${EMOJI_DIMENSION}px`,
-	display: 'inline-flex',
-	fontSize: '1.4em',
-	justifyContent: 'center',
-	alignItems: 'center',
-	background: 'transparent',
-	cursor: 'pointer',
-	border: 'none',
-	borderRadius: '5px',
-	marginTop: `${EMOJI_DIMENSION}px`,
-	transition: 'all 0.15s',
-	willChange: 'transform',
-
-	'&:hover': {
-		background: 'rgba(255, 255, 255, 0.1)',
-		transform: 'scale(0.9)',
-	},
-
-	'&:active': {
-		background: 'rgba(255, 255, 255, 0.2)',
-	},
-});
-
-const RelativeWrapper = styled('div')({
-	position: 'relative',
-});
+const RelativeWrapper = styled('div')({position: 'relative'});
 
 const StyledContainer = styled<
 	HTMLAttributes<HTMLDivElement> & {
