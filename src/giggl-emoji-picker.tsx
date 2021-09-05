@@ -67,7 +67,6 @@ export const GigglEmojiPicker = (props: Props) => {
 		<StyledContainer
 			containerTheme={{
 				...props.style,
-
 				// Set the bounds to be dynamic from the amount
 				// of columns set. Allows for runtime defaults
 				width: `${containerColsWidth}px`,
