@@ -99,6 +99,8 @@ export const GigglEmojiPicker = (props: Props) => {
 		>
 			<RelativeWrapper>
 				<Input
+					aria-autocomplete="none"
+					autoComplete="off"
 					placeholder="🧭 Search..."
 					type="text"
 					value={state}
