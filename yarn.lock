@@ -401,7 +401,6 @@ __metadata:
     tslib: ^2.3.1
     tsup: ^4.14.0
     typescript: ^4.4.2
-    use-input-filter: ^0.1.2
   peerDependencies:
     react: ">=17"
   languageName: unknown
@@ -9903,15 +9902,6 @@ typescript@^4.4.2:
     punycode: 1.3.2
     querystring: 0.2.0
   checksum: 50d100d3dd2d98b9fe3ada48cadb0b08aa6be6d3ac64112b867b56b19be4bfcba03c2a9a0d7922bfd7ac17d4834e88537749fe182430dfd9b68e520175900d90
-  languageName: node
-  linkType: hard
-
-"use-input-filter@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "use-input-filter@npm:0.1.2"
-  peerDependencies:
-    react: ">=16"
-  checksum: ef43ed6f8c6085918899313071a49f77af5c7f2eb0e5de8d02a416476c2441f2f6b9d0b5098ab45e597c9a985c1bbd68561ff6c45063682af23c6e527899eafc
   languageName: node
   linkType: hard
 

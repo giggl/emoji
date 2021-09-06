@@ -1,10 +1,10 @@
-import React, {createElement as h, HTMLAttributes, ReactChild} from 'react';
+import React, {createElement as h, HTMLAttributes, ReactChild, useMemo} from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
 import {chunk, enforceInferType} from './utils/types';
 import {EmojiListItem, emojis} from './types';
-import {useInputFilter} from 'use-input-filter';
 import {FixedSizeGrid} from 'react-window';
 import {Input} from './components/input';
+import {useInputFilter} from './utils/hook';
 import {
 	DEFAULT_ROWS_COUNT,
 	CONTAINER_PADDING,
@@ -78,12 +78,18 @@ export const GigglEmojiPicker = (props: Props) => {
 			.includes(trimmed);
 	}, emojis);
 
-	const chunked = chunk(filtered, props.columns ?? DEFAULT_COLUMNS_COUNT);
+	const chunked = useMemo(
+		// Chunk the emojis into individual rows with defined column width
+		() => chunk(filtered, props.columns ?? DEFAULT_COLUMNS_COUNT),
+		[props.columns, filtered],
+	);
 
+	// Calculate the width of the container against the amount of columns being rendered
 	const containerColsWidth =
 		containerBoundsCalculator.padding +
 		containerBoundsCalculator.width(props.columns ?? DEFAULT_COLUMNS_COUNT);
 
+	// Calculate the height of the container against the amount of rows being rendered
 	const containerRowsHeight =
 		containerBoundsCalculator.padding +
 		containerBoundsCalculator.height(props.rows ?? DEFAULT_ROWS_COUNT);

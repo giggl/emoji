@@ -84,8 +84,7 @@
 	"homepage": "https://github.com/giggl/giggl_emoji_picker#readme",
 	"dependencies": {
 		"goober": "^2.0.41",
-		"react-window": "^1.8.6",
-		"use-input-filter": "^0.1.2"
+		"react-window": "^1.8.6"
 	},
 	"packageManager": "yarn@3.0.1"
 }
