@@ -6,11 +6,11 @@ import {useInputFilter} from 'use-input-filter';
 import {FixedSizeGrid} from 'react-window';
 import {Input} from './components/input';
 import {
-	COLUMN_COUNT,
+	DEFAULT_ROWS_COUNT,
 	CONTAINER_PADDING,
 	containerBoundsCalculator,
 	EMOJI_DIMENSION,
-	GRID_WIDTH,
+	DEFAULT_COLUMNS_COUNT,
 } from './constants';
 import {EmojiCell} from './components/emoji-cell';
 
@@ -78,15 +78,15 @@ export const GigglEmojiPicker = (props: Props) => {
 			.includes(trimmed);
 	}, emojis);
 
-	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
+	const chunked = chunk(filtered, props.columns ?? DEFAULT_COLUMNS_COUNT);
 
 	const containerColsWidth =
 		containerBoundsCalculator.padding +
-		containerBoundsCalculator.width(props.columns ?? GRID_WIDTH);
+		containerBoundsCalculator.width(props.columns ?? DEFAULT_COLUMNS_COUNT);
 
 	const containerRowsHeight =
 		containerBoundsCalculator.padding +
-		containerBoundsCalculator.height(props.rows ?? COLUMN_COUNT);
+		containerBoundsCalculator.height(props.rows ?? DEFAULT_ROWS_COUNT);
 
 	return (
 		<StyledContainer
@@ -108,12 +108,12 @@ export const GigglEmojiPicker = (props: Props) => {
 				/>
 
 				<FixedSizeGrid
-					columnCount={props.columns ?? GRID_WIDTH}
+					columnCount={props.columns ?? DEFAULT_COLUMNS_COUNT}
 					columnWidth={EMOJI_DIMENSION}
 					height={containerRowsHeight}
 					rowCount={chunked.length}
 					rowHeight={EMOJI_DIMENSION}
-					width={(props.columns ?? GRID_WIDTH) * EMOJI_DIMENSION}
+					width={(props.columns ?? DEFAULT_COLUMNS_COUNT) * EMOJI_DIMENSION}
 				>
 					{virtualProps => {
 						const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
