@@ -10,8 +10,13 @@ export const DEFAULT_COLUMNS_COUNT = 6;
  * The default amount of rows to display
  */
 export const DEFAULT_ROWS_COUNT = 7;
-
+/**
+ * Padding for the main container
+ */
 export const CONTAINER_PADDING = 10;
+/**
+ * The height of each category message (this is needed and forced to calculate the height for virtualized scrolling)
+ */
 export const CATEGORY_CONTAINER_HEIGHT = 24;
 
 /**
