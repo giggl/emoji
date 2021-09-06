@@ -1,8 +1,7 @@
 import React, {createElement as h, HTMLAttributes, ReactChild} from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
-import emojis from './emoji.json';
 import {chunk, enforceInferType} from './utils/types';
-import {EmojiListItem} from './types';
+import {EmojiListItem, emojis} from './types';
 import {useInputFilter} from 'use-input-filter';
 import {FixedSizeGrid} from 'react-window';
 import {Input} from './components/input';
@@ -30,13 +29,39 @@ const defaultContainerTheme = enforceInferType<CSSAttribute>()({
 
 export type ContainerTheme = typeof defaultContainerTheme;
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
-	children?: ReactChild;
-	style?: Partial<ContainerTheme>;
-	onPick: (item: string) => unknown;
-	debug?: boolean;
+const CATEGORY_MAP = new Map<string, EmojiListItem[]>();
 
+emojis.forEach(emoji => {
+	const existing = CATEGORY_MAP.get(emoji.category) ?? [];
+	CATEGORY_MAP.set(emoji.category, [...existing, emoji]);
+});
+
+export interface Props extends HTMLAttributes<HTMLDivElement> {
+	/**
+	 * Idk why this is here i dont think we need this
+	 */
+	children?: ReactChild;
+	/**
+	 * CSS to pass to the main container. A better api will be worked upon for this eventually
+	 * @experimental
+	 */
+	style?: Partial<ContainerTheme>;
+	/**
+	 * Callback for when a user selectes an emoji
+	 */
+	onPick: (item: string) => unknown;
+	/**
+	 * If we should show/render/log debug messages
+	 * @experimental
+	 */
+	debug?: boolean;
+	/**
+	 * The amount of columns to render
+	 */
 	columns?: number;
+	/**
+	 * The amount of rows to render
+	 */
 	rows?: number;
 }
 
@@ -51,7 +76,7 @@ export const GigglEmojiPicker = (props: Props) => {
 		return (item.name + item.short_names.join(',') + item.short_name + item.category)
 			.toLowerCase()
 			.includes(trimmed);
-	}, emojis as EmojiListItem[]);
+	}, emojis);
 
 	const chunked = chunk(filtered, props.columns ?? GRID_WIDTH);
 
