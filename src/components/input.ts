@@ -3,7 +3,7 @@ import {styled} from 'goober';
 export const Input = styled('input')({
 	display: 'block',
 	position: 'absolute',
-	zIndex: 2,
+	zIndex: 10,
 	width: '100%',
 	backdropFilter: 'blur(8px)',
 	background: 'rgba(77,77,80, 0.8)',

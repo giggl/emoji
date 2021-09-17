@@ -1,4 +1,4 @@
-import React, {createElement as h, HTMLAttributes, ReactChild, useMemo} from 'react';
+import React, {createElement as h, HTMLAttributes, ReactChild, useMemo, useState} from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
 import {chunk, enforceInferType} from './utils/types';
 import {EmojiListItem, emojis} from './types';
@@ -66,6 +66,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const GigglEmojiPicker = (props: Props) => {
+	const [[x, y] = [null, null], setLocation] = useState<[number, number] | never[]>([]);
+
 	const {state, setState, filtered} = useInputFilter((item, state) => {
 		const trimmed = state.trim().toLowerCase();
 
@@ -98,7 +100,7 @@ export const GigglEmojiPicker = (props: Props) => {
 		<StyledContainer
 			containerTheme={{
 				...props.style,
-				// Set the bounds to be dynamic from the amount
+				// Set the bounds to be dynamic from the amountx
 				// of columns set. Allows for runtime defaults
 				width: `${containerColsWidth}px`,
 			}}
@@ -125,6 +127,14 @@ export const GigglEmojiPicker = (props: Props) => {
 				>
 					{virtualProps => {
 						const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
+
+						const isRowSelected = virtualProps.rowIndex === x;
+						const isColumnSelected = virtualProps.columnIndex === y;
+						const isKeyboardSelected = isRowSelected && isColumnSelected;
+
+						if (isKeyboardSelected) {
+							return <EmojiCell>Y</EmojiCell>;
+						}
 
 						if (!emoji) {
 							return null;
@@ -154,9 +164,7 @@ export const GigglEmojiPicker = (props: Props) => {
 const RelativeWrapper = styled('div')({position: 'relative'});
 
 const StyledContainer = styled<
-	HTMLAttributes<HTMLDivElement> & {
-		containerTheme?: Partial<CSSAttribute>;
-	}
+	HTMLAttributes<HTMLDivElement> & {containerTheme?: Partial<CSSAttribute>}
 >(props => {
 	// Pull containerTheme out because we don't want to apply it as a DOM property
 	const {containerTheme, ...rest} = props;
