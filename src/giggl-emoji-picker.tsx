@@ -66,30 +66,37 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 	rows?: number;
 }
 
+enum Direction {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+}
+
 export const GigglEmojiPicker = (props: Props) => {
 	const [[x, y], setLocation] = useState<[number, number]>([-1, -1]);
 
-	useHotkeys(
-		'Up',
-		() => {
-			setLocation(old => {
-				const [x, y] = old;
-				return [x, y - 1];
+	const directionFactory = (direction: Direction) => {
+		return () => {
+			setLocation(([x, y]) => {
+				switch (direction) {
+					case Direction.UP:
+						return [x, y - 1];
+					case Direction.DOWN:
+						return [x, y + 1];
+					case Direction.LEFT:
+						return [x - 1, y];
+					case Direction.RIGHT:
+						return [x + 1, y];
+				}
 			});
-		},
-		{enableOnTags: ['INPUT']},
-	);
+		};
+	};
 
-	useHotkeys(
-		'Down',
-		() => {
-			setLocation(old => {
-				const [x, y] = old;
-				return [x, y + 1];
-			});
-		},
-		{enableOnTags: ['INPUT']},
-	);
+	useHotkeys('Up', directionFactory(Direction.UP), {enableOnTags: ['INPUT']});
+	useHotkeys('Down', directionFactory(Direction.DOWN), {enableOnTags: ['INPUT']});
+	useHotkeys('Left', directionFactory(Direction.LEFT), {enableOnTags: ['INPUT']});
+	useHotkeys('Right', directionFactory(Direction.RIGHT), {enableOnTags: ['INPUT']});
 
 	const {state, setState, filtered} = useInputFilter((item, state) => {
 		const trimmed = state.trim().toLowerCase();
@@ -157,17 +164,13 @@ export const GigglEmojiPicker = (props: Props) => {
 					{virtualProps => {
 						const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
 
-						const isRowSelected = virtualProps.rowIndex === y;
-						const isColumnSelected = virtualProps.columnIndex === x;
-						// const isKeyboardSelected = isRowSelected && isColumnSelected;
-
-						if (isRowSelected) {
-							return <EmojiCell>Y</EmojiCell>;
-						}
-
 						if (!emoji) {
 							return null;
 						}
+
+						const isRowSelected = virtualProps.rowIndex === y;
+						const isColumnSelected = virtualProps.columnIndex === x;
+						const isKeyboardSelected = isRowSelected && isColumnSelected;
 
 						const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 
@@ -175,7 +178,10 @@ export const GigglEmojiPicker = (props: Props) => {
 							<EmojiCell
 								key={emoji.name}
 								type="button"
-								style={virtualProps.style}
+								style={{
+									...virtualProps.style,
+									backgroundColor: isKeyboardSelected ? 'red' : 'inherit',
+								}}
 								onClick={() => {
 									props.onPick(emoji.name);
 								}}
