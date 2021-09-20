@@ -67,7 +67,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const GigglEmojiPicker = (props: Props) => {
-	const [[x, y], setLocation] = useState<[number, number]>([-1, -1]);
+	const [[x, y], setLocation] = useState<[number, number] | [null, null]>([null, null]);
 
 	useHotkeys(
 		'Up',
