@@ -13,6 +13,7 @@ import {
 	DEFAULT_COLUMNS_COUNT,
 } from './constants';
 import {EmojiCell} from './components/emoji-cell';
+import {useHotkeys} from 'react-hotkeys-hook';
 
 setup(h);
 
@@ -66,7 +67,29 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const GigglEmojiPicker = (props: Props) => {
-	const [[x, y] = [null, null], setLocation] = useState<[number, number] | never[]>([]);
+	const [[x, y], setLocation] = useState<[number, number]>([-1, -1]);
+
+	useHotkeys(
+		'Up',
+		() => {
+			setLocation(old => {
+				const [x, y] = old;
+				return [x, y - 1];
+			});
+		},
+		{enableOnTags: ['INPUT']},
+	);
+
+	useHotkeys(
+		'Down',
+		() => {
+			setLocation(old => {
+				const [x, y] = old;
+				return [x, y + 1];
+			});
+		},
+		{enableOnTags: ['INPUT']},
+	);
 
 	const {state, setState, filtered} = useInputFilter((item, state) => {
 		const trimmed = state.trim().toLowerCase();
@@ -105,6 +128,12 @@ export const GigglEmojiPicker = (props: Props) => {
 				width: `${containerColsWidth}px`,
 			}}
 		>
+			{props.debug && (
+				<>
+					{x}
+					{y}
+				</>
+			)}
 			<RelativeWrapper>
 				<Input
 					aria-autocomplete="none"
@@ -128,11 +157,11 @@ export const GigglEmojiPicker = (props: Props) => {
 					{virtualProps => {
 						const emoji = chunked[virtualProps.rowIndex][virtualProps.columnIndex];
 
-						const isRowSelected = virtualProps.rowIndex === x;
-						const isColumnSelected = virtualProps.columnIndex === y;
-						const isKeyboardSelected = isRowSelected && isColumnSelected;
+						const isRowSelected = virtualProps.rowIndex === y;
+						const isColumnSelected = virtualProps.columnIndex === x;
+						// const isKeyboardSelected = isRowSelected && isColumnSelected;
 
-						if (isKeyboardSelected) {
+						if (isRowSelected) {
 							return <EmojiCell>Y</EmojiCell>;
 						}
 

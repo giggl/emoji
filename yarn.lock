@@ -396,6 +396,7 @@ __metadata:
     prettier: ^2.3.2
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-hotkeys-hook: ^3.4.0
     react-window: ^1.8.6
     size-limit: ^5.0.3
     tslib: ^2.3.1
@@ -4937,6 +4938,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"hotkeys-js@npm:3.8.7":
+  version: 3.8.7
+  resolution: "hotkeys-js@npm:3.8.7"
+  checksum: 1eb6df2781e8e49a80c72930d5c69ed50ea16d1dbef0667512059f5b5d1551bfdce3024c25d99275ab567e0b7ae0fbf292971542ea347ed8b7b585eab4e99287
+  languageName: node
+  linkType: hard
+
 "hsl-regex@npm:^1.0.0":
   version: 1.0.0
   resolution: "hsl-regex@npm:1.0.0"
@@ -8219,6 +8227,18 @@ fsevents@~2.3.2:
   peerDependencies:
     react: 17.0.2
   checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
+  languageName: node
+  linkType: hard
+
+"react-hotkeys-hook@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "react-hotkeys-hook@npm:3.4.0"
+  dependencies:
+    hotkeys-js: 3.8.7
+  peerDependencies:
+    react: ">=16.8.1"
+    react-dom: ">=16.8.1"
+  checksum: 39c438aa7b0b3837569b51005b6479807160f0b60d0a424f875555ff301e0948e09d2fd569f937f8d7350510c29a0f540fccd18d21ec4b9fdf25ae97f55e21e3
   languageName: node
   linkType: hard
 
