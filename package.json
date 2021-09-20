@@ -11,9 +11,7 @@
 	},
 	"scripts": {
 		"build": "yarn workspace @giggl/emoji-picker build",
-		"lint": "eslint ./src/**/*.ts*",
-		"size": "size-limit",
-		"analyze": "size-limit --why"
+		"build-example": "yarn workspace @giggl/example build"
 	},
 	"husky": {
 		"hooks": {
