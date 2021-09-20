@@ -1,12 +1,12 @@
 {
-	"include": ["src", "types"],
+	"include": ["emoji-picker", "types"],
 	"compilerOptions": {
 		"module": "esnext",
 		"lib": ["dom", "esnext"],
 		"importHelpers": true,
 		"declaration": true,
 		"sourceMap": true,
-		"rootDir": "./src",
+		"rootDir": "emoji-picker",
 		"strict": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
