@@ -76,21 +76,21 @@ enum Direction {
 export const GigglEmojiPicker = (props: Props) => {
 	const [[x, y], setLocation] = useState<[number, number]>([-1, -1]);
 
-	const directionFactory = (direction: Direction) => {
-		return () => {
-			setLocation(([x, y]) => {
-				switch (direction) {
-					case Direction.UP:
-						return [x, y - 1];
-					case Direction.DOWN:
-						return [x, y + 1];
-					case Direction.LEFT:
-						return [x - 1, y];
-					case Direction.RIGHT:
-						return [x + 1, y];
-				}
-			});
-		};
+	const directionFactory = (direction: Direction) => () => {
+		setLocation(([x, y]) => {
+			switch (direction) {
+				case Direction.UP:
+					return [x, y - 1];
+				case Direction.DOWN:
+					return [x, y + 1];
+				case Direction.LEFT:
+					return [x - 1, y];
+				case Direction.RIGHT:
+					return [x + 1, y];
+				default:
+					return [x, y];
+			}
+		});
 	};
 
 	useHotkeys('Up', directionFactory(Direction.UP), {enableOnTags: ['INPUT']});
