@@ -1,0 +1,18 @@
+{
+	"name": "@giggl/example",
+	"packageManager": "yarn@3.0.1",
+	"scripts": {
+		"dev": "parcel ./index.html",
+		"build": "parcel build ./index.html",
+		"serve": "serve dist -p 3000"
+	},
+	"devDependencies": {
+		"@types/react-dom": "^17.0.9",
+		"parcel": "^2.0.0-rc.0",
+		"serve": "^12.0.1"
+	},
+	"dependencies": {
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	}
+}

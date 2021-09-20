@@ -1,28 +1,17 @@
 {
 	"version": "0.1.0",
 	"license": "MIT",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
-	"name": "@giggl/emoji-picker",
+	"name": "giggl",
 	"author": "Giggl <devs@giggl.app> (https://giggl.app)",
-	"module": "dist/index.mjs",
-	"engines": {
-		"node": ">=10"
+	"workspaces": {
+		"packages": [
+			"emoji-picker",
+			"example"
+		]
 	},
-	"files": [
-		"dist",
-		"src"
-	],
 	"scripts": {
-		"build": "tsup src/index.ts --format esm,cjs --dts --minify",
-		"lint": "eslint ./src/**/*.ts*",
-		"size": "size-limit",
-		"analyze": "size-limit --why",
-		"dev": "parcel ./example/index.html",
-		"build-example": "parcel build ./example/index.html"
-	},
-	"peerDependencies": {
-		"react": ">=17"
+		"build": "yarn workspace @giggl/emoji-picker build",
+		"build-example": "yarn workspace @giggl/example build"
 	},
 	"husky": {
 		"hooks": {
@@ -41,33 +30,23 @@
 	],
 	"devDependencies": {
 		"@size-limit/preset-small-lib": "^5.0.3",
-		"@types/react": "^17.0.20",
-		"@types/react-dom": "^17.0.9",
 		"@types/react-window": "^1.8.5",
-		"@typescript-eslint/eslint-plugin": "^4.30.0",
-		"@typescript-eslint/parser": "^4.30.0",
+		"@typescript-eslint/eslint-plugin": "^4.31.1",
+		"@typescript-eslint/parser": "^4.31.1",
 		"eslint": "^7.32.0",
 		"eslint-config-react-app": "^6.0.0",
 		"eslint-config-xo": "^0.38.0",
 		"eslint-config-xo-react": "^0.25.0",
 		"eslint-config-xo-typescript": "^0.44.0",
-		"eslint-plugin-react": "^7.25.1",
+		"eslint-plugin-react": "^7.25.3",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"husky": "^7.0.2",
-		"parcel": "^2.0.0-rc.0",
-		"prettier": "^2.3.2",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
+		"prettier": "^2.4.1",
 		"size-limit": "^5.0.3",
 		"tslib": "^2.3.1",
-		"tsup": "^4.14.0",
-		"typescript": "^4.4.2"
+		"typescript": "^4.4.3"
 	},
 	"description": "React emoji picker powered by Twemoji. Maintained by the Giggl team.",
-	"directories": {
-		"example": "example",
-		"test": "test"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/giggl/giggl_emoji_picker.git"
@@ -82,11 +61,5 @@
 		"url": "https://github.com/giggl/giggl_emoji_picker/issues"
 	},
 	"homepage": "https://github.com/giggl/giggl_emoji_picker#readme",
-	"dependencies": {
-		"goober": "^2.0.41",
-		"react-hotkeys-hook": "^3.4.0",
-		"react-window": "^1.8.6",
-		"type-fest": "npm:^0.20.2"
-	},
-	"packageManager": "yarn@3.0.1"
+	"packageManager": "yarn@3.0.2"
 }

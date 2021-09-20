@@ -1,0 +1,25 @@
+{
+	"name": "@giggl/emoji-picker",
+	"packageManager": "yarn@3.0.1",
+	"module": "dist/index.mjs",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"engines": {
+		"node": ">=10"
+	},
+	"files": [
+		"dist",
+		"src"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --format esm,cjs --dts --minify"
+	},
+	"dependencies": {
+		"goober": "^2.0.41",
+		"react-hotkeys-hook": "^3.4.0",
+		"react-window": "^1.8.6"
+	},
+	"devDependencies": {
+		"tsup": "^5.1.0"
+	}
+}

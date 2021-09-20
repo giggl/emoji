@@ -1,8 +1,7 @@
 /* eslint-disable no-alert */
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import ReactDOM from 'react-dom';
-
-import {GigglEmojiPicker} from '../src/';
+import {GigglEmojiPicker} from '@giggl/emoji-picker';
 
 function App() {
 	const [debug, setDebug] = useState(true);
