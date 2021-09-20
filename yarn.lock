@@ -373,10 +373,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@giggl/emoji-picker@workspace:emoji-picker":
+  version: 0.0.0-use.local
+  resolution: "@giggl/emoji-picker@workspace:emoji-picker"
+  dependencies:
+    goober: ^2.0.41
+    react-hotkeys-hook: ^3.4.0
+    react-window: ^1.8.6
+    tsup: ^5.1.0
+  languageName: unknown
+  linkType: soft
+
 "@giggl/example@workspace:example":
   version: 0.0.0-use.local
   resolution: "@giggl/example@workspace:example"
   dependencies:
+    "@types/react-dom": ^17.0.9
     parcel: ^2.0.0-rc.0
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -1234,6 +1246,15 @@ __metadata:
   version: 15.7.4
   resolution: "@types/prop-types@npm:15.7.4"
   checksum: ef6e1899e59b876c273811b1bd845022fc66d5a3d11cb38a25b6c566b30514ae38fe20a40f67622f362a4f4f7f9224e22d8da101cff3d6e97e11d7b4c307cfc1
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^17.0.9":
+  version: 17.0.9
+  resolution: "@types/react-dom@npm:17.0.9"
+  dependencies:
+    "@types/react": "*"
+  checksum: b7e898e1a22643a371f58e801a3d1d8cf13a82d77063c24be73e840ef8d877ca1d04adc5db168d0dac3167dc050a26b1d70efc5fe8566a7f46a3c488a8322989
   languageName: node
   linkType: hard
 
@@ -3567,17 +3588,6 @@ __metadata:
   checksum: d56d21fd04e97869f7ffcc92e18903b9f67f2d4637a23c860492fbbff5a3155fd9ca0184ce0c865dd6eb2487d234ce9551335c021c376cd2d3b7cb749c7d10f4
   languageName: node
   linkType: hard
-
-"emoji-picker@workspace:emoji-picker":
-  version: 0.0.0-use.local
-  resolution: "emoji-picker@workspace:emoji-picker"
-  dependencies:
-    goober: ^2.0.41
-    react-hotkeys-hook: ^3.4.0
-    react-window: ^1.8.6
-    tsup: ^5.1.0
-  languageName: unknown
-  linkType: soft
 
 "emoji-regex@npm:^8.0.0":
   version: 8.0.0

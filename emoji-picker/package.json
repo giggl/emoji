@@ -1,5 +1,5 @@
 {
-	"name": "emoji-picker",
+	"name": "@giggl/emoji-picker",
 	"packageManager": "yarn@3.0.1",
 	"module": "dist/index.mjs",
 	"main": "dist/index.js",
