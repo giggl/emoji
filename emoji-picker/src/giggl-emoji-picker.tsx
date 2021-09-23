@@ -1,8 +1,15 @@
-import React, {createElement as h, HTMLAttributes, ReactChild, useMemo, useState} from 'react';
+import React, {
+	createElement as h,
+	useEffect,
+	HTMLAttributes,
+	ReactChild,
+	useMemo,
+	useState,
+} from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
 import {chunk, enforceInferType} from './utils/types';
 import {EmojiListItem, emojis} from './types';
-import {FixedSizeGrid} from 'react-window';
+import {FixedSizeGrid, GridChildComponentProps} from 'react-window';
 import {Input} from './components/input';
 import {useInputFilter} from './utils/hook';
 import {
@@ -74,21 +81,30 @@ enum Direction {
 }
 
 export const GigglEmojiPicker = (props: Props) => {
-	const [[x, y], setLocation] = useState<[number, number] | [null, null]>([null, null]);
+	const [[x, y] = [], setLocation] = useState<[number, number] | null>(null);
 
 	const directionFactory = (direction: Direction) => () => {
-		setLocation(([x, y]) => {
+		setLocation(([x, y] = [0, 0]) => {
 			switch (direction) {
-				case Direction.UP:
-					return [x, y - 1];
-				case Direction.DOWN:
-					return [x, y + 1];
-				case Direction.LEFT:
-					return [x - 1, y];
-				case Direction.RIGHT:
-					return [x + 1, y];
-				default:
+				case Direction.UP: {
+					return [x, (y ?? 0) - 1];
+				}
+
+				case Direction.DOWN: {
+					return [x, (y ?? 0) + 1];
+				}
+
+				case Direction.LEFT: {
+					return [(x ?? 0) - 1, y];
+				}
+
+				case Direction.RIGHT: {
+					return [(x ?? 0) + 1, y];
+				}
+
+				default: {
 					return [x, y];
+				}
 			}
 		});
 	};
@@ -168,33 +184,52 @@ export const GigglEmojiPicker = (props: Props) => {
 							return null;
 						}
 
-						const isRowSelected = virtualProps.rowIndex === y;
-						const isColumnSelected = virtualProps.columnIndex === x;
-						const isKeyboardSelected = isRowSelected && isColumnSelected;
-
-						const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
-
-						return (
-							<EmojiCell
-								key={emoji.name}
-								type="button"
-								style={{
-									...virtualProps.style,
-									backgroundColor: isKeyboardSelected ? 'red' : 'inherit',
-								}}
-								onClick={() => {
-									props.onPick(emoji.name);
-								}}
-							>
-								{String.fromCodePoint(...codes)}
-							</EmojiCell>
-						);
+						return <EmojiCellChild key={emoji.name} emoji={emoji} {...virtualProps} />;
 					}}
 				</FixedSizeGrid>
 			</RelativeWrapper>
 		</StyledContainer>
 	);
 };
+
+function EmojiCellChild(
+	props: React.PropsWithChildren<GridChildComponentProps<unknown>> & {
+		active: boolean;
+		emoji: EmojiListItem;
+	} & Pick<Props, 'onPick'>,
+) {
+	const {active, emoji, onPick, ...virtualProps} = props;
+
+	const isRowSelected = virtualProps.rowIndex === y;
+	const isColumnSelected = virtualProps.columnIndex === x;
+	const isKeyboardSelected = isRowSelected && isColumnSelected;
+
+	const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
+	const ref = useRef<HTMLButtonElement | null>(null);
+
+	useEffect(() => {
+		if (active) {
+			ref.current?.focus();
+		}
+	}, [active]);
+
+	return (
+		<EmojiCell
+			ref={ref}
+			key={emoji.name}
+			type="button"
+			style={{
+				...virtualProps.style,
+				backgroundColor: isKeyboardSelected ? 'red' : 'inherit',
+			}}
+			onClick={() => {
+				onPick(emoji.name);
+			}}
+		>
+			{String.fromCodePoint(...codes)}
+		</EmojiCell>
+	);
+}
 
 const RelativeWrapper = styled('div')({position: 'relative'});
 
