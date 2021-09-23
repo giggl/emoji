@@ -114,27 +114,42 @@ export const GigglEmojiPicker = (props: Props) => {
 
 	const directionFactory = (direction: Direction) => () => {
 		setLocation(([x, y]) => {
+			let result = [x, y] as const;
+
 			switch (direction) {
 				case Direction.UP: {
-					return [x, Math.max(y - 1, 0)];
+					result = [x, Math.max(y - 1, 0)];
+					break;
 				}
 
 				case Direction.DOWN: {
-					return [x, Math.min(y + 1, chunked.length)];
+					result = [x, Math.min(y + 1, chunked.length)];
+					break;
 				}
 
 				case Direction.LEFT: {
-					return [x - 1, y];
+					result = [Math.max(x - 1, 0), y];
+					break;
 				}
 
 				case Direction.RIGHT: {
-					return [x + 1, y];
+					result = [Math.min(x + 1, (props.columns ?? DEFAULT_COLUMNS_COUNT) - 1), y];
+					break;
 				}
 
-				default: {
-					return [x, y];
-				}
+				default:
+					break;
 			}
+
+			const [resultX, resultY] = result;
+
+			const emojiExistsAtLocation = Boolean(chunked[resultX]?.[resultY]);
+
+			if (!emojiExistsAtLocation) {
+				return [x, y];
+			}
+
+			return result;
 		});
 	};
 
@@ -142,6 +157,8 @@ export const GigglEmojiPicker = (props: Props) => {
 	useHotkeys('Down', directionFactory(Direction.DOWN), {enableOnTags: ['INPUT']});
 	useHotkeys('Left', directionFactory(Direction.LEFT), {enableOnTags: ['INPUT']});
 	useHotkeys('Right', directionFactory(Direction.RIGHT), {enableOnTags: ['INPUT']});
+
+	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	return (
 		<StyledContainer
@@ -160,6 +177,7 @@ export const GigglEmojiPicker = (props: Props) => {
 			)}
 			<RelativeWrapper>
 				<Input
+					ref={inputRef}
 					aria-autocomplete="none"
 					autoComplete="off"
 					placeholder="🧭 Search..."
@@ -192,7 +210,7 @@ export const GigglEmojiPicker = (props: Props) => {
 						return (
 							<EmojiCellChild
 								key={emoji.name}
-								active={isKeyboardSelected}
+								active={isKeyboardSelected && document.activeElement !== inputRef?.current}
 								emoji={emoji}
 								setLocation={setLocation}
 								onPick={props.onPick}
@@ -230,7 +248,8 @@ function EmojiCellChild(
 			key={emoji.name}
 			type="button"
 			style={virtualProps.style}
-			onMouseOver={() => {
+			onMouseEnter={() => {
+				setLocation([virtualProps.columnIndex, virtualProps.rowIndex]);
 				ref.current?.focus();
 			}}
 			onClick={() => {

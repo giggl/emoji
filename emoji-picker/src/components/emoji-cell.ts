@@ -17,15 +17,10 @@ export const EmojiCell = styled(
 	border: '2px solid transparent',
 	borderRadius: '5px',
 	marginTop: `${EMOJI_DIMENSION}px`,
-	transition: 'all 0.15s',
 	willChange: 'transform',
 	outline: 'none',
 
 	'&:focus': {
-		background: 'rgba(255, 255, 255, 0.2)',
-	},
-
-	'&:active': {
 		background: 'rgba(255, 255, 255, 0.2)',
 	},
 });

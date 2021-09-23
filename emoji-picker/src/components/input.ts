@@ -1,6 +1,10 @@
 import {styled} from 'goober';
+import {forwardRef} from 'react';
 
-export const Input = styled('input')({
+export const Input = styled(
+	'input',
+	forwardRef,
+)({
 	display: 'block',
 	position: 'absolute',
 	zIndex: 10,

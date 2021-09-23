@@ -1,10 +1,14 @@
 /* eslint-disable no-alert */
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, DispatchWithoutAction, SetStateAction, useEffect, useReducer} from 'react';
 import ReactDOM from 'react-dom';
 import {GigglEmojiPicker} from '../emoji-picker/src';
 
 function App() {
-	const [debug, setDebug] = useState(true);
+	const [debug, setDebug] = useReducer(x => !x, window.localStorage.getItem('debug') === 'yes');
+
+	useEffect(() => {
+		window.localStorage.setItem('debug', debug ? 'yes' : 'no');
+	}, [debug]);
 
 	return (
 		<>
@@ -22,23 +26,11 @@ function App() {
 	);
 }
 
-function DebugSwitch({
-	debug,
-	setDebug,
-}: {
-	debug: boolean;
-	setDebug: Dispatch<SetStateAction<boolean>>;
-}) {
+function DebugSwitch({debug, setDebug}: {debug: boolean; setDebug: DispatchWithoutAction}) {
 	return (
 		<div style={{marginBottom: '20px'}}>
 			<label>
-				<input
-					type="checkbox"
-					checked={debug}
-					onChange={() => {
-						setDebug(x => !x);
-					}}
-				/>
+				<input type="checkbox" checked={debug} onChange={setDebug} />
 				<span>debug</span>
 			</label>
 		</div>
