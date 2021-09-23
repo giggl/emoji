@@ -377,7 +377,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/emoji-picker@workspace:emoji-picker"
   dependencies:
+    "@types/react": ^17.0.22
     goober: ^2.0.41
+    react: ^17.0.2
     react-hotkeys-hook: ^3.4.0
     react-window: ^1.8.6
     tsup: ^5.1.0
@@ -1276,6 +1278,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 4ee41e0c8d0e938f501f80ac75a5ee70b5e8cd5968a1f764960bf7b2694fd0d8ca01345f00325617130643b4af6e072bb3ade023dbc2bd2db7e73504b355b8d9
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^17.0.22":
+  version: 17.0.22
+  resolution: "@types/react@npm:17.0.22"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 691c7abda8f5b16d26f6b9940f75e6a9831f12d5ca070e62391454c26fd1a3d0dbe64e0199655773e0389e35e7c7984fa8a06c4561d3164562cd167f60c759e6
   languageName: node
   linkType: hard
 

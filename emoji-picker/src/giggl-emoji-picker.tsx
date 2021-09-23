@@ -5,6 +5,7 @@ import React, {
 	ReactChild,
 	useMemo,
 	useState,
+	useRef,
 } from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
 import {chunk, enforceInferType} from './utils/types';
@@ -81,38 +82,7 @@ enum Direction {
 }
 
 export const GigglEmojiPicker = (props: Props) => {
-	const [[x, y] = [], setLocation] = useState<[number, number] | null>(null);
-
-	const directionFactory = (direction: Direction) => () => {
-		setLocation(([x, y] = [0, 0]) => {
-			switch (direction) {
-				case Direction.UP: {
-					return [x, (y ?? 0) - 1];
-				}
-
-				case Direction.DOWN: {
-					return [x, (y ?? 0) + 1];
-				}
-
-				case Direction.LEFT: {
-					return [(x ?? 0) - 1, y];
-				}
-
-				case Direction.RIGHT: {
-					return [(x ?? 0) + 1, y];
-				}
-
-				default: {
-					return [x, y];
-				}
-			}
-		});
-	};
-
-	useHotkeys('Up', directionFactory(Direction.UP), {enableOnTags: ['INPUT']});
-	useHotkeys('Down', directionFactory(Direction.DOWN), {enableOnTags: ['INPUT']});
-	useHotkeys('Left', directionFactory(Direction.LEFT), {enableOnTags: ['INPUT']});
-	useHotkeys('Right', directionFactory(Direction.RIGHT), {enableOnTags: ['INPUT']});
+	const [[x, y], setLocation] = useState<[number, number]>([0, 0]);
 
 	const {state, setState, filtered} = useInputFilter((item, state) => {
 		const trimmed = state.trim().toLowerCase();
@@ -141,6 +111,37 @@ export const GigglEmojiPicker = (props: Props) => {
 	const containerRowsHeight =
 		containerBoundsCalculator.padding +
 		containerBoundsCalculator.height(props.rows ?? DEFAULT_ROWS_COUNT);
+
+	const directionFactory = (direction: Direction) => () => {
+		setLocation(([x, y]) => {
+			switch (direction) {
+				case Direction.UP: {
+					return [x, Math.max(y - 1, 0)];
+				}
+
+				case Direction.DOWN: {
+					return [x, Math.min(y + 1, chunked.length)];
+				}
+
+				case Direction.LEFT: {
+					return [x - 1, y];
+				}
+
+				case Direction.RIGHT: {
+					return [x + 1, y];
+				}
+
+				default: {
+					return [x, y];
+				}
+			}
+		});
+	};
+
+	useHotkeys('Up', directionFactory(Direction.UP), {enableOnTags: ['INPUT']});
+	useHotkeys('Down', directionFactory(Direction.DOWN), {enableOnTags: ['INPUT']});
+	useHotkeys('Left', directionFactory(Direction.LEFT), {enableOnTags: ['INPUT']});
+	useHotkeys('Right', directionFactory(Direction.RIGHT), {enableOnTags: ['INPUT']});
 
 	return (
 		<StyledContainer
@@ -184,7 +185,19 @@ export const GigglEmojiPicker = (props: Props) => {
 							return null;
 						}
 
-						return <EmojiCellChild key={emoji.name} emoji={emoji} {...virtualProps} />;
+						const isRowSelected = virtualProps.rowIndex === y;
+						const isColumnSelected = virtualProps.columnIndex === x;
+						const isKeyboardSelected = isRowSelected && isColumnSelected;
+
+						return (
+							<EmojiCellChild
+								key={emoji.name}
+								active={isKeyboardSelected}
+								emoji={emoji}
+								onPick={props.onPick}
+								{...virtualProps}
+							/>
+						);
 					}}
 				</FixedSizeGrid>
 			</RelativeWrapper>
@@ -200,15 +213,11 @@ function EmojiCellChild(
 ) {
 	const {active, emoji, onPick, ...virtualProps} = props;
 
-	const isRowSelected = virtualProps.rowIndex === y;
-	const isColumnSelected = virtualProps.columnIndex === x;
-	const isKeyboardSelected = isRowSelected && isColumnSelected;
-
 	const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 	const ref = useRef<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
-		if (active) {
+		if (active && document.activeElement !== ref.current) {
 			ref.current?.focus();
 		}
 	}, [active]);
@@ -218,10 +227,7 @@ function EmojiCellChild(
 			ref={ref}
 			key={emoji.name}
 			type="button"
-			style={{
-				...virtualProps.style,
-				backgroundColor: isKeyboardSelected ? 'red' : 'inherit',
-			}}
+			style={virtualProps.style}
 			onClick={() => {
 				onPick(emoji.name);
 			}}
