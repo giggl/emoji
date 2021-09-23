@@ -22,13 +22,7 @@ export const EmojiCell = styled(
 	outline: 'none',
 
 	'&:focus': {
-		border: '2px solid gray',
-		background: 'rgba(255, 255, 255, 0.1)',
-	},
-
-	'&:hover': {
-		background: 'rgba(255, 255, 255, 0.1)',
-		transform: 'scale(0.9)',
+		background: 'rgba(255, 255, 255, 0.2)',
 	},
 
 	'&:active': {

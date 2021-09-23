@@ -194,6 +194,7 @@ export const GigglEmojiPicker = (props: Props) => {
 								key={emoji.name}
 								active={isKeyboardSelected}
 								emoji={emoji}
+								setLocation={setLocation}
 								onPick={props.onPick}
 								{...virtualProps}
 							/>
@@ -209,9 +210,10 @@ function EmojiCellChild(
 	props: React.PropsWithChildren<GridChildComponentProps<unknown>> & {
 		active: boolean;
 		emoji: EmojiListItem;
+		setLocation: React.Dispatch<React.SetStateAction<[number, number]>>;
 	} & Pick<Props, 'onPick'>,
 ) {
-	const {active, emoji, onPick, ...virtualProps} = props;
+	const {active, emoji, onPick, setLocation, ...virtualProps} = props;
 
 	const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 	const ref = useRef<HTMLButtonElement | null>(null);
@@ -228,6 +230,9 @@ function EmojiCellChild(
 			key={emoji.name}
 			type="button"
 			style={virtualProps.style}
+			onMouseOver={() => {
+				ref.current?.focus();
+			}}
 			onClick={() => {
 				onPick(emoji.name);
 			}}
