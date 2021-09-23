@@ -114,7 +114,7 @@ export const GigglEmojiPicker = (props: Props) => {
 
 	const directionFactory = (direction: Direction) => () => {
 		setLocation(([x, y]) => {
-			let result = [x, y] as const;
+			let result = [x, y] as [number, number];
 
 			switch (direction) {
 				case Direction.UP: {
