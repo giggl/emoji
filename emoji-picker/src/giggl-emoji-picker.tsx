@@ -74,7 +74,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 	rows?: number;
 }
 
-enum Direction {
+const enum Direction {
 	LEFT,
 	RIGHT,
 	UP,

@@ -11,7 +11,8 @@
 	},
 	"scripts": {
 		"build": "yarn workspace @giggl/emoji-picker build",
-		"build-example": "yarn workspace @giggl/example build"
+		"build-example": "yarn workspace @giggl/example build",
+		"dev": "yarn workspace @giggl/example dev"
 	},
 	"husky": {
 		"hooks": {
