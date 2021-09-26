@@ -22,6 +22,7 @@ import {
 } from './constants';
 import {EmojiCell} from './components/emoji-cell';
 import {useHotkeys} from 'react-hotkeys-hook';
+import {CategoryScroller} from './components/category-scroller';
 
 setup(h);
 
@@ -34,11 +35,12 @@ const defaultContainerTheme = enforceInferType<CSSAttribute>()({
 	padding: `${CONTAINER_PADDING}px`,
 	boxSizing: 'border-box',
 	border: '1px solid #49494a',
+	float: 'left',
 });
 
 export type ContainerTheme = typeof defaultContainerTheme;
 
-const CATEGORY_MAP = new Map<string, EmojiListItem[]>();
+const CATEGORY_MAP = new Map<EmojiListItem['category'], EmojiListItem[]>();
 
 emojis.forEach(emoji => {
 	const existing = CATEGORY_MAP.get(emoji.category) ?? [];
@@ -99,7 +101,10 @@ export const GigglEmojiPicker = (props: Props) => {
 	const chunked = useMemo(
 		// Chunk the emojis into individual rows with defined column width
 		() => chunk(filtered, props.columns ?? DEFAULT_COLUMNS_COUNT),
-		[props.columns, filtered],
+
+		// Safe to use filtered.length
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[props.columns, filtered.length],
 	);
 
 	// Calculate the width of the container against the amount of columns being rendered
@@ -123,7 +128,7 @@ export const GigglEmojiPicker = (props: Props) => {
 				}
 
 				case Direction.DOWN: {
-					result = [x, Math.min(y + 1, chunked.length)];
+					result = [x, Math.min(y + 1, filtered.length)];
 					break;
 				}
 
@@ -141,7 +146,13 @@ export const GigglEmojiPicker = (props: Props) => {
 					break;
 			}
 
+			console.log(result);
+
 			const [resultX, resultY] = result;
+
+			if (resultY > 5) {
+				debugger;
+			}
 
 			const emojiExistsAtLocation = Boolean(chunked[resultX]?.[resultY]);
 
@@ -176,6 +187,11 @@ export const GigglEmojiPicker = (props: Props) => {
 				</>
 			)}
 			<RelativeWrapper>
+				<CategoryScroller>
+					{[...CATEGORY_MAP.keys()].map(key => (
+						<span key={key}>{key}</span>
+					))}
+				</CategoryScroller>
 				<Input
 					ref={inputRef}
 					aria-autocomplete="none"
@@ -210,8 +226,9 @@ export const GigglEmojiPicker = (props: Props) => {
 						return (
 							<EmojiCellChild
 								key={emoji.name}
-								active={isKeyboardSelected && document.activeElement !== inputRef?.current}
 								emoji={emoji}
+								active={isKeyboardSelected}
+								location={[virtualProps.rowIndex, virtualProps.columnIndex]}
 								setLocation={setLocation}
 								onPick={props.onPick}
 								{...virtualProps}
@@ -229,25 +246,26 @@ function EmojiCellChild(
 		active: boolean;
 		emoji: EmojiListItem;
 		setLocation: React.Dispatch<React.SetStateAction<[number, number]>>;
+		location: [number, number];
 	} & Pick<Props, 'onPick'>,
 ) {
-	const {active, emoji, onPick, setLocation, ...virtualProps} = props;
+	const {emoji, onPick, location, setLocation, ...virtualProps} = props;
 
 	const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 	const ref = useRef<HTMLButtonElement | null>(null);
 
-	useEffect(() => {
-		if (active && document.activeElement !== ref.current) {
-			ref.current?.focus();
-		}
-	}, [active]);
+	const [x, y] = props.location;
+	const active = x === virtualProps.columnIndex && y === virtualProps.rowIndex;
 
 	return (
 		<EmojiCell
 			ref={ref}
 			key={emoji.name}
 			type="button"
-			style={virtualProps.style}
+			style={{
+				...virtualProps.style,
+				background: active ? 'red' : 'blue',
+			}}
 			onMouseEnter={() => {
 				setLocation([virtualProps.columnIndex, virtualProps.rowIndex]);
 				ref.current?.focus();
@@ -261,7 +279,9 @@ function EmojiCellChild(
 	);
 }
 
-const RelativeWrapper = styled('div')({position: 'relative'});
+const RelativeWrapper = styled('div')({
+	position: 'relative',
+});
 
 const StyledContainer = styled<
 	HTMLAttributes<HTMLDivElement> & {containerTheme?: Partial<CSSAttribute>}

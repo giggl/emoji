@@ -9,6 +9,11 @@ export function enforceInferType<T>() {
 	};
 }
 
+const emojiCategoryMap = {'Smileys & Emotion': '😃'} as const;
+export function getCategoryURL<T extends keyof typeof emojiCategoryMap>(key: T) {
+	return emojiCategoryMap[key];
+}
+
 /**
  * TypeScript lacks a way of typing a record of keys only but not values.
  * we need this because we want an object of typed keys but we want to leave the values inferred.
