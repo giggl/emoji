@@ -23,7 +23,7 @@ import {
 import {EmojiCell} from './components/emoji-cell';
 import {useHotkeys} from 'react-hotkeys-hook';
 import {CategoryScroller} from './components/category-scroller';
-import {KeyboardEventHandler} from 'react';
+import type {KeyHandler} from 'hotkeys-js';
 
 setup(h);
 
@@ -119,7 +119,7 @@ export const GigglEmojiPicker = (props: Props) => {
 		containerBoundsCalculator.height(props.rows ?? DEFAULT_ROWS_COUNT);
 
 	const directionFactory =
-		(direction: Direction): KeyboardEventHandler<HTMLInputElement> =>
+		(direction: Direction): KeyHandler =>
 		e => {
 			e.stopPropagation();
 
