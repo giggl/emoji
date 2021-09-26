@@ -1,2 +1,2 @@
 export * from './giggl-emoji-picker';
-export * from './types';
+export * from './emojis';

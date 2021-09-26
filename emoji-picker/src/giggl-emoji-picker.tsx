@@ -1,6 +1,5 @@
 import React, {
 	createElement as h,
-	useEffect,
 	HTMLAttributes,
 	ReactChild,
 	useMemo,
@@ -9,7 +8,7 @@ import React, {
 } from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
 import {chunk, enforceInferType} from './utils/types';
-import {EmojiListItem, emojis} from './types';
+import {EmojiListItem, emojis} from './emojis';
 import {FixedSizeGrid, GridChildComponentProps} from 'react-window';
 import {Input} from './components/input';
 import {useInputFilter} from './utils/hook';
@@ -87,14 +86,14 @@ const enum Direction {
 export const GigglEmojiPicker = (props: Props) => {
 	const [[x, y], setLocation] = useState<[number, number]>([0, 0]);
 
-	const {state, setState, filtered} = useInputFilter((item, state) => {
+	const {state, setState, filtered} = useInputFilter((emoji, state) => {
 		const trimmed = state.trim().toLowerCase();
 
 		if (trimmed === '') {
 			return true;
 		}
 
-		return (item.name + item.short_names.join(',') + item.short_name + item.category)
+		return (emoji.name + emoji.short_names.join(',') + emoji.short_name + emoji.category)
 			.toLowerCase()
 			.includes(trimmed);
 	}, emojis);
@@ -151,14 +150,7 @@ export const GigglEmojiPicker = (props: Props) => {
 						break;
 				}
 
-				console.log(result);
-
 				const [resultX, resultY] = result;
-
-				if (resultY > 5) {
-					debugger;
-				}
-
 				const emojiExistsAtLocation = Boolean(chunked[resultX]?.[resultY]);
 
 				if (!emojiExistsAtLocation) {
