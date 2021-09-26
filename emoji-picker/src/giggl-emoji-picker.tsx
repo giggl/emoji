@@ -23,6 +23,7 @@ import {
 import {EmojiCell} from './components/emoji-cell';
 import {useHotkeys} from 'react-hotkeys-hook';
 import {CategoryScroller} from './components/category-scroller';
+import {KeyboardEventHandler} from 'react';
 
 setup(h);
 
@@ -117,52 +118,56 @@ export const GigglEmojiPicker = (props: Props) => {
 		containerBoundsCalculator.padding +
 		containerBoundsCalculator.height(props.rows ?? DEFAULT_ROWS_COUNT);
 
-	const directionFactory = (direction: Direction) => () => {
-		setLocation(([x, y]) => {
-			let result = [x, y] as [number, number];
+	const directionFactory =
+		(direction: Direction): KeyboardEventHandler<HTMLInputElement> =>
+		e => {
+			e.stopPropagation();
 
-			switch (direction) {
-				case Direction.UP: {
-					result = [x, Math.max(y - 1, 0)];
-					break;
+			setLocation(([x, y]) => {
+				let result = [x, y] as [number, number];
+
+				switch (direction) {
+					case Direction.UP: {
+						result = [x, Math.max(y - 1, 0)];
+						break;
+					}
+
+					case Direction.DOWN: {
+						result = [x, Math.min(y + 1, filtered.length)];
+						break;
+					}
+
+					case Direction.LEFT: {
+						result = [Math.max(x - 1, 0), y];
+						break;
+					}
+
+					case Direction.RIGHT: {
+						result = [Math.min(x + 1, (props.columns ?? DEFAULT_COLUMNS_COUNT) - 1), y];
+						break;
+					}
+
+					default:
+						break;
 				}
 
-				case Direction.DOWN: {
-					result = [x, Math.min(y + 1, filtered.length)];
-					break;
+				console.log(result);
+
+				const [resultX, resultY] = result;
+
+				if (resultY > 5) {
+					debugger;
 				}
 
-				case Direction.LEFT: {
-					result = [Math.max(x - 1, 0), y];
-					break;
+				const emojiExistsAtLocation = Boolean(chunked[resultX]?.[resultY]);
+
+				if (!emojiExistsAtLocation) {
+					return [x, y];
 				}
 
-				case Direction.RIGHT: {
-					result = [Math.min(x + 1, (props.columns ?? DEFAULT_COLUMNS_COUNT) - 1), y];
-					break;
-				}
-
-				default:
-					break;
-			}
-
-			console.log(result);
-
-			const [resultX, resultY] = result;
-
-			if (resultY > 5) {
-				debugger;
-			}
-
-			const emojiExistsAtLocation = Boolean(chunked[resultX]?.[resultY]);
-
-			if (!emojiExistsAtLocation) {
-				return [x, y];
-			}
-
-			return result;
-		});
-	};
+				return result;
+			});
+		};
 
 	useHotkeys('Up', directionFactory(Direction.UP), {enableOnTags: ['INPUT']});
 	useHotkeys('Down', directionFactory(Direction.DOWN), {enableOnTags: ['INPUT']});
