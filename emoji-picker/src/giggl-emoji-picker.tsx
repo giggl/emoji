@@ -204,7 +204,21 @@ export const GigglEmojiPicker = (props: Props) => {
 			<RelativeWrapper>
 				<CategoryScroller>
 					{[...CATEGORY_MAP.keys()].map(key => (
-						<span key={key}>{key}</span>
+						<span
+							key={key}
+							onClick={() => {
+								const row = chunked.find(row => row.find(emoji => emoji.category === key));
+								if (!row) {
+									return;
+								}
+
+								const rowIndex = chunked.indexOf(row);
+
+								listRef.current?.scrollTo({scrollTop: rowIndex * EMOJI_DIMENSION});
+							}}
+						>
+							{key}
+						</span>
 					))}
 				</CategoryScroller>
 				<Input
