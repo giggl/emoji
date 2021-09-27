@@ -23,6 +23,9 @@ import {
 import {EmojiCell} from './components/emoji-cell';
 import {useHotkeys} from 'react-hotkeys-hook';
 import {CategoryScroller} from './components/category-scroller';
+
+// Note: hotkeys-js is a dependency of react-hotkeys-hook
+// so it's safe to import the type here
 import type {KeyHandler} from 'hotkeys-js';
 
 setup(h);
