@@ -279,7 +279,6 @@ function EmojiCellChild(
 ) {
 	const {emoji, onPick, setLocation, ...virtualProps} = props;
 
-	const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 	const ref = useRef<HTMLButtonElement | null>(null);
 
 	return (
@@ -297,7 +296,11 @@ function EmojiCellChild(
 				onPick(emoji.name);
 			}}
 		>
-			{String.fromCodePoint(...codes)}
+			<img
+				src={`https://twitter.github.io/twemoji/v/13.1.0/svg/${emoji.unified.toLowerCase()}.svg`}
+				crossOrigin="anonymous"
+				alt=""
+			/>
 		</EmojiCell>
 	);
 }
