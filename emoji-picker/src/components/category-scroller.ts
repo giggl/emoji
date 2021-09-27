@@ -8,8 +8,13 @@ export const CategoryScroller = styled(
 	'display': 'flex',
 	'overflowX': 'auto',
 
-	'> span': {
+	'> button': {
+		marginRight: '10px',
+		background: 'transparent',
+		border: 'none',
 		display: 'inline',
-		minWidth: '100px',
+		width: '35px',
+		fontSize: '2em',
+		cursor: 'pointer',
 	},
 });

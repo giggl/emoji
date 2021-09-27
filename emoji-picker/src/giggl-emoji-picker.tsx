@@ -8,7 +8,7 @@ import React, {
 	useEffect,
 } from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
-import {chunk, enforceInferType} from './utils/types';
+import {chunk, enforceInferType, getCategoryURL} from './utils/types';
 import {EmojiListItem, emojis} from './emojis';
 import {FixedSizeGrid, GridChildComponentProps} from 'react-window';
 import {Input} from './components/input';
@@ -204,21 +204,25 @@ export const GigglEmojiPicker = (props: Props) => {
 			<RelativeWrapper>
 				<CategoryScroller>
 					{[...CATEGORY_MAP.keys()].map(key => (
-						<span
+						<button
 							key={key}
+							type="button"
 							onClick={() => {
 								const row = chunked.find(row => row.find(emoji => emoji.category === key));
+
 								if (!row) {
 									return;
 								}
 
 								const rowIndex = chunked.indexOf(row);
 
-								listRef.current?.scrollTo({scrollTop: rowIndex * EMOJI_DIMENSION});
+								listRef.current?.scrollTo({
+									scrollTop: rowIndex * EMOJI_DIMENSION,
+								});
 							}}
 						>
-							{key}
-						</span>
+							{getCategoryURL(key as 'Symbols')}
+						</button>
 					))}
 				</CategoryScroller>
 				<Input
@@ -249,16 +253,10 @@ export const GigglEmojiPicker = (props: Props) => {
 							return null;
 						}
 
-						const isRowSelected = virtualProps.rowIndex === y;
-						const isColumnSelected = virtualProps.columnIndex === x;
-						const isKeyboardSelected = isRowSelected && isColumnSelected;
-
 						return (
 							<EmojiCellChild
 								key={emoji.name}
 								emoji={emoji}
-								active={isKeyboardSelected}
-								location={[x, y]}
 								setLocation={setLocation}
 								onPick={props.onPick}
 								{...virtualProps}
@@ -273,26 +271,20 @@ export const GigglEmojiPicker = (props: Props) => {
 
 function EmojiCellChild(
 	props: React.PropsWithChildren<GridChildComponentProps<unknown>> & {
-		active: boolean;
 		emoji: EmojiListItem;
 		setLocation: React.Dispatch<React.SetStateAction<[number, number]>>;
-		location: [number, number];
 	} & Pick<Props, 'onPick'>,
 ) {
-	const {emoji, onPick, location, setLocation, ...virtualProps} = props;
+	const {emoji, onPick, setLocation, ...virtualProps} = props;
 
 	const codes = emoji.unified.split('-').map(char => parseInt(char, 16));
 	const ref = useRef<HTMLButtonElement | null>(null);
-
-	const [x, y] = props.location;
-	const active = x === virtualProps.columnIndex && y === virtualProps.rowIndex;
 
 	return (
 		<EmojiCell
 			ref={ref}
 			key={emoji.name}
 			type="button"
-			active={active}
 			style={virtualProps.style}
 			onMouseEnter={() => {
 				setLocation([virtualProps.columnIndex, virtualProps.rowIndex]);

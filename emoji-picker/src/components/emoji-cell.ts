@@ -4,13 +4,13 @@ import {MutableRefObject} from 'react-dom/node_modules/@types/react';
 import {EMOJI_DIMENSION} from '../constants';
 
 export const EmojiCell = styled<
-	{active: boolean} & ButtonHTMLAttributes<HTMLButtonElement> & {
-			ref: MutableRefObject<HTMLButtonElement | null>;
-		}
+	ButtonHTMLAttributes<HTMLButtonElement> & {
+		ref: MutableRefObject<HTMLButtonElement | null>;
+	}
 >(
-	({active, ref, ...props}) => createElement('button', {...props, type: 'button'}),
+	({ref, ...props}) => createElement('button', {...props, type: 'button'}),
 	forwardRef,
-)(props => ({
+)({
 	'width': `${EMOJI_DIMENSION}px`,
 	'height': `${EMOJI_DIMENSION}px`,
 	'boxSizing': 'border-box',
@@ -20,13 +20,17 @@ export const EmojiCell = styled<
 	'alignItems': 'center',
 	'background': 'transparent',
 	'cursor': 'pointer',
-	'border': `2px solid ${props.active ? '#ccccc0f' : 'transparent'}`,
+	'border': 'none',
 	'borderRadius': '5px',
 	'marginTop': `${EMOJI_DIMENSION}px`,
 	'willChange': 'transform',
 	'outline': 'none',
 
+	'&:hover': {
+		background: 'gray',
+	},
+
 	'&:focus': {
 		background: 'rgba(255, 255, 255, 0.2)',
 	},
-}));
+});

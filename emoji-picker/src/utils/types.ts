@@ -11,7 +11,7 @@ export function enforceInferType<T>() {
 	};
 }
 
-const emojiCategoryMap = ensureKeys<Record<Exclude<EmojiCategory, 'Component'>, never>>()({
+const emojiCategoryMap = ensureKeys<Record<EmojiCategory, never>>()({
 	'Smileys & Emotion': '😃',
 	'Activities': '⚽️',
 	'Animals & Nature': '🐻',
@@ -21,6 +21,7 @@ const emojiCategoryMap = ensureKeys<Record<Exclude<EmojiCategory, 'Component'>, 
 	'Symbols': '🔢',
 	'Flags': '🇬🇧',
 	'People & Body': '👥',
+	'Component': '🟧',
 } as const);
 
 export function getCategoryURL<T extends keyof typeof emojiCategoryMap>(key: T) {
