@@ -94,9 +94,7 @@ export const GigglEmojiPicker = (props: Props) => {
 			return true;
 		}
 
-		return (emoji.name + emoji.short_names.join(',') + emoji.short_name + emoji.category)
-			.toLowerCase()
-			.includes(trimmed);
+		return (emoji.name + emoji.short_name + emoji.category).toLowerCase().includes(trimmed);
 	}, emojis);
 
 	const chunked = useMemo(
@@ -206,6 +204,7 @@ export const GigglEmojiPicker = (props: Props) => {
 					{[...CATEGORY_MAP.keys()].map(key => (
 						<button
 							key={key}
+							title={key}
 							type="button"
 							onClick={() => {
 								const row = chunked.find(row => row.find(emoji => emoji.category === key));
@@ -285,6 +284,7 @@ function EmojiCellChild(
 			ref={ref}
 			key={emoji.name}
 			type="button"
+			title={emoji.short_name}
 			style={virtualProps.style}
 			onMouseEnter={() => {
 				setLocation([virtualProps.columnIndex, virtualProps.rowIndex]);

@@ -15,13 +15,13 @@
 		"build": "tsup src/index.ts --format esm,cjs --dts --minify"
 	},
 	"dependencies": {
-		"@types/react": "^17.0.22",
+		"@types/react": "^17.0.24",
 		"goober": "^2.0.41",
 		"react": "^17.0.2",
-		"react-hotkeys-hook": "^3.4.0",
+		"react-hotkeys-hook": "^3.4.3",
 		"react-window": "^1.8.6"
 	},
 	"devDependencies": {
-		"tsup": "^5.1.0"
+		"tsup": "^5.2.1"
 	}
 }

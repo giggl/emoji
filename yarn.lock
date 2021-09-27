@@ -1553,12 +1553,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/emoji-picker@workspace:emoji-picker"
   dependencies:
-    "@types/react": ^17.0.22
+    "@types/react": ^17.0.24
     goober: ^2.0.41
     react: ^17.0.2
-    react-hotkeys-hook: ^3.4.0
+    react-hotkeys-hook: ^3.4.3
     react-window: ^1.8.6
-    tsup: ^5.1.0
+    tsup: ^5.2.1
   languageName: unknown
   linkType: soft
 
@@ -2534,14 +2534,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.22":
-  version: 17.0.22
-  resolution: "@types/react@npm:17.0.22"
+"@types/react@npm:^17.0.24":
+  version: 17.0.24
+  resolution: "@types/react@npm:17.0.24"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 691c7abda8f5b16d26f6b9940f75e6a9831f12d5ca070e62391454c26fd1a3d0dbe64e0199655773e0389e35e7c7984fa8a06c4561d3164562cd167f60c759e6
+  checksum: 99383e2cbaa85831984cc17ec4a5fe7fd091aa21ef023855570440d8d0b5038efb8159701e8e2a0f6ddff3efae655922ded690190e7d172653608cbde016cb66
   languageName: node
   linkType: hard
 
@@ -11331,15 +11331,15 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react-hotkeys-hook@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "react-hotkeys-hook@npm:3.4.0"
+"react-hotkeys-hook@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "react-hotkeys-hook@npm:3.4.3"
   dependencies:
     hotkeys-js: 3.8.7
   peerDependencies:
     react: ">=16.8.1"
     react-dom: ">=16.8.1"
-  checksum: 39c438aa7b0b3837569b51005b6479807160f0b60d0a424f875555ff301e0948e09d2fd569f937f8d7350510c29a0f540fccd18d21ec4b9fdf25ae97f55e21e3
+  checksum: 1e2ad8572163f975c0cc32c144c4eed910f296ab1f5fba5597f500e00d78dd37f3f1aa7a6914efa10596ec08dcaa911ea9a52053294d4228d6d85e90a16f3881
   languageName: node
   linkType: hard
 
@@ -13100,9 +13100,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tsup@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "tsup@npm:5.1.0"
+"tsup@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "tsup@npm:5.2.1"
   dependencies:
     cac: ^6.7.2
     chalk: ^4.1.0
@@ -13125,7 +13125,7 @@ resolve@^2.0.0-next.3:
   bin:
     tsup: dist/cli-default.js
     tsup-node: dist/cli-node.js
-  checksum: d62521555112968591f8f57fcdf6c20fa145b3e3eef27029136196a34617919b461e14942b3b0c4f7f6b5298b41198bae90f5591a8eba7b71ef97d1273c0239f
+  checksum: f5c1271b5d09b2172cab613cbdeef13131c0c3628fcf98b4ef09cc083aebf03d32aee37a28d5d130dd5d1e257f85b6ef9d2f96871c1e2c17cecaa56b230055ab
   languageName: node
   linkType: hard
 

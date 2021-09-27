@@ -4,8 +4,8 @@ const prettier = require('prettier');
 const file = JSON.parse(fs.readFileSync('./emoji-picker/src/emoji.json').toString('utf-8'));
 
 const mapped = file.map(emoji => {
-	const {unified, name, short_names, category, short_name} = emoji;
-	return {unified, name, short_names, category, short_name};
+	const {unified, name, category, short_name} = emoji;
+	return {unified, name, category, short_name};
 });
 
 const prettierConfig = fs.readFileSync('./.prettierrc').toString('utf-8');

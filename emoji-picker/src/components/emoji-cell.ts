@@ -1,6 +1,5 @@
 import {styled} from 'goober';
-import {forwardRef, createElement, ButtonHTMLAttributes} from 'react';
-import {MutableRefObject} from 'react-dom/node_modules/@types/react';
+import {forwardRef, createElement, ButtonHTMLAttributes, MutableRefObject} from 'react';
 import {EMOJI_DIMENSION} from '../constants';
 
 export const EmojiCell = styled<
@@ -8,7 +7,7 @@ export const EmojiCell = styled<
 		ref: MutableRefObject<HTMLButtonElement | null>;
 	}
 >(
-	({ref, ...props}) => createElement('button', {...props, type: 'button'}),
+	props => createElement('button', {...props, type: 'button'}),
 	forwardRef,
 )({
 	'width': `${EMOJI_DIMENSION}px`,
