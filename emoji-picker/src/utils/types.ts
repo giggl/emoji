@@ -1,3 +1,5 @@
+import {EmojiCategory} from '../emojis';
+
 /**
  * TypeScript lacks a way to enforce that an object confines to a type without type-erasure.
  * This is a work around that preserves inferred types whilst still maintaining a strict
@@ -9,7 +11,18 @@ export function enforceInferType<T>() {
 	};
 }
 
-const emojiCategoryMap = {'Smileys & Emotion': '😃'} as const;
+const emojiCategoryMap = ensureKeys<Record<Exclude<EmojiCategory, 'Component'>, never>>()({
+	'Smileys & Emotion': '😃',
+	'Activities': '⚽️',
+	'Animals & Nature': '🐻',
+	'Food & Drink': '🍔',
+	'Travel & Places': '🌆',
+	'Objects': '💡',
+	'Symbols': '🔢',
+	'Flags': '🇬🇧',
+	'People & Body': '👥',
+} as const);
+
 export function getCategoryURL<T extends keyof typeof emojiCategoryMap>(key: T) {
 	return emojiCategoryMap[key];
 }

@@ -19,6 +19,7 @@ module.exports = {
 		'react/function-component-definition': 0,
 		'@typescript-eslint/indent': 0,
 		'operator-linebreak': 0,
+		'quote-props': 0,
 	},
 	ignorePatterns: ['**/*.js'],
 };

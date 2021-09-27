@@ -5,8 +5,8 @@ export const CategoryScroller = styled(
 	'div',
 	forwardRef,
 )({
-	display: 'flex',
-	overflowX: 'auto',
+	'display': 'flex',
+	'overflowX': 'auto',
 
 	'> span': {
 		display: 'inline',

@@ -5,6 +5,7 @@ import React, {
 	useMemo,
 	useState,
 	useRef,
+	useEffect,
 } from 'react';
 import {CSSAttribute, setup, styled} from 'goober';
 import {chunk, enforceInferType} from './utils/types';
@@ -107,6 +108,10 @@ export const GigglEmojiPicker = (props: Props) => {
 		[props.columns, filtered.length],
 	);
 
+	useEffect(() => {
+		setLocation([0, 0]);
+	}, [filtered.length]);
+
 	// Calculate the width of the container against the amount of columns being rendered
 	const containerColsWidth =
 		containerBoundsCalculator.padding +
@@ -132,7 +137,7 @@ export const GigglEmojiPicker = (props: Props) => {
 					}
 
 					case Direction.DOWN: {
-						result = [x, Math.min(y + 1, filtered.length)];
+						result = [x, Math.min(y + 1, chunked.length)];
 						break;
 					}
 
@@ -151,7 +156,7 @@ export const GigglEmojiPicker = (props: Props) => {
 				}
 
 				const [resultX, resultY] = result;
-				const emojiExistsAtLocation = Boolean(chunked[resultX]?.[resultY]);
+				const emojiExistsAtLocation = Boolean(chunked[resultY]?.[resultX]);
 
 				if (!emojiExistsAtLocation) {
 					return [x, y];
@@ -161,12 +166,26 @@ export const GigglEmojiPicker = (props: Props) => {
 			});
 		};
 
+	const listRef = useRef<FixedSizeGrid | null>(null);
+	const inputRef = useRef<HTMLInputElement | null>(null);
+
 	useHotkeys('Up', directionFactory(Direction.UP), {enableOnTags: ['INPUT']});
 	useHotkeys('Down', directionFactory(Direction.DOWN), {enableOnTags: ['INPUT']});
 	useHotkeys('Left', directionFactory(Direction.LEFT), {enableOnTags: ['INPUT']});
 	useHotkeys('Right', directionFactory(Direction.RIGHT), {enableOnTags: ['INPUT']});
+	useHotkeys(
+		'Enter',
+		() => {
+			const emoji = chunked[y]?.[x];
 
-	const inputRef = useRef<HTMLInputElement | null>(null);
+			if (!emoji) {
+				return;
+			}
+
+			console.log(emoji);
+		},
+		{enableOnTags: ['INPUT']},
+	);
 
 	return (
 		<StyledContainer
@@ -179,8 +198,7 @@ export const GigglEmojiPicker = (props: Props) => {
 		>
 			{props.debug && (
 				<>
-					{x}
-					{y}
+					{x},{y}
 				</>
 			)}
 			<RelativeWrapper>
@@ -202,6 +220,7 @@ export const GigglEmojiPicker = (props: Props) => {
 				/>
 
 				<FixedSizeGrid
+					ref={listRef}
 					columnCount={props.columns ?? DEFAULT_COLUMNS_COUNT}
 					columnWidth={EMOJI_DIMENSION}
 					height={containerRowsHeight}
@@ -225,7 +244,7 @@ export const GigglEmojiPicker = (props: Props) => {
 								key={emoji.name}
 								emoji={emoji}
 								active={isKeyboardSelected}
-								location={[virtualProps.rowIndex, virtualProps.columnIndex]}
+								location={[x, y]}
 								setLocation={setLocation}
 								onPick={props.onPick}
 								{...virtualProps}
@@ -259,10 +278,8 @@ function EmojiCellChild(
 			ref={ref}
 			key={emoji.name}
 			type="button"
-			style={{
-				...virtualProps.style,
-				background: active ? 'red' : 'blue',
-			}}
+			active={active}
+			style={virtualProps.style}
 			onMouseEnter={() => {
 				setLocation([virtualProps.columnIndex, virtualProps.rowIndex]);
 				ref.current?.focus();
