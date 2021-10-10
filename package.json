@@ -1,55 +1,27 @@
 {
-	"version": "0.1.0",
-	"license": "MIT",
-	"name": "giggl",
-	"author": "Giggl <devs@giggl.app> (https://giggl.app)",
-	"workspaces": {
-		"packages": [
-			"emoji-picker",
-			"example"
-		]
+	"name": "giggl_emoji_picker",
+	"packageManager": "yarn@3.0.2",
+	"devDependencies": {
+		"@babel/core": "^7.15.8",
+		"@babel/preset-env": "^7.15.8",
+		"@babel/preset-typescript": "^7.15.0",
+		"@preconstruct/cli": "^2.1.5",
+		"@types/babel__core": "^7",
+		"@types/babel__preset-env": "^7"
 	},
 	"scripts": {
-		"build": "yarn workspace @giggl/emoji-picker build",
-		"build-example": "yarn workspace @giggl/example build",
-		"dev": "yarn workspace @giggl/example dev"
+		"dev": "preconstruct watch",
+		"p": "preconstruct dev",
+		"build": "preconstruct build",
+		"pi": "preconstruct init"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "yarn lint"
-		}
-	},
-	"devDependencies": {
-		"@size-limit/preset-small-lib": "^5.0.4",
-		"@types/react-window": "^1.8.5",
-		"@typescript-eslint/eslint-plugin": "^4.31.2",
-		"@typescript-eslint/parser": "^4.31.2",
-		"eslint": "^7.32.0",
-		"eslint-config-react-app": "^6.0.0",
-		"eslint-config-xo": "^0.38.0",
-		"eslint-config-xo-react": "^0.25.0",
-		"eslint-config-xo-typescript": "^0.44.0",
-		"eslint-plugin-react": "^7.26.0",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"husky": "^7.0.2",
-		"prettier": "^2.4.1",
-		"tslib": "^2.3.1",
-		"typescript": "^4.4.3"
-	},
-	"description": "React emoji picker powered by Twemoji. Maintained by the Giggl team.",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/giggl/giggl_emoji_picker.git"
-	},
-	"keywords": [
-		"react",
-		"emoji",
-		"picker",
-		"typescript"
+	"workspaces": [
+		"packages/*",
+		"apps/*"
 	],
-	"bugs": {
-		"url": "https://github.com/giggl/giggl_emoji_picker/issues"
-	},
-	"homepage": "https://github.com/giggl/giggl_emoji_picker#readme",
-	"packageManager": "yarn@3.0.2"
+	"preconstruct": {
+		"packages": [
+			"packages/*"
+		]
+	}
 }
