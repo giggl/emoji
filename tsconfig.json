@@ -12,9 +12,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "preserve",
-		"noFallthroughCasesInSwitch": true,
-		"allowSyntheticDefaultImports": true
+		"jsx": "react",
+		"noFallthroughCasesInSwitch": true
 	},
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*.ts", "./**/*.tsx"]
