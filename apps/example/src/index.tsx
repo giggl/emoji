@@ -10,8 +10,4 @@ const onPick: OnPick = emoji => {
 	console.log(emoji);
 };
 
-function App() {
-	return <EmojiPicker onPick={onPick} />;
-}
-
-render(<App />, mount);
+render(<EmojiPicker onPick={onPick} />, mount);
