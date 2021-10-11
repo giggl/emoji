@@ -5,5 +5,6 @@
 	"bracketSpacing": false,
 	"arrowParens": "avoid",
 	"trailingComma": "all",
-	"quoteProps": "consistent"
+	"quoteProps": "consistent",
+	"endOfLine": "auto"
 }
