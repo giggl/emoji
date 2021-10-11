@@ -1,11 +1,9 @@
-import React from 'react';
-import {FixedSizeGrid} from 'react-window';
-import {chunk} from '@giggl/utils';
-import {Container} from './container';
+import React, {Fragment} from 'react';
+import * as Root from './root';
 import {OnPick} from './types';
 import {PickerProvider} from './context';
-import {Cell} from './cell';
 import {EmojiRow, emojis} from './emojis';
+import {chunk} from './util';
 
 export interface EmojiProps
 	extends React.DetailedHTMLProps<
@@ -24,18 +22,37 @@ const chunked = chunk(emojis, columns) as EmojiRow[];
 export function EmojiPicker(props: EmojiProps) {
 	return (
 		<PickerProvider picker={props.onPick}>
-			<Container>
-				<FixedSizeGrid<EmojiRow[]>
-					columnWidth={40}
-					rowHeight={40}
-					rowCount={6}
-					columnCount={400}
-					height={200}
-					width={200}
-					itemData={chunked}
-					children={Cell}
-				/>
-			</Container>
+			<Root.Root>
+				<Root.Scrollbar orientation="vertical">
+					<Root.Thumb />
+				</Root.Scrollbar>
+				<Root.Corner />
+				<Root.Viewport>
+					{chunked.map((item, index) => {
+						return (
+							<Fragment key={index}>
+								{item.map(row => {
+									if (!row) {
+										return null;
+									}
+
+									return <div>{row.char}</div>;
+								})}
+							</Fragment>
+						);
+					})}
+					{/*<FixedSizeGrid<EmojiRow[]>*/}
+					{/*	columnWidth={emojiSize}*/}
+					{/*	rowHeight={emojiSize}*/}
+					{/*	rowCount={6}*/}
+					{/*	columnCount={400}*/}
+					{/*	height={200}*/}
+					{/*	width={200}*/}
+					{/*	itemData={chunked}*/}
+					{/*	children={Cell}*/}
+					{/*/>*/}
+				</Root.Viewport>
+			</Root.Root>
 		</PickerProvider>
 	);
 }

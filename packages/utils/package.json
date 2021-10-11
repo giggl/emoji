@@ -1,6 +1,0 @@
-{
-	"name": "@giggl/utils",
-	"packageManager": "yarn@3.0.2",
-	"main": "dist/giggl-utils.cjs.js",
-	"module": "dist/giggl-utils.esm.js"
-}
