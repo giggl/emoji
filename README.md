@@ -7,7 +7,8 @@ Giggl emoji picker is an accessible emoji picker for React built in TypeScript.
 ### SSR
 
 `@giggl/emoji` uses the amazing `@stitches/react` styling library under the hood. It exports a function called
-`getCssText` which can be used to render a style tag on the server. Documentation on that can be found at [stitches.dev/docs/server-side-rendering](https://stitches.dev/docs/server-side-rendering).
+`getCssText` which can be used to render a style tag on the server. Documentation on that can be found
+at [stitches.dev/docs/server-side-rendering](https://stitches.dev/docs/server-side-rendering).
 
 A basic implementation (in Next.js) is as follows
 
