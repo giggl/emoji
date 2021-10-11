@@ -1,11 +1,11 @@
 import React from 'react';
 import {FixedSizeGrid} from 'react-window';
+import {chunk} from '@giggl/utils';
 import {Container} from './container';
 import {OnPick} from './types';
 import {PickerProvider} from './context';
 import {Cell} from './cell';
 import {EmojiRow, emojis} from './emojis';
-import {chunk} from '@giggl/utils';
 
 export interface EmojiProps
 	extends React.DetailedHTMLProps<

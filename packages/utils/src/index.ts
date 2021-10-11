@@ -1,14 +1,14 @@
 /**
  * Chunk an array into subsets of that array
- * @param arr
- * @param len Amount of items to chunk by
+ * @param array
+ * @param length Amount of items to chunk by
  */
-export function chunk<T>(arr: T[], len: number) {
+export function chunk<T>(array: T[], length: number) {
 	const chunks: T[][] = [];
 	let i = 0;
 
-	while (i < arr.length) {
-		chunks.push(arr.slice(i, (i += len)));
+	while (i < array.length) {
+		chunks.push(array.slice(i, (i += length)));
 	}
 
 	return chunks;
