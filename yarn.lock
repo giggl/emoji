@@ -1409,6 +1409,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/emoji@workspace:packages/emoji"
   dependencies:
+    "@giggl/utils": "workspace:packages/utils"
     "@stitches/react": ^1.2.5
     "@types/react-window": ^1
     "@types/twemoji": ^12.1.2

@@ -22,8 +22,6 @@ const columns = 5;
 const chunked = chunk(emojis, columns) as EmojiRow[];
 
 export function EmojiPicker(props: EmojiProps) {
-	// TODO: these
-
 	return (
 		<PickerProvider picker={props.onPick}>
 			<Container>

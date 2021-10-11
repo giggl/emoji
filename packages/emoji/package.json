@@ -7,6 +7,7 @@
 		"react": "*"
 	},
 	"dependencies": {
+		"@giggl/utils": "workspace:packages/utils",
 		"@stitches/react": "^1.2.5",
 		"jotai": "^1.3.9",
 		"react-window": "^1.8.6",
