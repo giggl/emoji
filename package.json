@@ -39,7 +39,13 @@
 		"rules": {
 			"@typescript-eslint/naming-convention": "off",
 			"node/prefer-global/process": "off",
-			"@typescript-eslint/triple-slash-reference": "off"
+			"@typescript-eslint/triple-slash-reference": "off",
+			"prettier/prettier": [
+				"error",
+				{
+					"endOfLine": "auto"
+				}
+			]
 		}
 	}
 }
