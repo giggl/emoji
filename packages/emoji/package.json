@@ -5,5 +5,8 @@
 	"module": "dist/giggl-emoji.esm.js",
 	"peerDependencies": {
 		"react": "*"
+	},
+	"dependencies": {
+		"jotai": "^1.3.9"
 	}
 }

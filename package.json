@@ -1,5 +1,6 @@
 {
-	"name": "giggl_emoji_picker",
+	"name": "giggl",
+	"private": true,
 	"packageManager": "yarn@3.0.2",
 	"devDependencies": {
 		"@babel/core": "^7.15.8",
@@ -15,11 +16,13 @@
 		"xo": "^0.45.0"
 	},
 	"scripts": {
-		"dev": "preconstruct watch",
+		"watch": "preconstruct watch",
 		"p": "preconstruct dev",
 		"build": "preconstruct build",
 		"pi": "preconstruct init",
-		"lint": "xo"
+		"lint": "xo",
+		"example": "yarn workspace @giggl/example dev",
+		"build-example": "yarn workspace @giggl/example build"
 	},
 	"workspaces": [
 		"packages/*",
