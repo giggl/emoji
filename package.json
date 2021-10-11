@@ -17,7 +17,7 @@
 	},
 	"scripts": {
 		"watch": "preconstruct watch",
-		"p": "preconstruct dev",
+		"dev": "preconstruct dev",
 		"build": "preconstruct build",
 		"pi": "preconstruct init",
 		"lint": "xo",
@@ -39,6 +39,7 @@
 		"rules": {
 			"@typescript-eslint/naming-convention": "off",
 			"node/prefer-global/process": "off",
+			"import/no-extraneous-dependencies": "off",
 			"@typescript-eslint/triple-slash-reference": "off",
 			"prettier/prettier": [
 				"error",

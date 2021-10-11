@@ -1,1 +1,1 @@
-export const x = null;
+export {};

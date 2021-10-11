@@ -7,6 +7,11 @@
 		"react": "*"
 	},
 	"dependencies": {
-		"jotai": "^1.3.9"
+		"@stitches/react": "^1.2.5",
+		"jotai": "^1.3.9",
+		"twemoji": "^13.1.0"
+	},
+	"devDependencies": {
+		"@types/twemoji": "^12.1.2"
 	}
 }
