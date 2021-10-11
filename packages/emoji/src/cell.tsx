@@ -1,16 +1,40 @@
 import React from 'react';
 import {styled} from '@stitches/react';
 import {GridChildComponentProps} from 'react-window';
-import {useIsActiveCell} from './hooks';
+import {useSellState} from './hooks';
 import {usePicker} from './context';
-import {Emoji} from './emojis';
+import {EmojiRow} from './emojis';
+import {theme} from './stitches';
 
 export const StyledCell = styled('button', {
-	//
+	display: 'inline-block',
+	size: theme.sizes.EMOJI_SIZE,
+	background: 'transparent',
+	border: 'none',
+	br: theme.radii.md,
+	transition: 'all 0.5s',
+	cursor: 'pointer',
+	color: theme.colors.textTertiary,
+
+	variants: {
+		type: {
+			active: {
+				br: theme.radii.lg,
+				transform: 'scale(0.95)',
+				background: theme.colors.bgSecondary,
+				color: theme.colors.textPrimary,
+			},
+			inactive: {},
+		},
+	},
 });
 
-export function Cell(props: GridChildComponentProps<Emoji[][]>) {
-	const [active, loc] = useIsActiveCell(props);
+/**
+ * Emoji grid cell
+ * @param props
+ */
+export function Cell(props: GridChildComponentProps<EmojiRow[]>) {
+	const [active, loc, set] = useSellState(props);
 	const picker = usePicker();
 
 	const click = () => {
@@ -19,10 +43,10 @@ export function Cell(props: GridChildComponentProps<Emoji[][]>) {
 		}
 
 		const [x, y] = loc;
-		const emoji = props.data[x]?.[y] ?? null;
+		const emoji = props.data[x]?.[y];
 
 		if (!emoji) {
-			// TODO: We should handle this somehow
+			// We should handle this somehow
 			return;
 		}
 
@@ -30,7 +54,12 @@ export function Cell(props: GridChildComponentProps<Emoji[][]>) {
 	};
 
 	return (
-		<StyledCell onClick={click} style={props.style}>
+		<StyledCell
+			type={active ? 'active' : 'inactive'}
+			onMouseOver={set}
+			onClick={click}
+			style={props.style}
+		>
 			{active ? 'Y' : 'N'}
 		</StyledCell>
 	);

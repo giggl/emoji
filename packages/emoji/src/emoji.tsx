@@ -4,7 +4,7 @@ import {Container} from './container';
 import {OnPick} from './types';
 import {PickerProvider} from './context';
 import {Cell} from './cell';
-import {Emoji} from './emojis';
+import {EmojiRow} from './emojis';
 
 export interface EmojiProps
 	extends React.DetailedHTMLProps<
@@ -25,14 +25,14 @@ export function EmojiPicker(props: EmojiProps) {
 	return (
 		<PickerProvider picker={props.onPick}>
 			<Container>
-				<FixedSizeGrid<Emoji[][]>
+				<FixedSizeGrid<EmojiRow[]>
 					columnWidth={40}
 					rowHeight={40}
 					columnCount={400}
 					height={200}
 					rowCount={200}
 					width={200}
-					itemData={[[]]}
+					itemData={[]}
 					children={Cell}
 				/>
 			</Container>

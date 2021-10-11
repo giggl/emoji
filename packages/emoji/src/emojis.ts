@@ -7,7 +7,9 @@ export interface Emoji {
 	subgroup: string;
 }
 
-export const emojis: Emoji[] = [
+export type EmojiRow = [Emoji, Emoji?, Emoji?, Emoji?, Emoji?, Emoji?];
+
+export const emojis = [
 	{
 		codes: '1F600',
 		char: '😀',
@@ -36728,4 +36730,4 @@ export const emojis: Emoji[] = [
 		group: 'Flags',
 		subgroup: 'subdivision-flag',
 	},
-];
+] as Emoji[];

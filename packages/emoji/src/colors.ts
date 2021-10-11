@@ -1,3 +1,4 @@
+// impl from @giggl/commons (private)
 export const colors = {
 	black: '#000000',
 	bgPrimary: '#191d1f',
