@@ -1434,6 +1434,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@giggl/utils@workspace:packages/utils":
+  version: 0.0.0-use.local
+  resolution: "@giggl/utils@workspace:packages/utils"
+  languageName: unknown
+  linkType: soft
+
 "@humanwhocodes/config-array@npm:^0.5.0":
   version: 0.5.0
   resolution: "@humanwhocodes/config-array@npm:0.5.0"

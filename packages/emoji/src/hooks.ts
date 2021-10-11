@@ -1,5 +1,5 @@
 import {GridChildComponentProps} from 'react-window';
-import {useAtom} from 'jotai/esm';
+import {useAtom} from 'jotai';
 import {atoms} from './state';
 
 /**

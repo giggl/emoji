@@ -4,7 +4,8 @@ import {Container} from './container';
 import {OnPick} from './types';
 import {PickerProvider} from './context';
 import {Cell} from './cell';
-import {EmojiRow} from './emojis';
+import {EmojiRow, emojis} from './emojis';
+import {chunk} from '@giggl/utils';
 
 export interface EmojiProps
 	extends React.DetailedHTMLProps<
@@ -17,10 +18,11 @@ export interface EmojiProps
 	onPick: OnPick;
 }
 
+const columns = 5;
+const chunked = chunk(emojis, columns) as EmojiRow[];
+
 export function EmojiPicker(props: EmojiProps) {
 	// TODO: these
-	// const columns = 5;
-	// const rows = 6;
 
 	return (
 		<PickerProvider picker={props.onPick}>
@@ -28,11 +30,11 @@ export function EmojiPicker(props: EmojiProps) {
 				<FixedSizeGrid<EmojiRow[]>
 					columnWidth={40}
 					rowHeight={40}
+					rowCount={6}
 					columnCount={400}
 					height={200}
-					rowCount={200}
 					width={200}
-					itemData={[]}
+					itemData={chunked}
 					children={Cell}
 				/>
 			</Container>
