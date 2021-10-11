@@ -1317,7 +1317,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4":
   version: 7.15.4
   resolution: "@babel/runtime@npm:7.15.4"
   dependencies:
@@ -1410,8 +1410,10 @@ __metadata:
   resolution: "@giggl/emoji@workspace:packages/emoji"
   dependencies:
     "@stitches/react": ^1.2.5
+    "@types/react-window": ^1
     "@types/twemoji": ^12.1.2
     jotai: ^1.3.9
+    react-window: ^1.8.6
     twemoji: ^13.1.0
   peerDependencies:
     react: "*"
@@ -2593,6 +2595,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: b7e898e1a22643a371f58e801a3d1d8cf13a82d77063c24be73e840ef8d877ca1d04adc5db168d0dac3167dc050a26b1d70efc5fe8566a7f46a3c488a8322989
+  languageName: node
+  linkType: hard
+
+"@types/react-window@npm:^1":
+  version: 1.8.5
+  resolution: "@types/react-window@npm:1.8.5"
+  dependencies:
+    "@types/react": "*"
+  checksum: 5f519e1402300d11b6e6595223feb6499f3227e38da166cbc565773cd7f71862abcf855b7835d391b5119fcfacdfba79d73a965b45f60a293fc1ff25986319ed
   languageName: node
   linkType: hard
 
@@ -7869,6 +7880,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"memoize-one@npm:>=3.1.1 <6":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
 "memory-fs@npm:^0.2.0":
   version: 0.2.0
   resolution: "memory-fs@npm:0.2.0"
@@ -9876,6 +9894,19 @@ fsevents@~2.3.2:
   version: 0.9.0
   resolution: "react-refresh@npm:0.9.0"
   checksum: 6440146176f19402ffb7d66f317e40b1c42c88579b4d439b49021e38be6307c642da3e8732a72e6997b6bb1127db0da92f4aa433da4313ce8ebad0c1efa2ed4a
+  languageName: node
+  linkType: hard
+
+"react-window@npm:^1.8.6":
+  version: 1.8.6
+  resolution: "react-window@npm:1.8.6"
+  dependencies:
+    "@babel/runtime": ^7.0.0
+    memoize-one: ">=3.1.1 <6"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 54ccf2b16c921a1acfadbe6de5dc19fe0981d84c5a913e4607afbf24448b96e938020704bf5125ec528e43a710643fc05e86fc117219fc4936e231ecd19be0b2
   languageName: node
   linkType: hard
 

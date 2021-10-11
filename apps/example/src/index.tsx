@@ -2,10 +2,12 @@ import React from 'react';
 import {render} from 'react-dom';
 import {EmojiPicker, OnPick} from '@giggl/emoji';
 
+import './index.css';
+
 const mount = document.querySelector<HTMLDivElement>('#mount')!;
 
 const onPick: OnPick = emoji => {
-	alert(emoji);
+	console.log(emoji);
 };
 
 function App() {

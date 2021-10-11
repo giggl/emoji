@@ -22,7 +22,8 @@
 		"pi": "preconstruct init",
 		"lint": "xo",
 		"example": "yarn workspace @giggl/example dev",
-		"build-example": "yarn workspace @giggl/example build"
+		"build-example": "yarn workspace @giggl/example build",
+		"fullbuild": "yarn lint&&yarn build && yarn build-example"
 	},
 	"workspaces": [
 		"packages/*",
