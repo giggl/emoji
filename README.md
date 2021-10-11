@@ -1,5 +1,3 @@
-🚨🚧 This is a work in progress, no releases have been made yet.
+# `@giggl/emoji`
 
-# `giggl_emoji_picker`
-
-A universal, accessible emoji picker for the modern web.
+Giggl emoji picker is an accessible emoji picker for React built in TypeScript.
