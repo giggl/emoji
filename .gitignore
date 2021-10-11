@@ -12,3 +12,5 @@ storybook-static
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+
+.vercel

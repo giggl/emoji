@@ -11,7 +11,7 @@ Giggl emoji picker is an accessible emoji picker for React built in TypeScript.
 
 A basic implementation (in Next.js) is as follows
 
-```ts
+```tsx
 import React from 'react';
 import NextDocument, {Html, Head, Main, NextScript} from 'next/document';
 import {getCssText} from '@giggl/emoji';
@@ -35,3 +35,9 @@ export default class Document extends NextDocument {
 	}
 }
 ```
+
+### Development
+
+This repository uses preconstruct for managing its monorepo setup. To start development, you can simply run `yarn dev`
+to build project symlinks. Afterwards, you can run `yarn example` to start the ./apps/example project which will hot
+reload when you edit the ./packages/emoji package.
