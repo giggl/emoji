@@ -34,7 +34,7 @@ export const {
 		},
 		sizes: {
 			CONTAINER_WIDTH: '200px',
-			EMOJI_SIZE: 40,
+			EMOJI_SIZE: '40px',
 			CONTAINER_HEIGHT: '400px',
 		},
 		radii: {

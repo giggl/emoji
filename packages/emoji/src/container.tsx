@@ -4,7 +4,8 @@ import {styled, t} from './stitches';
 const SCROLLBAR_SIZE = 10;
 
 const columns = 5;
-const width = columns * Number.parseInt(t.sizes.EMOJI_SIZE.value, 10);
+const width =
+	columns * Number.parseInt(t.sizes.EMOJI_SIZE.value, 10) + SCROLLBAR_SIZE;
 
 export const Container = styled(ScrollArea.Root, {
 	width,
