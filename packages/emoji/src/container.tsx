@@ -1,23 +1,25 @@
-import {styled, t} from './stitches';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import {styled, t} from './stitches';
 
 const SCROLLBAR_SIZE = 10;
 
+const columns = 5;
+const width = columns * Number.parseInt(t.sizes.EMOJI_SIZE.value, 10);
+
 export const Container = styled(ScrollArea.Root, {
+	width,
 	background: t.colors.bgPrimary,
 	color: t.colors.textPrimary,
 	px: 2,
-	width: t.sizes.CONTAINER_WIDTH,
 	height: t.sizes.CONTAINER_HEIGHT,
 	borderRadius: t.radii.sm,
-	boxShadow: `0 2px 10px ${t.colors.bgSecondary}`,
+	boxShadow: `0 2px 10px ${t.colors.bgSecondary.toString()}`,
 });
 
 export const Thumb = styled(ScrollArea.Thumb, {
 	'flex': 1,
 	'background': t.colors.brandPrimary,
 	'borderRadius': SCROLLBAR_SIZE,
-	// increase target size for touch devices https://www.w3.org/WAI/WCAG21/Understanding/target-size.html
 	'position': 'relative',
 	'&::before': {
 		content: '""',
@@ -40,9 +42,7 @@ export const Viewport = styled(ScrollArea.Viewport, {
 
 export const Scrollbar = styled(ScrollArea.Scrollbar, {
 	'display': 'flex',
-	// ensures no selection
 	'userSelect': 'none',
-	// disable browser handling of all panning and zooming gestures on touch devices
 	'touchAction': 'none',
 	'padding': 2,
 	'background': t.colors.textMuted,

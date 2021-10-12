@@ -1,21 +1,33 @@
-import {useAtom} from 'jotai';
-import {atoms} from './state';
-import type {Props} from './cell';
+import {useState, useRef, useEffect} from 'react';
 
-/**
- * Hook to identify if the current
- * @param props The props passed to the cell
- */
-export function useSellState(props: Props) {
-	const [loc, setLoc] = useAtom(atoms.location);
+export function useCell() {
+	const [hovered, setHovered] = useState(false);
 
-	const set = () => setLoc([props.col, props.row]);
+	const ref = useRef<HTMLButtonElement | null>(null);
 
-	if (!loc) {
-		return [false, loc, set] as const;
-	}
+	const enter = () => {
+		setHovered(true);
+	};
 
-	const [x, y] = loc;
+	const leave = () => {
+		setHovered(false);
+	};
 
-	return [props.col === x && props.row === y, loc, set] as const;
+	useEffect(() => {
+		if (ref.current) {
+			ref.current.addEventListener('mouseenter', enter);
+			ref.current.addEventListener('mouseleave', leave);
+		}
+
+		return () => {
+			if (!ref.current) {
+				return;
+			}
+
+			ref.current.removeEventListener('mouseenter', enter);
+			ref.current.removeEventListener('mouseleave', leave);
+		};
+	}, []);
+
+	return [ref, hovered] as const;
 }
