@@ -3,7 +3,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 
 const SCROLLBAR_SIZE = 10;
 
-export const Root = styled(ScrollArea.Root, {
+export const Container = styled(ScrollArea.Root, {
 	background: t.colors.bgPrimary,
 	color: t.colors.textPrimary,
 	px: 2,

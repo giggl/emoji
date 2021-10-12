@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
-import * as Root from './root';
 import {OnPick} from './types';
 import {PickerProvider} from './context';
 import {EmojiRow, emojis} from './emojis';
 import {chunk} from './util';
+
+import * as Scroller from './container';
+import {Cell} from './cell';
 
 export interface EmojiProps
 	extends React.DetailedHTMLProps<
@@ -22,21 +24,28 @@ const chunked = chunk(emojis, columns) as EmojiRow[];
 export function EmojiPicker(props: EmojiProps) {
 	return (
 		<PickerProvider picker={props.onPick}>
-			<Root.Root>
-				<Root.Scrollbar orientation="vertical">
-					<Root.Thumb />
-				</Root.Scrollbar>
-				<Root.Corner />
-				<Root.Viewport>
-					{chunked.map((item, index) => {
+			<Scroller.Container>
+				<Scroller.Scrollbar orientation="vertical">
+					<Scroller.Thumb />
+				</Scroller.Scrollbar>
+				<Scroller.Corner />
+				<Scroller.Viewport>
+					{chunked.map((row, columnIndex) => {
 						return (
-							<Fragment key={index}>
-								{item.map(row => {
-									if (!row) {
+							<Fragment key={columnIndex}>
+								{row.map((emoji, rowIndex) => {
+									if (!emoji) {
 										return null;
 									}
 
-									return <div>{row.char}</div>;
+									return (
+										<Cell
+											key={emoji.char}
+											col={columnIndex}
+											row={rowIndex}
+											emoji={emoji}
+										/>
+									);
 								})}
 							</Fragment>
 						);
@@ -51,8 +60,8 @@ export function EmojiPicker(props: EmojiProps) {
 					{/*	itemData={chunked}*/}
 					{/*	children={Cell}*/}
 					{/*/>*/}
-				</Root.Viewport>
-			</Root.Root>
+				</Scroller.Viewport>
+			</Scroller.Container>
 		</PickerProvider>
 	);
 }

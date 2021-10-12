@@ -1,9 +1,8 @@
 import React from 'react';
 import {styled} from '@stitches/react';
-import {GridChildComponentProps} from 'react-window';
 import {useSellState} from './hooks';
 import {usePicker} from './context';
-import {EmojiRow} from './emojis';
+import {Emoji} from './emojis';
 import {theme} from './stitches';
 
 export const StyledCell = styled('button', {
@@ -29,28 +28,34 @@ export const StyledCell = styled('button', {
 	},
 });
 
+export interface Props {
+	col: number;
+	row: number;
+	emoji: Emoji;
+}
+
 /**
  * Emoji grid cell
  * @param props
  */
-export function Cell(props: GridChildComponentProps<EmojiRow[]>) {
-	const [active, loc, set] = useSellState(props);
+export function Cell(props: Props) {
+	const [active, , set] = useSellState(props);
 	const picker = usePicker();
 
 	const click = () => {
-		if (!loc) {
-			return;
-		}
+		// if (!loc) {
+		// 	return;
+		// }
+		//
+		// const [x, y] = loc;
+		// const emoji = props.data[x]?.[y];
+		//
+		// if (!emoji) {
+		// 	// We should handle this somehow
+		// 	return;
+		// }
 
-		const [x, y] = loc;
-		const emoji = props.data[x]?.[y];
-
-		if (!emoji) {
-			// We should handle this somehow
-			return;
-		}
-
-		picker(emoji);
+		picker(props.emoji);
 	};
 
 	return (
@@ -58,7 +63,6 @@ export function Cell(props: GridChildComponentProps<EmojiRow[]>) {
 			type={active ? 'active' : 'inactive'}
 			onMouseOver={set}
 			onClick={click}
-			style={props.style}
 		>
 			{active ? 'Y' : 'N'}
 		</StyledCell>
