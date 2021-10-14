@@ -1409,11 +1409,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/emoji@workspace:packages/emoji"
   dependencies:
-    "@radix-ui/react-scroll-area": ^0.1.0
+    "@radix-ui/react-scroll-area": ^0.1.1
     "@stitches/react": ^1.2.5
     "@types/react-window": ^1
     "@types/twemoji": ^12.1.2
-    jotai: ^1.3.9
+    jotai: ^1.4.0
     react-window: ^1.8.6
     twemoji: ^13.1.0
   peerDependencies:
@@ -2372,71 +2372,71 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-context@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-context@npm:0.1.0"
+"@radix-ui/react-context@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@radix-ui/react-context@npm:0.1.1"
   dependencies:
     "@babel/runtime": ^7.13.10
   peerDependencies:
     react: ^16.8 || ^17.0
-  checksum: 94aadf43b2ef9dfaf42472baef70d6acc5a4ab76b9b7cc94511ce3f6e41d501c3ec17a34811d2b1fd5f86038e323e0679c50be26debf99f668b189d4fc2956c4
+  checksum: 85ed35b6e386706bc3a8d21ff7e2a55d0f452fd8ab89f6c9a6c2e271e390c8788800517589d5606a3bfbcca08741fbcb4b6c695c466a284ae35957d92620c467
   languageName: node
   linkType: hard
 
-"@radix-ui/react-presence@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-presence@npm:0.1.0"
+"@radix-ui/react-presence@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@radix-ui/react-presence@npm:0.1.1"
   dependencies:
     "@babel/runtime": ^7.13.10
     "@radix-ui/react-compose-refs": 0.1.0
     "@radix-ui/react-use-layout-effect": 0.1.0
   peerDependencies:
     react: ">=16.8"
-  checksum: d0c48e84d97564d12032f2374a2efc0da3de84605ad7bd7f0a3b0c7e202f6bfc075f5714265f7b1c5ccd6c9cc7371642d1b7bbff65182cd4baf4e544358a5972
+  checksum: b8911eb908111135b585fc09500b9582039a53166bf1e59103df083534da5c8d7277c080bd45c270ae70510d41046a15c9ac357094b8588d26eacf9102de1dc6
   languageName: node
   linkType: hard
 
-"@radix-ui/react-primitive@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-primitive@npm:0.1.0"
+"@radix-ui/react-primitive@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@radix-ui/react-primitive@npm:0.1.1"
   dependencies:
     "@babel/runtime": ^7.13.10
-    "@radix-ui/react-slot": 0.1.0
+    "@radix-ui/react-slot": 0.1.1
   peerDependencies:
     react: ^16.8 || ^17.0
-  checksum: feefa898997bafbd7eb57a0510cb525516c5ced4449a378d65accecbf213aca3fd08450bc6105726f846ce4ec055825274c3d45171d881d36e458fb0d86f5ffd
+  checksum: 0e2c7abf032903ecc54b4bee65e56c9330c7f8e62934915b80abc109919d695e393c20dff7161779637883c80e066bd6c0e164520d044b23247e960af63a75cd
   languageName: node
   linkType: hard
 
-"@radix-ui/react-scroll-area@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-scroll-area@npm:0.1.0"
+"@radix-ui/react-scroll-area@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@radix-ui/react-scroll-area@npm:0.1.1"
   dependencies:
     "@babel/runtime": ^7.13.10
     "@radix-ui/number": 0.1.0
     "@radix-ui/primitive": 0.1.0
     "@radix-ui/react-compose-refs": 0.1.0
-    "@radix-ui/react-context": 0.1.0
-    "@radix-ui/react-presence": 0.1.0
-    "@radix-ui/react-primitive": 0.1.0
+    "@radix-ui/react-context": 0.1.1
+    "@radix-ui/react-presence": 0.1.1
+    "@radix-ui/react-primitive": 0.1.1
     "@radix-ui/react-use-callback-ref": 0.1.0
     "@radix-ui/react-use-direction": 0.1.0
     "@radix-ui/react-use-layout-effect": 0.1.0
   peerDependencies:
     react: ^16.8 || ^17.0
-  checksum: 41a6facfe6262cd351a587dac448f1896160d3b9713c044ad8bed47541ed87f92c1e645ddc766d6fe7bf099f8830219e1e07c5d970b3dfb8aa795fc900425cfd
+  checksum: 3eb7ba1ce90224323bdc6835920a00feac241b20acc6944e36f003787bd135040cea2184aa014b63868b2457cb3cb6b0b6211ff0a40a3c37c85f50b600864f3a
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@radix-ui/react-slot@npm:0.1.0"
+"@radix-ui/react-slot@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@radix-ui/react-slot@npm:0.1.1"
   dependencies:
     "@babel/runtime": ^7.13.10
     "@radix-ui/react-compose-refs": 0.1.0
   peerDependencies:
     react: ^16.8 || ^17.0
-  checksum: cec6877aa2000c78aea88e413bc3e940b3e2706785e63ab15eefe31ed252900656a247abd33dd869d2743ecc06e5af46bbb8851412a42c43f1a2e19d7b3d1780
+  checksum: a711c3e68f21eb52a2b8bd2a83bedb1a208783e7a9b5b6cfd58885047a5dd88efb31dfe4f2e19fe7a59a1faf65371df08d622efce0e624e11f45b9c66a2356ab
   languageName: node
   linkType: hard
 
@@ -7385,9 +7385,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"jotai@npm:^1.3.9":
-  version: 1.3.9
-  resolution: "jotai@npm:1.3.9"
+"jotai@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "jotai@npm:1.4.0"
   peerDependencies:
     "@babel/core": "*"
     "@babel/template": "*"
@@ -7418,7 +7418,7 @@ fsevents@~2.3.2:
       optional: true
     xstate:
       optional: true
-  checksum: 78ed2e87a84d5adf4612dc53bd9b4681babb13bc317e6199244cb1419e65ce11e5312fbedde077bdb8d7c59b875aefec85d71cab75217c8c96d03c19fa01bd12
+  checksum: 9382d10f496e8f778832cce15b29c89f30df23e36fdcbef239378a9bffd0ce9760742b4fc5f70e63713903efc5ab3b2d1827f452a553e4e71e6c660e948ab642
   languageName: node
   linkType: hard
 
