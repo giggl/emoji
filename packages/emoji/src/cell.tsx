@@ -1,5 +1,5 @@
-import React from 'react';
-import twemoji from 'twemoji';
+import React, {useMemo} from 'react';
+import {parse} from 'twemoji-parser';
 import {styled, theme} from './stitches';
 import {useCell} from './hooks';
 import {usePicker} from './context';
@@ -51,11 +51,11 @@ export function Cell(props: Props) {
 		picker(props.emoji);
 	};
 
+	const char = useMemo(() => parse(props.emoji.char), [props.emoji.char]);
+
 	return (
 		<StyledCell type={active ? 'active' : 'inactive'} ref={ref} onClick={click}>
-			<span
-				dangerouslySetInnerHTML={{__html: twemoji.parse(props.emoji.char)}}
-			/>
+			{JSON.stringify(char)}
 		</StyledCell>
 	);
 }
