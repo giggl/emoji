@@ -1,8 +1,6 @@
 import React from 'react';
 import {OnPick} from './types';
 import {PickerProvider} from './context';
-
-import * as Scroller from './container';
 import {Cell} from './cell';
 import {emojis} from './emojis';
 
@@ -20,17 +18,9 @@ export interface EmojiProps
 export function EmojiPicker(props: EmojiProps) {
 	return (
 		<PickerProvider picker={props.onPick}>
-			<Scroller.Container>
-				<Scroller.Scrollbar orientation="vertical">
-					<Scroller.Thumb />
-				</Scroller.Scrollbar>
-				<Scroller.Corner />
-				<Scroller.Viewport>
-					{emojis.map((emoji, index) => {
-						return <Cell key={emoji.char} index={index} emoji={emoji} />;
-					})}
-				</Scroller.Viewport>
-			</Scroller.Container>
+			{emojis.map((emoji, index) => {
+				return <Cell key={emoji.char} index={index} emoji={emoji} />;
+			})}
 		</PickerProvider>
 	);
 }

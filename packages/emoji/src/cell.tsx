@@ -15,6 +15,7 @@ export const StyledCell = styled('button', {
 	'transition': 'all 0.5s',
 	'cursor': 'pointer',
 	'color': theme.colors.textTertiary,
+	'willChange': 'transform',
 
 	'> span img': {
 		width: 30,
@@ -24,7 +25,7 @@ export const StyledCell = styled('button', {
 	'variants': {
 		type: {
 			active: {
-				borderRadius: theme.radii.lg,
+				borderRadius: theme.radii.sm,
 				transform: 'scale(0.95)',
 				background: theme.colors.bgSecondary,
 				color: theme.colors.textPrimary,
@@ -51,11 +52,15 @@ export function Cell(props: Props) {
 		picker(props.emoji);
 	};
 
-	const char = useMemo(() => parse(props.emoji.char), [props.emoji.char]);
+	const emoji = useMemo(() => parse(props.emoji.char), [props.emoji.char]);
+
+	if (!emoji[0]) {
+		return null;
+	}
 
 	return (
 		<StyledCell type={active ? 'active' : 'inactive'} ref={ref} onClick={click}>
-			{JSON.stringify(char)}
+			<img src={emoji[0]?.url} alt={emoji[0]?.text} loading="lazy" />
 		</StyledCell>
 	);
 }
