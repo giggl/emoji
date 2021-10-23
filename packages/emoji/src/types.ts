@@ -6,3 +6,18 @@ import {Emoji} from './emojis';
 export type OnPick = (emoji: Emoji) => unknown;
 
 export type Coords = [column: number, row: number];
+
+export interface ParsedCategory {
+	/**
+	 * The emojis in this category
+	 */
+	emojis: Emoji[];
+	/**
+	 * The ID of the category (for react keys)
+	 */
+	id: string;
+	/**
+	 * The name of this category
+	 */
+	name: string;
+}

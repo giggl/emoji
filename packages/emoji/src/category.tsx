@@ -15,7 +15,7 @@ export const StyledCategory = styled('div', {
 	background: 'rgba(0, 0 ,0 , 0.5)',
 	display: 'flex',
 	alignItems: 'center',
-	pl: '4px',
+	px: '10px',
 });
 
 export const Category = (props: Props) => (

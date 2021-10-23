@@ -2,8 +2,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import {styled, t} from './stitches';
 
 const SCROLLBAR_SIZE = 10;
-
-const columns = 5;
+const columns = 8;
 const width =
 	// prettier-ignore
 	(columns * Number.parseInt(t.sizes.EMOJI_SIZE.value, 10)) + SCROLLBAR_SIZE;
@@ -48,6 +47,7 @@ export const Scrollbar = styled(ScrollArea.Scrollbar, {
 	'padding': 2,
 	'background': t.colors.textMuted,
 	'transition': 'background 160ms ease-out',
+	'zIndex': 2,
 	'&:hover': {background: t.colors.textTertiary},
 	'&[data-orientation="vertical"]': {width: SCROLLBAR_SIZE},
 	'&[data-orientation="horizontal"]': {

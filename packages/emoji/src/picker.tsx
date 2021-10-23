@@ -1,10 +1,9 @@
 import React, {Fragment} from 'react';
-import {OnPick} from './types';
-import {PickerProvider} from './context';
-import {Emoji, emojis} from './emojis';
-import {chunk} from './util';
-
 import * as Scroller from './container';
+import {OnPick, ParsedCategory} from './types';
+import {PickerProvider} from './context';
+import {emojis} from './emojis';
+import {chunk} from './util';
 import {Cell} from './cell';
 import {Category} from './category';
 
@@ -20,10 +19,18 @@ export interface EmojiProps
 }
 
 const columns = 5;
-const categories = emojis.reduce<Map<string, Emoji[]>>((map, emoji) => {
-	const existing = map.get(emoji.category) ?? [];
-	map.set(emoji.category, [...existing, emoji]);
-	return map;
+const categories = emojis.reduce<Map<string, ParsedCategory>>((map, emoji) => {
+	const existing = map.get(emoji.group);
+
+	const merged = existing ? [...existing.emojis, emoji] : [emoji];
+
+	const category: ParsedCategory = {
+		name: emoji.group,
+		id: emoji.group,
+		emojis: merged,
+	};
+
+	return map.set(emoji.group, category);
 }, new Map());
 
 export const EmojiPicker = (props: EmojiProps) => (
@@ -34,39 +41,34 @@ export const EmojiPicker = (props: EmojiProps) => (
 			</Scroller.Scrollbar>
 			<Scroller.Corner />
 			<Scroller.Viewport>
-				{[...categories.entries()].map(entry => {
-					const [name, items] = entry;
-
-					const chunked = chunk(items, columns);
+				{[...categories.values()].map(parsedCategory => {
+					// This chunk is incredibly fast, surprisingly. Thanks modern js engines!
+					// I was originally thinking of wrapping in useMemo but it would
+					// literally cause worse performance due to over-optimisation (the root
+					// of all evil).
+					const chunked = chunk(parsedCategory.emojis, columns);
 
 					return (
-						<Fragment key={name}>
-							<Category>{name}</Category>
-							{chunked.map((row, rowIdx) => (
-								<Fragment key={name}>
-									{row.map((emoji, colIdx) => (
-										<Cell
-											key={emoji.codes}
-											emoji={emoji}
-											indicies={[colIdx, rowIdx]}
-										/>
-									))}
-								</Fragment>
-							))}
+						<Fragment key={parsedCategory.name}>
+							<Category>{parsedCategory.name}</Category>
+							{chunked.map((row, rowIdx) => {
+								const key = `${row.length}${rowIdx}${parsedCategory.name}`;
+
+								return (
+									<Fragment key={key}>
+										{row.map((emoji, colIdx) => (
+											<Cell
+												key={emoji.codes}
+												emoji={emoji}
+												indicies={[colIdx, rowIdx]}
+											/>
+										))}
+									</Fragment>
+								);
+							})}
 						</Fragment>
 					);
 				})}
-
-				{/* <FixedSizeGrid<EmojiRow[]> */}
-				{/*	columnWidth={emojiSize} */}
-				{/*	rowHeight={emojiSize} */}
-				{/*	rowCount={6} */}
-				{/*	columnCount={400} */}
-				{/*	height={200} */}
-				{/*	width={200} */}
-				{/*	itemData={chunked} */}
-				{/*	children={Cell} */}
-				{/* /> */}
 			</Scroller.Viewport>
 		</Scroller.Container>
 	</PickerProvider>
