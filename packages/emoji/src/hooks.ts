@@ -20,12 +20,14 @@ export function useCell() {
 		}
 
 		return () => {
-			if (!ref.current) {
+			const {current} = ref;
+
+			if (!current) {
 				return;
 			}
 
-			ref.current.removeEventListener('mouseenter', enter);
-			ref.current.removeEventListener('mouseleave', leave);
+			current.removeEventListener('mouseenter', enter);
+			current.removeEventListener('mouseleave', leave);
 		};
 	}, []);
 

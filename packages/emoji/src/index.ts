@@ -1,2 +1,3 @@
-export * from './emoji';
 export * from './types';
+export * from './emojis';
+export * from './picker';

@@ -8,9 +8,10 @@ const picker = createContext<OnPick | null>(null);
  * @param props
  * @constructor
  */
-export function PickerProvider(props: {picker: OnPick; children: ReactNode}) {
-	return <picker.Provider value={props.picker} children={props.children} />;
-}
+export const PickerProvider = (props: {
+	picker: OnPick;
+	children: ReactNode;
+}) => <picker.Provider value={props.picker}>{props.children}</picker.Provider>;
 
 /**
  * Gets the current picker function from context

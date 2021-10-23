@@ -36,6 +36,14 @@ export const {
 			CONTAINER_WIDTH: '200px',
 			EMOJI_SIZE: '40px',
 			CONTAINER_HEIGHT: '400px',
+			CATEGORY_HEIGHT: '40px',
+		},
+		fontSizes: {
+			xs: '10px',
+			sm: '13px',
+			md: '16px',
+			lg: '18px',
+			xl: '24px',
 		},
 		radii: {
 			xs: '4px',

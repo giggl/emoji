@@ -9,7 +9,7 @@
 	"dependencies": {
 		"@radix-ui/react-scroll-area": "^0.1.1",
 		"@stitches/react": "^1.2.5",
-		"jotai": "^1.4.0",
+		"jotai": "^1.4.1",
 		"react-window": "^1.8.6",
 		"twemoji": "^13.1.0",
 		"twemoji-parser": "^13.1.0"
