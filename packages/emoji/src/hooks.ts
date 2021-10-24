@@ -1,10 +1,10 @@
-import {useAtom} from 'jotai';
+import {useUpdateAtom} from 'jotai/utils';
 import {useState, useRef, useEffect} from 'react';
 import {Coords} from '.';
 import {atoms} from './state';
 
 export function useCell(coords: Coords) {
-	const [, set] = useAtom(atoms.location);
+	const set = useUpdateAtom(atoms.location);
 	const [hovered, setHovered] = useState(false);
 
 	const ref = useRef<HTMLButtonElement | null>(null);

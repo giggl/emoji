@@ -31,7 +31,6 @@ export const StyledCell = styled('button', {
 				background: theme.colors.bgSecondary,
 				color: theme.colors.textPrimary,
 			},
-			inactive: {},
 		},
 	},
 });
@@ -60,7 +59,7 @@ export const Cell = (props: Props) => {
 	}
 
 	return (
-		<StyledCell ref={ref} type={active ? 'active' : 'inactive'} onClick={click}>
+		<StyledCell ref={ref} type={active ? 'active' : undefined} onClick={click}>
 			<img src={emoji[0]?.url} alt={emoji[0]?.text} loading="lazy" />
 		</StyledCell>
 	);
