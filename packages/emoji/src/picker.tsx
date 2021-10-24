@@ -18,15 +18,13 @@ const columns = 5;
 const categories = emojis.reduce<Map<string, ParsedCategory>>((map, emoji) => {
 	let existing = map.get(emoji.group);
 
-	const merged = existing ? [...existing.emojis, emoji] : [emoji];
-
 	if (existing) {
-		existing.emojis = merged;
+		existing.emojis.push(emoji);
 	} else {
 		existing = {
 			name: emoji.group,
 			id: emoji.group,
-			emojis: merged,
+			emojis: [emoji],
 		};
 	}
 

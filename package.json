@@ -29,6 +29,7 @@
 		"lint": "eslint",
 		"example": "yarn workspace @giggl/example dev",
 		"build-example": "yarn workspace @giggl/example build",
+		"serve-example": "yarn workspace @giggl/example s",
 		"fullbuild": "yarn lint&&yarn build && yarn build-example"
 	},
 	"workspaces": [
