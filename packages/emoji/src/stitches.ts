@@ -18,7 +18,7 @@ export const {
 			primary: `linear-gradient(to right, ${colors.brandSecondary}, ${colors.brandPrimary})`,
 		},
 		fonts: {
-			untitled: 'Inter Var, Inter, -apple-system, system-ui, sans-serif',
+			inter: 'Inter Var, Inter, -apple-system, system-ui, sans-serif',
 			mono: 'JetBrains Mono, Söhne Mono, menlo, monospace',
 		},
 		space: {
@@ -37,6 +37,7 @@ export const {
 			EMOJI_SIZE: '40px',
 			CONTAINER_HEIGHT: '400px',
 			CATEGORY_HEIGHT: '40px',
+			SEARCH_HEIGHT: '32px',
 		},
 		fontSizes: {
 			xs: '10px',

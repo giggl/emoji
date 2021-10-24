@@ -11,10 +11,11 @@ export const Container = styled('div', {
 	width,
 	background: t.colors.bgPrimary,
 	color: t.colors.textPrimary,
-	height: t.sizes.CONTAINER_HEIGHT,
+	height: `calc(${t.sizes.CONTAINER_HEIGHT.toString()} + ${t.sizes.SEARCH_HEIGHT.toString()})`,
 	borderRadius: t.radii.sm,
 	boxShadow: `0 2px 10px ${t.colors.bgSecondary.toString()}`,
 	overflow: 'auto',
+	fontFamily: t.fonts.inter,
 });
 
 export const Thumb = styled(ScrollArea.Thumb, {

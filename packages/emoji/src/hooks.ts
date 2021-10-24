@@ -1,6 +1,6 @@
 import {useUpdateAtom} from 'jotai/utils';
 import {useState, useRef, useEffect} from 'react';
-import {Coords} from '.';
+import {Coords} from './types';
 import {atoms} from './state';
 
 export function useCell(coords: Coords) {

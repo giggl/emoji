@@ -3,22 +3,22 @@ export interface Emoji {
 	char: string;
 	name: string;
 	category: string;
-	group: EmojiGroup;
+	group: typeof EmojiGroup[keyof typeof EmojiGroup];
 	subgroup: string;
 }
 
-export enum EmojiGroup {
-	SmileysAndEmotion = 'Smileys & Emotion',
-	PeopleAndBody = 'People & Body',
-	Component = 'Component',
-	AnimalsAndNature = 'Animals & Nature',
-	Symbols = 'Symbols',
-	Activities = 'Activities',
-	Flags = 'Flags',
-	TravelAndPlaces = 'Travel & Places',
-	Objects = 'Objects',
-	FoodAndDrink = 'Food & Drink',
-}
+export const EmojiGroup = {
+	SmileysAndEmotion: 'Smileys & Emotion',
+	PeopleAndBody: 'People & Body',
+	Component: 'Component',
+	AnimalsAndNature: 'Animals & Nature',
+	Symbols: 'Symbols',
+	Activities: 'Activities',
+	Flags: 'Flags',
+	TravelAndPlaces: 'Travel & Places',
+	Objects: 'Objects',
+	FoodAndDrink: 'Food & Drink',
+} as const;
 
 // @ts-expect-error massive friggin array cannot be type checked
 export const emojis: Emoji[] = [
