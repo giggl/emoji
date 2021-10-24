@@ -60,7 +60,7 @@ export const Cell = (props: Props) => {
 
 	return (
 		<StyledCell ref={ref} type={active ? 'active' : undefined} onClick={click}>
-			<img src={emoji[0]?.url} alt={emoji[0]?.text} loading="lazy" />
+			<img src={emoji[0].url} alt={emoji[0].text} loading="lazy" />
 		</StyledCell>
 	);
 };

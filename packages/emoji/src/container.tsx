@@ -5,15 +5,16 @@ const SCROLLBAR_SIZE = 10;
 const columns = 8;
 const width =
 	// prettier-ignore
-	(columns * Number.parseInt(t.sizes.EMOJI_SIZE.value, 10)) + SCROLLBAR_SIZE;
+	columns * Number.parseInt(t.sizes.EMOJI_SIZE.value, 10);
 
-export const Container = styled(ScrollArea.Root, {
+export const Container = styled('div', {
 	width,
 	background: t.colors.bgPrimary,
 	color: t.colors.textPrimary,
 	height: t.sizes.CONTAINER_HEIGHT,
 	borderRadius: t.radii.sm,
 	boxShadow: `0 2px 10px ${t.colors.bgSecondary.toString()}`,
+	overflow: 'auto',
 });
 
 export const Thumb = styled(ScrollArea.Thumb, {
