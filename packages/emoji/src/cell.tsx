@@ -13,7 +13,7 @@ export const StyledCell = styled('button', {
 	'background': 'transparent',
 	'border': 'none',
 	'borderRadius': theme.radii.md,
-	'transition': 'all 0.5s',
+	'transition': 'all 0.2s',
 	'cursor': 'pointer',
 	'color': theme.colors.textTertiary,
 	'willChange': 'transform',
@@ -47,7 +47,7 @@ export interface Props {
  */
 export const Cell = (props: Props) => {
 	const picker = usePicker();
-	const [ref, active] = useCell();
+	const [ref, active] = useCell(props.indicies);
 
 	const click = () => {
 		picker(props.emoji);

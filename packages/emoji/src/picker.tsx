@@ -20,17 +20,21 @@ export interface EmojiProps
 
 const columns = 5;
 const categories = emojis.reduce<Map<string, ParsedCategory>>((map, emoji) => {
-	const existing = map.get(emoji.group);
+	let existing = map.get(emoji.group);
 
 	const merged = existing ? [...existing.emojis, emoji] : [emoji];
 
-	const category: ParsedCategory = {
-		name: emoji.group,
-		id: emoji.group,
-		emojis: merged,
-	};
+	if (existing) {
+		existing.emojis = merged;
+	} else {
+		existing = {
+			name: emoji.group,
+			id: emoji.group,
+			emojis: merged,
+		};
+	}
 
-	return map.set(emoji.group, category);
+	return map.set(emoji.group, existing);
 }, new Map());
 
 export const EmojiPicker = (props: EmojiProps) => (
