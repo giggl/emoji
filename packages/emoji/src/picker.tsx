@@ -6,7 +6,6 @@ import {chunk} from './util';
 import {Cell} from './cell';
 import {Category} from './category';
 import {Container} from './container';
-import {FixedSizeList} from 'react-window';
 
 export interface EmojiProps extends PropsFor<'div'> {
 	/**
