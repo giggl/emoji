@@ -1,17 +1,13 @@
 import React, {Fragment} from 'react';
 import * as Scroller from './container';
-import {OnPick, ParsedCategory} from './types';
+import {OnPick, ParsedCategory, PropsFor} from './types';
 import {PickerProvider} from './context';
 import {emojis} from './emojis';
 import {chunk} from './util';
 import {Cell} from './cell';
 import {Category} from './category';
 
-export interface EmojiProps
-	extends React.DetailedHTMLProps<
-		React.HTMLAttributes<HTMLDivElement>,
-		HTMLDivElement
-	> {
+export interface EmojiProps extends PropsFor<'div'> {
 	/**
 	 * Picker function. Please wrap in useCallback if defined inside a component to avoid unnecessary rerenders!
 	 */

@@ -28,7 +28,7 @@ export const StyledCell = styled('button', {
 			active: {
 				borderRadius: theme.radii.sm,
 				transform: 'scale(0.95)',
-				background: theme.colors.bgSecondary,
+				background: theme.colors.textMuted,
 				color: theme.colors.textPrimary,
 			},
 		},

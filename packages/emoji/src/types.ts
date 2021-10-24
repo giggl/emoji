@@ -21,3 +21,9 @@ export interface ParsedCategory {
 	 */
 	name: string;
 }
+
+/**
+ * Gets the prop types for element when passed a tag name
+ */
+export type PropsFor<T extends keyof JSX.IntrinsicElements> =
+	JSX.IntrinsicElements[T];
