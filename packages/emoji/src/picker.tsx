@@ -1,12 +1,16 @@
-import React, {Fragment, memo} from 'react';
-import {OnPick, ParsedCategory, PropsFor} from './types';
+import React, {memo} from 'react';
+import {OnPick, PropsFor} from './types';
 import {PickerProvider} from './context';
 import {emojis} from './emojis';
 import {chunk, useInput} from './util';
 import {Cell} from './cell';
 import {Category} from './category';
-import {Container} from './container';
+import {columns, Container, EMOJI_SIZE, height, width} from './container';
 import {Search} from './search';
+import {Emoji} from '.';
+import {FixedSizeGrid} from 'react-window';
+import {useAtomValue, useUpdateAtom} from 'jotai/utils';
+import {atoms} from './state';
 
 export interface EmojiProps extends PropsFor<'div'> {
 	/**
@@ -15,63 +19,61 @@ export interface EmojiProps extends PropsFor<'div'> {
 	onPick: OnPick;
 }
 
-const columns = 5;
-const categories = emojis.reduce<Map<string, ParsedCategory>>((map, emoji) => {
-	let existing = map.get(emoji.group);
+const chunked = chunk(emojis, columns);
 
-	if (existing) {
-		existing.emojis.push(emoji);
-	} else {
-		existing = {
-			name: emoji.group,
-			id: emoji.group,
-			emojis: [emoji],
-		};
-	}
+const MemoList = memo(() => {
+	const setCategory = useUpdateAtom(atoms.currentCategory);
 
-	return map.set(emoji.group, existing);
-}, new Map());
+	return (
+		<FixedSizeGrid
+			useIsScrolling
+			rowCount={emojis.length / columns}
+			rowHeight={EMOJI_SIZE}
+			columnCount={columns}
+			columnWidth={EMOJI_SIZE}
+			width={width}
+			height={height}
+			overscanRowCount={5}
+			onItemsRendered={render => {
+				const lastEmoji =
+					chunked[render.visibleRowStartIndex][render.visibleColumnStartIndex];
 
-const MemoList = memo(() => (
-	<>
-		{[...categories.values()].map(parsedCategory => {
-			// This chunk is incredibly fast, surprisingly. Thanks modern js engines!
-			// I was originally thinking of wrapping in useMemo but it would
-			// literally cause worse performance due to over-optimisation (the root
-			// of all evil).
-			const chunked = chunk(parsedCategory.emojis, columns);
+				if (!lastEmoji) {
+					return;
+				}
 
-			return (
-				<Fragment key={parsedCategory.name}>
-					<Category>{parsedCategory.name}</Category>
-					{chunked.map((row, rowIdx) => {
-						const key = `${row.length}${rowIdx}${parsedCategory.name}`;
+				setCategory(lastEmoji.group);
+			}}
+		>
+			{({columnIndex, rowIndex, style}) => {
+				const emoji = chunked[rowIndex][columnIndex] as Emoji | undefined;
 
-						return (
-							<Fragment key={key}>
-								{row.map((emoji, colIdx) => (
-									<Cell
-										key={emoji.codes}
-										emoji={emoji}
-										indicies={[colIdx, rowIdx]}
-									/>
-								))}
-							</Fragment>
-						);
-					})}
-				</Fragment>
-			);
-		})}
-	</>
-));
+				if (!emoji) {
+					return null;
+				}
+
+				return (
+					<Cell
+						key={emoji.codes}
+						emoji={emoji}
+						style={style}
+						indicies={[columnIndex, rowIndex]}
+					/>
+				);
+			}}
+		</FixedSizeGrid>
+	);
+});
 
 export const EmojiPicker = (props: EmojiProps) => {
-	const {setter, state} = useInput();
+	const {onChange, state} = useInput('', value => value.toUpperCase());
+	const activeCategory = useAtomValue(atoms.currentCategory);
 
 	return (
 		<PickerProvider picker={props.onPick}>
 			<Container>
-				<Search value={state} placeholder="🧭 Search" onChange={setter} />
+				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
+				<Category>{activeCategory}</Category>
 				<MemoList />
 			</Container>
 		</PickerProvider>

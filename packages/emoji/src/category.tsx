@@ -1,11 +1,6 @@
-import React from 'react';
 import {styled, theme} from './stitches';
 
-interface Props {
-	children: string;
-}
-
-export const StyledCategory = styled('div', {
+export const Category = styled('div', {
 	fontSize: theme.fontSizes.xs,
 	height: theme.sizes.CATEGORY_HEIGHT,
 	width: '100%',
@@ -16,8 +11,5 @@ export const StyledCategory = styled('div', {
 	display: 'flex',
 	alignItems: 'center',
 	px: '10px',
+	boxSizing: 'border-box',
 });
-
-export const Category = (props: Props) => (
-	<StyledCategory>{props.children}</StyledCategory>
-);

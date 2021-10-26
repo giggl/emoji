@@ -14,6 +14,7 @@ export const Search = styled('input', {
 	'color': 'white',
 	'px': 10,
 	'fontFamily': theme.fonts.inter,
+	'boxSizing': 'border-box',
 
 	'&:focus': {
 		outline: 'none',

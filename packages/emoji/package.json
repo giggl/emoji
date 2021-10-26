@@ -7,7 +7,6 @@
 		"react": "*"
 	},
 	"dependencies": {
-		"@radix-ui/react-scroll-area": "^0.1.1",
 		"@stitches/react": "^1.2.5",
 		"jotai": "^1.4.1",
 		"react-window": "^1.8.6",
@@ -17,6 +16,7 @@
 	"devDependencies": {
 		"@types/react-window": "^1",
 		"@types/twemoji": "^12.1.2",
-		"@types/twemoji-parser": "^13.1.1"
+		"@types/twemoji-parser": "^13.1.1",
+		"typescript": "^4.4.4"
 	}
 }

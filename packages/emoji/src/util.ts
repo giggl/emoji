@@ -1,4 +1,4 @@
-import {ChangeEventHandler as onChange, useState} from 'react';
+import {ChangeEventHandler, useState} from 'react';
 
 /**
  * Chunk an array into subsets of that array
@@ -18,17 +18,17 @@ export function chunk<T>(array: T[], length: number) {
 
 export type InputTransformer = (value: string) => string;
 
-export function useInput<T extends HTMLInputElement>(
-	initial = '',
-	transformers: InputTransformer[] = [],
-) {
+export function useInput<
+	T extends HTMLElement & Pick<HTMLInputElement, 'value'>,
+	Transformers extends InputTransformer[],
+>(initial = '', ...transformers: Transformers) {
 	const [state, setState] = useState(initial);
 
-	const setter: onChange<T> = event => {
+	const onChange: ChangeEventHandler<T> = event => {
 		if (transformers.length) {
 			setState(
 				transformers.reduce(
-					(acc, transformer) => transformer(acc),
+					(prev, transformer) => transformer(prev),
 					event.target.value,
 				),
 			);
@@ -37,5 +37,5 @@ export function useInput<T extends HTMLInputElement>(
 		}
 	};
 
-	return {state, setState, setter};
+	return {state, setState, onChange} as const;
 }

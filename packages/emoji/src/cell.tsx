@@ -4,7 +4,7 @@ import {styled, theme} from './stitches';
 import {useCell} from './hooks';
 import {usePicker} from './context';
 import {Emoji} from './emojis';
-import {Coords} from './types';
+import {Coords, PropsFor} from './types';
 
 export const StyledCell = styled('button', {
 	'display': 'inline-block',
@@ -13,7 +13,6 @@ export const StyledCell = styled('button', {
 	'background': 'transparent',
 	'border': 'none',
 	'borderRadius': theme.radii.md,
-	'transition': 'all 0.2s',
 	'cursor': 'pointer',
 	'color': theme.colors.textTertiary,
 	'willChange': 'transform',
@@ -44,7 +43,7 @@ export interface Props {
  * Emoji grid cell
  * @param props
  */
-export const Cell = (props: Props) => {
+export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
 	const picker = usePicker();
 	const [ref, active] = useCell(props.indicies);
 
@@ -59,7 +58,12 @@ export const Cell = (props: Props) => {
 	}
 
 	return (
-		<StyledCell ref={ref} type={active ? 'active' : undefined} onClick={click}>
+		<StyledCell
+			ref={ref}
+			type={active ? 'active' : undefined}
+			style={props.style}
+			onClick={click}
+		>
 			<img src={emoji[0].url} alt={emoji[0].text} loading="lazy" />
 		</StyledCell>
 	);
