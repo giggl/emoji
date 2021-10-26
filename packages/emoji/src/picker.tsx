@@ -1,39 +1,37 @@
-import React, {memo} from 'react';
-import {OnPick, PropsFor} from './types';
+import React, {memo, useMemo} from 'react';
+import {OnPick} from './types';
 import {PickerProvider} from './context';
-import {emojis} from './emojis';
+import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
 import {Cell} from './cell';
 import {Category} from './category';
 import {columns, Container, EMOJI_SIZE, height, width} from './container';
 import {Search} from './search';
-import {Emoji} from '.';
 import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
+import {Either} from '.';
 
-export interface EmojiProps extends PropsFor<'div'> {
+export interface EmojiProps {
 	/**
 	 * Picker function. Please wrap in useCallback if defined inside a component to avoid unnecessary rerenders!
 	 */
 	onPick: OnPick;
 }
 
-const chunked = chunk(emojis, columns);
-
 const MemoList = memo(() => {
 	const setCategory = useUpdateAtom(atoms.currentCategory);
 
+	const chunked = useMemo(() => chunk(emojis, columns), []);
+
 	return (
 		<FixedSizeGrid
-			useIsScrolling
 			rowCount={emojis.length / columns}
 			rowHeight={EMOJI_SIZE}
 			columnCount={columns}
 			columnWidth={EMOJI_SIZE}
 			width={width}
 			height={height}
-			overscanRowCount={5}
 			onItemsRendered={render => {
 				const lastEmoji =
 					chunked[render.visibleRowStartIndex][render.visibleColumnStartIndex];
@@ -46,7 +44,10 @@ const MemoList = memo(() => {
 			}}
 		>
 			{({columnIndex, rowIndex, style}) => {
-				const emoji = chunked[rowIndex][columnIndex] as Emoji | undefined;
+				const emoji = chunked[rowIndex][columnIndex] as Either<
+					Emoji,
+					undefined
+				>;
 
 				if (!emoji) {
 					return null;

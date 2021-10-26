@@ -29,3 +29,5 @@ export interface ParsedCategory {
  */
 export type PropsFor<T extends keyof JSX.IntrinsicElements> =
 	JSX.IntrinsicElements[T];
+
+export type Either<T, X> = Exclude<T, X> | Exclude<X, T>;
