@@ -40,7 +40,7 @@ const MemoList = memo(() => {
 					return;
 				}
 
-				setCategory(lastEmoji.group);
+				setCategory(lastEmoji.category);
 			}}
 		>
 			{({columnIndex, rowIndex, style}) => {
@@ -53,14 +53,7 @@ const MemoList = memo(() => {
 					return null;
 				}
 
-				return (
-					<Cell
-						key={emoji.codes}
-						emoji={emoji}
-						style={style}
-						indicies={[columnIndex, rowIndex]}
-					/>
-				);
+				return <Cell key={emoji.name} emoji={emoji} style={style} />;
 			}}
 		</FixedSizeGrid>
 	);

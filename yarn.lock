@@ -1372,11 +1372,9 @@ __metadata:
     "@stitches/react": ^1.2.5
     "@types/react-window": ^1
     "@types/twemoji": ^12.1.2
-    "@types/twemoji-parser": ^13.1.1
     jotai: ^1.4.1
     react-window: ^1.8.6
     twemoji: ^13.1.0
-    twemoji-parser: ^13.1.0
     typescript: ^4.4.4
   peerDependencies:
     react: "*"
@@ -2577,13 +2575,6 @@ __metadata:
   version: 0.16.2
   resolution: "@types/scheduler@npm:0.16.2"
   checksum: b6b4dcfeae6deba2e06a70941860fb1435730576d3689225a421280b7742318d1548b3d22c1f66ab68e414f346a9542f29240bc955b6332c5b11e561077583bc
-  languageName: node
-  linkType: hard
-
-"@types/twemoji-parser@npm:^13.1.1":
-  version: 13.1.1
-  resolution: "@types/twemoji-parser@npm:13.1.1"
-  checksum: dbb915a0e1d4b1471a9c0bad52f81293ea8b1f3e92a2dc288261e6eb6dfb8b9ad37dcb6adf77832c5965a0e29f279f6a8d531f91f1c1f78ef4e592d177115d39
   languageName: node
   linkType: hard
 
@@ -9613,7 +9604,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"twemoji-parser@npm:13.1.0, twemoji-parser@npm:^13.1.0":
+"twemoji-parser@npm:13.1.0":
   version: 13.1.0
   resolution: "twemoji-parser@npm:13.1.0"
   checksum: 8046ce003c03dd92d68c2648cfbfa39c659fca4f05c10da8d14957985dc3c0c680f3ecf2de8245dc1ddffedc5b2a675f2032053e1e77cc7474301a88fe192ad3

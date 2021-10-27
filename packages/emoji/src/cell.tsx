@@ -1,9 +1,12 @@
-import React, {useMemo} from 'react';
-import {parse} from 'twemoji-parser';
+import React from 'react';
 import {styled, theme} from './stitches';
 import {usePicker} from './context';
 import {Emoji} from './emojis';
-import {Coords, PropsFor} from './types';
+import {PropsFor} from './types';
+
+const SHEET_ROWS = 60;
+const SHEET_COLS = 60;
+const SHEET_EMOJI_SIZE = 64;
 
 export const StyledCell = styled('button', {
 	'display': 'inline-block',
@@ -26,8 +29,9 @@ export const StyledCell = styled('button', {
 	},
 });
 
+const spriteSheet = `https://unpkg.com/emoji-datasource-twitter@7.0.2/img/twitter/sheets-clean/${SHEET_EMOJI_SIZE}.png`;
+
 export interface Props {
-	indicies: Coords;
 	emoji: Emoji;
 }
 
@@ -42,15 +46,23 @@ export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
 		picker(props.emoji);
 	};
 
-	const emoji = useMemo(() => parse(props.emoji.char), [props.emoji.char]);
-
-	if (!emoji[0]) {
-		return null;
-	}
+	const multiplyX = 100 / (SHEET_ROWS - 1);
+	const multiplyY = 100 / (SHEET_COLS - 1);
 
 	return (
 		<StyledCell style={props.style} onClick={click}>
-			<img src={emoji[0].url} alt={emoji[0].text} loading="eager" />
+			<div
+				style={{
+					background: `url(${spriteSheet})`,
+					backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
+						multiplyY * props.emoji.sheet_y
+					}%`,
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
+					height: '30px',
+					width: '30px',
+				}}
+			/>
 		</StyledCell>
 	);
 };
