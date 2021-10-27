@@ -1,5 +1,5 @@
 import React, {memo, useMemo} from 'react';
-import {OnPick} from './types';
+import {OnPick, Either} from './types';
 import {PickerProvider} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
@@ -10,7 +10,6 @@ import {Search} from './search';
 import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
-import {Either} from '.';
 
 export interface EmojiProps {
 	/**
@@ -19,10 +18,19 @@ export interface EmojiProps {
 	onPick: OnPick;
 }
 
-const MemoList = memo(() => {
+const MemoList = memo((props: {search: string}) => {
 	const setCategory = useUpdateAtom(atoms.currentCategory);
 
-	const chunked = useMemo(() => chunk(emojis, columns), []);
+	const chunked = useMemo(
+		() =>
+			chunk(
+				emojis.filter(emoji =>
+					emoji.name.toLowerCase().includes(props.search.toLowerCase()),
+				),
+				columns,
+			),
+		[props.search],
+	);
 
 	return (
 		<FixedSizeGrid
@@ -34,7 +42,9 @@ const MemoList = memo(() => {
 			height={height}
 			onItemsRendered={render => {
 				const lastEmoji =
-					chunked[render.visibleRowStartIndex][render.visibleColumnStartIndex];
+					chunked[render.visibleRowStartIndex]?.[
+						render.visibleColumnStartIndex
+					];
 
 				if (!lastEmoji) {
 					return;
@@ -60,7 +70,7 @@ const MemoList = memo(() => {
 });
 
 export const EmojiPicker = (props: EmojiProps) => {
-	const {onChange, state} = useInput('', value => value.toUpperCase());
+	const {onChange, state} = useInput('', value => value.toLowerCase());
 	const activeCategory = useAtomValue(atoms.currentCategory);
 
 	return (
@@ -73,7 +83,7 @@ export const EmojiPicker = (props: EmojiProps) => {
 						console.log(e.target);
 					}}
 				>
-					<MemoList />
+					<MemoList search={state} />
 				</div>
 			</Container>
 		</PickerProvider>
