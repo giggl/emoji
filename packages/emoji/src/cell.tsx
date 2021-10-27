@@ -1,6 +1,5 @@
 import React from 'react';
 import {styled, theme} from './stitches';
-import {usePicker} from './context';
 import {Emoji} from './emojis';
 import {PropsFor} from './types';
 
@@ -15,6 +14,7 @@ export const StyledCell = styled('button', {
 	'borderRadius': theme.radii.md,
 	'cursor': 'pointer',
 	'color': theme.colors.textTertiary,
+	'boxSizing': 'border-box',
 
 	'> span img': {
 		width: 30,
@@ -40,29 +40,20 @@ export interface Props {
  * @param props
  */
 export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
-	const picker = usePicker();
-
-	const click = () => {
-		picker(props.emoji);
-	};
-
 	const multiplyX = 100 / (SHEET_ROWS - 1);
 	const multiplyY = 100 / (SHEET_COLS - 1);
 
 	return (
-		<StyledCell style={props.style} onClick={click}>
-			<div
-				style={{
-					background: `url(${spriteSheet})`,
-					backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
-						multiplyY * props.emoji.sheet_y
-					}%`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
-					height: '30px',
-					width: '30px',
-				}}
-			/>
-		</StyledCell>
+		<StyledCell
+			style={{
+				...props.style,
+				background: `url(${spriteSheet})`,
+				backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
+					multiplyY * props.emoji.sheet_y
+				}%`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
+			}}
+		/>
 	);
 };

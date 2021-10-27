@@ -68,7 +68,13 @@ export const EmojiPicker = (props: EmojiProps) => {
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
 				<Category>{activeCategory}</Category>
-				<MemoList />
+				<div
+					onClick={e => {
+						console.log(e.target);
+					}}
+				>
+					<MemoList />
+				</div>
 			</Container>
 		</PickerProvider>
 	);
