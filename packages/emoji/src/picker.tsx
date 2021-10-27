@@ -18,56 +18,63 @@ export interface EmojiProps {
 	onPick: OnPick;
 }
 
-const MemoList = memo((props: {search: string}) => {
-	const setCategory = useUpdateAtom(atoms.currentCategory);
+const MemoList = memo(
+	(props: {search: string}) => {
+		const setCategory = useUpdateAtom(atoms.currentCategory);
 
-	const chunked = useMemo(
-		() =>
-			chunk(
-				emojis.filter(emoji =>
-					emoji.name.toLowerCase().includes(props.search.toLowerCase()),
+		const chunked = useMemo(
+			() =>
+				chunk(
+					emojis.filter(emoji =>
+						emoji.name.toLowerCase().includes(props.search.toLowerCase()),
+					),
+					columns,
 				),
-				columns,
-			),
-		[props.search],
-	);
+			[props.search],
+		);
 
-	return (
-		<FixedSizeGrid
-			rowCount={emojis.length / columns}
-			rowHeight={EMOJI_SIZE}
-			columnCount={columns}
-			columnWidth={EMOJI_SIZE}
-			width={width}
-			height={height}
-			onItemsRendered={render => {
-				const lastEmoji =
-					chunked[render.visibleRowStartIndex]?.[
-						render.visibleColumnStartIndex
-					];
+		if (chunked.length === 0) {
+			return <div style={{width, height}}>No emojis match your search!</div>;
+		}
 
-				if (!lastEmoji) {
-					return;
-				}
+		return (
+			<FixedSizeGrid
+				rowCount={emojis.length / columns}
+				rowHeight={EMOJI_SIZE}
+				columnCount={columns}
+				columnWidth={EMOJI_SIZE}
+				width={width}
+				height={height}
+				onItemsRendered={render => {
+					const lastEmoji =
+						chunked[render.visibleRowStartIndex]?.[
+							render.visibleColumnStartIndex
+						];
 
-				setCategory(lastEmoji.category);
-			}}
-		>
-			{({columnIndex, rowIndex, style}) => {
-				const emoji = chunked[rowIndex][columnIndex] as Either<
-					Emoji,
-					undefined
-				>;
+					if (!lastEmoji) {
+						return;
+					}
 
-				if (!emoji) {
-					return null;
-				}
+					setCategory(lastEmoji.category);
+				}}
+			>
+				{({columnIndex, rowIndex, style}) => {
+					const emoji = chunked[rowIndex]?.[columnIndex] as Either<
+						Emoji,
+						undefined
+					>;
 
-				return <Cell key={emoji.name} emoji={emoji} style={style} />;
-			}}
-		</FixedSizeGrid>
-	);
-});
+					if (!emoji) {
+						return null;
+					}
+
+					return <Cell key={emoji.name} emoji={emoji} style={style} />;
+				}}
+			</FixedSizeGrid>
+		);
+	},
+	(a, b) => a.search === b.search,
+);
 
 export const EmojiPicker = (props: EmojiProps) => {
 	const {onChange, state} = useInput('', value => value.toLowerCase());
