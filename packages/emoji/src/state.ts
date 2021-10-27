@@ -1,5 +1,5 @@
 import {atom} from 'jotai';
-import {emojis} from '.';
+import emojis from './emojis.json';
 import {Coords} from './types';
 
 export const atoms = {

@@ -1,11 +1,16 @@
 import React from 'react';
 import {styled, theme} from './stitches';
 import {Emoji} from './emojis';
-import {PropsFor} from './types';
+import {PropsFor, Coords} from './types';
 
 const SHEET_ROWS = 60;
 const SHEET_COLS = 60;
 const SHEET_EMOJI_SIZE = 64;
+
+const multiplyX = 100 / (SHEET_ROWS - 1);
+const multiplyY = 100 / (SHEET_COLS - 1);
+
+export const __GIGGL_EMOJI_CELL__ = '__GIGGL_EMOJI_CELL__';
 
 export const StyledCell = styled('button', {
 	'display': 'inline-block',
@@ -21,7 +26,7 @@ export const StyledCell = styled('button', {
 		height: 30,
 	},
 
-	'&:hover': {
+	'&:hover, .active': {
 		borderRadius: theme.radii.sm,
 		transform: 'scale(0.95)',
 		background: theme.colors.textMuted,
@@ -29,10 +34,16 @@ export const StyledCell = styled('button', {
 	},
 });
 
+const ImageContainer = styled('div', {
+	height: theme.sizes.SEARCH_HEIGHT,
+	width: theme.sizes.SEARCH_HEIGHT,
+});
+
 const spriteSheet = `https://unpkg.com/emoji-datasource-twitter@7.0.2/img/twitter/sheets-clean/${SHEET_EMOJI_SIZE}.png`;
 
 export interface Props {
 	emoji: Emoji;
+	coords: Coords;
 }
 
 /**
@@ -40,20 +51,25 @@ export interface Props {
  * @param props
  */
 export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
-	const multiplyX = 100 / (SHEET_ROWS - 1);
-	const multiplyY = 100 / (SHEET_COLS - 1);
+	const [x, y] = props.coords;
 
 	return (
 		<StyledCell
-			style={{
-				...props.style,
-				background: `url(${spriteSheet})`,
-				backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
-					multiplyY * props.emoji.sheet_y
-				}%`,
-				backgroundRepeat: 'no-repeat',
-				backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
-			}}
-		/>
+			className={__GIGGL_EMOJI_CELL__}
+			data-coords={`${x}:${y}`}
+			style={props.style}
+		>
+			<ImageContainer
+				style={{
+					pointerEvents: 'none',
+					background: `url(${spriteSheet})`,
+					backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
+						multiplyY * props.emoji.sheet_y
+					}%`,
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
+				}}
+			/>
+		</StyledCell>
 	);
 };

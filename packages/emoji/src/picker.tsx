@@ -25,16 +25,32 @@ const MemoList = memo(
 		const chunked = useMemo(
 			() =>
 				chunk(
-					emojis.filter(emoji =>
-						emoji.name.toLowerCase().includes(props.search.toLowerCase()),
-					),
+					emojis.filter(emoji => {
+						const str = emoji.name.toLowerCase();
+
+						return (
+							str + emoji.short_names.join(' ').replaceAll('_', ' ')
+						).includes(props.search.toLowerCase());
+					}),
 					columns,
 				),
 			[props.search],
 		);
 
 		if (chunked.length === 0) {
-			return <div style={{width, height}}>No emojis match your search!</div>;
+			return (
+				<div
+					style={{
+						width,
+						height,
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				>
+					🚫 No emojis match your search!
+				</div>
+			);
 		}
 
 		return (
@@ -68,7 +84,14 @@ const MemoList = memo(
 						return null;
 					}
 
-					return <Cell key={emoji.name} emoji={emoji} style={style} />;
+					return (
+						<Cell
+							key={emoji.name}
+							coords={[columnIndex, rowIndex]}
+							emoji={emoji}
+							style={style}
+						/>
+					);
 				}}
 			</FixedSizeGrid>
 		);

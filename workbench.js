@@ -3030,31 +3030,54 @@ U+1F3F4 U+E0067 U+E0062 U+E0077 U+E006C U+E0073 U+E007F ; 7.0 # 🏴󠁧󠁢󠁷
 
 const path = './packages/emoji/src/emojis.json';
 
+const categories = [
+	'Smileys & Emotion',
+	'People & Body',
+	'Food & Drink',
+	'Animals & Nature',
+	'Travel & Places',
+	'Activities',
+	'Component',
+	'Objects',
+	'Symbols',
+	'Flags',
+];
+
 const sort = emojis => {
-	const result = {};
+	const result = [];
 
-	for (const emoji of emojis) {
-		const index = order.indexOf(emoji.unified);
+	for (const categoryName of categories) {
+		const filtered = emojis.filter(emoji => emoji.category === categoryName);
+		const merged = {};
 
-		if (index === -1) {
-			continue;
+		filter: for (const emoji of filtered) {
+			const index = order.indexOf(emoji.unified);
+
+			if (index === -1) {
+				continue filter;
+			}
+
+			merged[index] = emoji;
 		}
 
-		result[index] = emoji;
+		const indexes = Object.keys(merged).sort();
+
+		console.log(categoryName, indexes);
+
+		const final = [];
+
+		for (const index of indexes) {
+			final.push(merged[index]);
+		}
+
+		result.push(...final);
 	}
 
-	const indexes = Object.keys(result).sort();
-
-	const final = [];
-
-	for (const index of indexes) {
-		final.push(result[index]);
-	}
-
-	return final;
+	return result.map(emoji => {
+		const {name, category, unified, sheet_y, sheet_x, short_names} = emoji;
+		return {name, category, unified, sheet_y, sheet_x, short_names};
+	});
 };
-
-console.log(order);
 
 const write = text => {
 	return fs.writeFile(path, text);
