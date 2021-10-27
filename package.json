@@ -31,7 +31,8 @@
 		"build-example": "yarn workspace @giggl/example build",
 		"serve-example": "yarn workspace @giggl/example s",
 		"fullbuild": "yarn lint&&yarn build && yarn build-example",
-		"start": "yarn dev && yarn example"
+		"start": "yarn dev && yarn example",
+		"release": "yarn lint&&yarn fullbuild&&yarn npm publish"
 	},
 	"workspaces": [
 		"packages/*",
