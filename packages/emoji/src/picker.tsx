@@ -1,5 +1,5 @@
 import React, {memo, useMemo} from 'react';
-import {OnPick, Either} from './types';
+import {OnPick, Either, Coords} from './types';
 import {PickerProvider} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
@@ -10,7 +10,7 @@ import {Search} from './search';
 import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
-import {Coords} from '.';
+import {DirectionHooks} from './direction';
 
 export interface EmojiProps {
 	/**
@@ -127,6 +127,7 @@ export const EmojiPicker = (props: EmojiProps) => {
 	return (
 		<PickerProvider picker={props.onPick}>
 			<StyledCellProvider />
+			<DirectionHooks />
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
 				<Category>{activeCategory}</Category>

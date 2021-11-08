@@ -9,7 +9,7 @@
 	"dependencies": {
 		"@stitches/react": "^1.2.5",
 		"jotai": "^1.4.1",
-		"react-hotkeys-hook": "^3.4.4",
+		"react-hotkeys-hook": "npm:^3.4.4",
 		"react-window": "^1.8.6"
 	},
 	"devDependencies": {
