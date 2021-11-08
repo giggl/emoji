@@ -100,27 +100,33 @@ const MemoList = memo(
 	(a, b) => a.search === b.search,
 );
 
-export const EmojiPicker = (props: EmojiProps) => {
-	const {onChange, state} = useInput('', value => value.toLowerCase());
-	const activeCategory = useAtomValue(atoms.currentCategory);
+const StyledCellProvider = () => {
 	const [x, y] = useAtomValue(atoms.location) ?? [];
 
 	return (
-		<PickerProvider picker={props.onPick}>
-			<style
-				// eslint-disable-next-line react/no-danger
-				dangerouslySetInnerHTML={{
-					__html:
-						x && y
-							? `
-								.${StyledCell.className}[data-coords="${x}:${y}"] {
+		<style
+			// eslint-disable-next-line react/no-danger
+			dangerouslySetInnerHTML={{
+				__html:
+					x !== undefined && y !== undefined
+						? ` 
+								.${StyledCell.className}[data-coords="${x}:${y}"] { 
 									background: red;
 								}
 							`
-							: '',
-				}}
-			/>
+						: '',
+			}}
+		/>
+	);
+};
 
+export const EmojiPicker = (props: EmojiProps) => {
+	const {onChange, state} = useInput('', value => value.toLowerCase());
+	const activeCategory = useAtomValue(atoms.currentCategory);
+
+	return (
+		<PickerProvider picker={props.onPick}>
+			<StyledCellProvider />
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
 				<Category>{activeCategory}</Category>
