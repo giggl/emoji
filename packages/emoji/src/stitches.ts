@@ -154,4 +154,3 @@ export const {
 });
 
 export type CSS = Stitches.CSS<typeof config>;
-export const t = theme;

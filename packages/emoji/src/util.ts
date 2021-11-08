@@ -39,3 +39,27 @@ export function useInput<
 
 	return {state, setState, onChange} as const;
 }
+
+export function useToggle(initial = false) {
+	const [state, setState] = useState(initial);
+
+	const handlers = {
+		on: () => {
+			setState(true);
+		},
+
+		off: () => {
+			setState(false);
+		},
+
+		toggle: () => {
+			setState(value => !value);
+		},
+
+		reset: () => {
+			setState(initial);
+		},
+	};
+
+	return [state, handlers] as const;
+}

@@ -3,13 +3,14 @@ import {OnPick, Either} from './types';
 import {PickerProvider} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
-import {Cell} from './cell';
+import {Cell, StyledCell} from './cell';
 import {Category} from './category';
 import {columns, Container, EMOJI_SIZE, height, width} from './container';
 import {Search} from './search';
 import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
+import {Coords} from '.';
 
 export interface EmojiProps {
 	/**
@@ -102,15 +103,39 @@ const MemoList = memo(
 export const EmojiPicker = (props: EmojiProps) => {
 	const {onChange, state} = useInput('', value => value.toLowerCase());
 	const activeCategory = useAtomValue(atoms.currentCategory);
+	const [x, y] = useAtomValue(atoms.location) ?? [null, null];
+
+	console.log([x, y]);
 
 	return (
 		<PickerProvider picker={props.onPick}>
+			<style
+				// eslint-disable-next-line react/no-danger
+				dangerouslySetInnerHTML={{
+					__html:
+						x && y
+							? `
+						.${StyledCell.className}[data-coords="${x}:${y}"] {
+							background: red;
+						}
+					`
+							: '',
+				}}
+			/>
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
 				<Category>{activeCategory}</Category>
 				<div
 					onClick={e => {
-						console.log(e.target);
+						e.stopPropagation();
+
+						if ((e.target as HTMLElement).tagName === 'BUTTON') {
+							const coords = (e.target as HTMLButtonElement).dataset
+								.coords!.split(':')
+								.map(item => parseInt(item, 10)) as Coords;
+
+							console.log(coords);
+						}
 					}}
 				>
 					<MemoList search={state} />

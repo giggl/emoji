@@ -1,4 +1,4 @@
-import {styled, t} from './stitches';
+import {styled, theme as t} from './stitches';
 
 export const SCROLLBAR_SIZE = 10;
 export const columns = 8;
