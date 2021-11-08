@@ -1,6 +1,6 @@
 import React, {memo, useMemo} from 'react';
 import {OnPick, Either, Coords} from './types';
-import {PickerProvider} from './context';
+import {PickerProvider, usePicker} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
 import {Cell, StyledCell} from './cell';
@@ -11,6 +11,7 @@ import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
+import {useHotkeys} from 'react-hotkeys-hook';
 
 export interface EmojiProps {
 	/**
@@ -102,6 +103,15 @@ const MemoList = memo(
 
 const StyledCellProvider = () => {
 	const [x, y] = useAtomValue(atoms.location) ?? [];
+	const picker = usePicker();
+
+	useHotkeys(
+		'Enter',
+		() => {
+			picker({x, y} as any);
+		},
+		[x, y],
+	);
 
 	return (
 		<style
