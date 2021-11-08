@@ -138,6 +138,7 @@ export const EmojiPicker = (props: EmojiProps) => {
 		<PickerProvider picker={props.onPick}>
 			<StyledCellProvider />
 			<DirectionHooks />
+
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
 				<Category>{activeCategory}</Category>
