@@ -103,9 +103,7 @@ const MemoList = memo(
 export const EmojiPicker = (props: EmojiProps) => {
 	const {onChange, state} = useInput('', value => value.toLowerCase());
 	const activeCategory = useAtomValue(atoms.currentCategory);
-	const [x, y] = useAtomValue(atoms.location) ?? [null, null];
-
-	console.log([x, y]);
+	const [x, y] = useAtomValue(atoms.location) ?? [];
 
 	return (
 		<PickerProvider picker={props.onPick}>
@@ -122,6 +120,7 @@ export const EmojiPicker = (props: EmojiProps) => {
 							: '',
 				}}
 			/>
+
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
 				<Category>{activeCategory}</Category>
@@ -130,11 +129,12 @@ export const EmojiPicker = (props: EmojiProps) => {
 						e.stopPropagation();
 
 						if ((e.target as HTMLElement).tagName === 'BUTTON') {
+							// eslint-disable-next-line @typescript-eslint/no-unused-vars
 							const coords = (e.target as HTMLButtonElement).dataset
 								.coords!.split(':')
 								.map(item => parseInt(item, 10)) as Coords;
 
-							console.log(coords);
+							// TODO: Get element from coords (might need to pass MemoList the currently chunked array to access row, col)
 						}
 					}}
 				>
