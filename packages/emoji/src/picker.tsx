@@ -115,10 +115,10 @@ export const EmojiPicker = (props: EmojiProps) => {
 					__html:
 						x && y
 							? `
-						.${StyledCell.className}[data-coords="${x}:${y}"] {
-							background: red;
-						}
-					`
+								.${StyledCell.className}[data-coords="${x}:${y}"] {
+									background: red;
+								}
+							`
 							: '',
 				}}
 			/>
