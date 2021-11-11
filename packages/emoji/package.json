@@ -1,6 +1,6 @@
 {
 	"name": "@giggl/emoji",
-	"packageManager": "yarn@3.0.2",
+	"packageManager": "yarn@3.1.0",
 	"main": "dist/giggl-emoji.cjs.js",
 	"module": "dist/giggl-emoji.esm.js",
 	"peerDependencies": {
