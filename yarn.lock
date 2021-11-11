@@ -21,7 +21,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.12.0, @babel/core@npm:^7.15.8, @babel/core@npm:^7.7.7":
+"@babel/core@npm:7.15.8, @babel/core@npm:^7.12.0, @babel/core@npm:^7.7.7":
   version: 7.15.8
   resolution: "@babel/core@npm:7.15.8"
   dependencies:
@@ -1167,7 +1167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.15.8":
+"@babel/preset-env@npm:7.15.8":
   version: 7.15.8
   resolution: "@babel/preset-env@npm:7.15.8"
   dependencies:
@@ -1265,7 +1265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.14.5":
+"@babel/preset-react@npm:7.14.5":
   version: 7.14.5
   resolution: "@babel/preset-react@npm:7.14.5"
   dependencies:
@@ -1281,7 +1281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.15.0":
+"@babel/preset-typescript@npm:7.15.0":
   version: 7.15.0
   resolution: "@babel/preset-typescript@npm:7.15.0"
   dependencies:
@@ -1370,11 +1370,11 @@ __metadata:
   resolution: "@giggl/emoji@workspace:packages/emoji"
   dependencies:
     "@stitches/react": ^1.2.5
-    "@types/react-window": ^1
+    "@types/react-window": 1.8.5
     jotai: ^1.4.1
     react-hotkeys-hook: "npm:^3.4.4"
     react-window: ^1.8.6
-    typescript: ^4.4.4
+    typescript: 4.4.4
   peerDependencies:
     react: "*"
   languageName: unknown
@@ -1384,13 +1384,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/example@workspace:apps/example"
   dependencies:
-    "@types/react": ^17
-    "@types/react-dom": ^17.0.10
-    parcel: ^2.0.0
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    serve: ^12.0.1
-    typescript: ^4.4.4
+    "@types/react": 17.0.34
+    "@types/react-dom": 17.0.10
+    parcel: 2.0.0
+    react: 17.0.2
+    react-dom: 17.0.2
+    serve: 12.0.1
+    typescript: 4.4.4
   languageName: unknown
   linkType: soft
 
@@ -2243,7 +2243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@preconstruct/cli@npm:^2.1.5":
+"@preconstruct/cli@npm:2.1.5":
   version: 2.1.5
   resolution: "@preconstruct/cli@npm:2.1.5"
   dependencies:
@@ -2412,7 +2412,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7":
+"@types/babel__core@npm:7.1.16":
   version: 7.1.16
   resolution: "@types/babel__core@npm:7.1.16"
   dependencies:
@@ -2434,7 +2434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__preset-env@npm:^7":
+"@types/babel__preset-env@npm:7.9.2":
   version: 7.9.2
   resolution: "@types/babel__preset-env@npm:7.9.2"
   checksum: a905ed92a3f602384966153e74a94790425e98af54e392a7fcfb5c5ded2f2a58c49a9fa64a0cb506fbffb8169ad25b56ea87983c812a4fb880f0716668c8c085
@@ -2518,7 +2518,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2":
+"@types/prettier@npm:2.4.1":
   version: 2.4.1
   resolution: "@types/prettier@npm:2.4.1"
   checksum: df330c2d6fe7c282839b0f17701e069a9c6c96d2ff54704e933a1b3c1b98844d963a7cb00c5629d173604892ceee802312bbaeb8a97f5da21e13db8f653b519e
@@ -2532,7 +2532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.10":
+"@types/react-dom@npm:17.0.10":
   version: 17.0.10
   resolution: "@types/react-dom@npm:17.0.10"
   dependencies:
@@ -2541,7 +2541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-window@npm:^1":
+"@types/react-window@npm:1.8.5":
   version: 1.8.5
   resolution: "@types/react-window@npm:1.8.5"
   dependencies:
@@ -2550,7 +2550,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17":
+"@types/react@npm:*":
   version: 17.0.27
   resolution: "@types/react@npm:17.0.27"
   dependencies:
@@ -2558,6 +2558,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 3a1147d963c16dc9bbea5afb20c4be94f2389cf4eca4c5fbe9b02f3406bd9957602c0459ea017c95f8c3d523221f572e8bd842f94654835776d4c2923357f9dc
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:17.0.34":
+  version: 17.0.34
+  resolution: "@types/react@npm:17.0.34"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 16729ad7d50922ccbf8eb93874d7781dc2f1c64edc78134b5edc7154839d41e9fe320eb1c11ad2d1c9bf28b99cb1febda344509c1fda025955a5c2b43c688c8f
   languageName: node
   linkType: hard
 
@@ -2577,7 +2588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.2.0":
+"@typescript-eslint/eslint-plugin@npm:5.2.0":
   version: 5.2.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.2.0"
   dependencies:
@@ -2615,7 +2626,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.2.0":
+"@typescript-eslint/parser@npm:5.2.0":
   version: 5.2.0
   resolution: "@typescript-eslint/parser@npm:5.2.0"
   dependencies:
@@ -4590,7 +4601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-xo-react@npm:^0.25.0":
+"eslint-config-xo-react@npm:0.25.0":
   version: 0.25.0
   resolution: "eslint-config-xo-react@npm:0.25.0"
   peerDependencies:
@@ -4601,7 +4612,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-xo-typescript@npm:^0.46.0":
+"eslint-config-xo-typescript@npm:0.46.0":
   version: 0.46.0
   resolution: "eslint-config-xo-typescript@npm:0.46.0"
   peerDependencies:
@@ -4612,7 +4623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-xo@npm:^0.39.0":
+"eslint-config-xo@npm:0.39.0":
   version: 0.39.0
   resolution: "eslint-config-xo@npm:0.39.0"
   dependencies:
@@ -4623,7 +4634,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.2.0":
+"eslint-plugin-react-hooks@npm:4.2.0":
   version: 4.2.0
   resolution: "eslint-plugin-react-hooks@npm:4.2.0"
   peerDependencies:
@@ -4632,7 +4643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.26.1":
+"eslint-plugin-react@npm:7.26.1":
   version: 7.26.1
   resolution: "eslint-plugin-react@npm:7.26.1"
   dependencies:
@@ -4701,7 +4712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.1.0":
+"eslint@npm:8.1.0":
   version: 8.1.0
   resolution: "eslint@npm:8.1.0"
   dependencies:
@@ -5262,23 +5273,23 @@ fsevents@~2.3.2:
   version: 0.0.0-use.local
   resolution: "giggl@workspace:."
   dependencies:
-    "@babel/core": ^7.15.8
-    "@babel/preset-env": ^7.15.8
-    "@babel/preset-react": ^7.14.5
-    "@babel/preset-typescript": ^7.15.0
-    "@preconstruct/cli": ^2.1.5
-    "@types/babel__core": ^7
-    "@types/babel__preset-env": ^7
-    "@types/prettier": ^2
-    "@typescript-eslint/eslint-plugin": ^5.2.0
-    "@typescript-eslint/parser": ^5.2.0
-    eslint: ^8.1.0
-    eslint-config-xo: ^0.39.0
-    eslint-config-xo-react: ^0.25.0
-    eslint-config-xo-typescript: ^0.46.0
-    eslint-plugin-react: ^7.26.1
-    eslint-plugin-react-hooks: ^4.2.0
-    prettier: ^2.4.1
+    "@babel/core": 7.15.8
+    "@babel/preset-env": 7.15.8
+    "@babel/preset-react": 7.14.5
+    "@babel/preset-typescript": 7.15.0
+    "@preconstruct/cli": 2.1.5
+    "@types/babel__core": 7.1.16
+    "@types/babel__preset-env": 7.9.2
+    "@types/prettier": 2.4.1
+    "@typescript-eslint/eslint-plugin": 5.2.0
+    "@typescript-eslint/parser": 5.2.0
+    eslint: 8.1.0
+    eslint-config-xo: 0.39.0
+    eslint-config-xo-react: 0.25.0
+    eslint-config-xo-typescript: 0.46.0
+    eslint-plugin-react: 7.26.1
+    eslint-plugin-react-hooks: 4.2.0
+    prettier: 2.4.1
   languageName: unknown
   linkType: soft
 
@@ -7436,7 +7447,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"parcel@npm:^2.0.0":
+"parcel@npm:2.0.0":
   version: 2.0.0
   resolution: "parcel@npm:2.0.0"
   dependencies:
@@ -8159,7 +8170,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.4.1":
+"prettier@npm:2.4.1":
   version: 2.4.1
   resolution: "prettier@npm:2.4.1"
   bin:
@@ -8372,7 +8383,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.2":
+"react-dom@npm:17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -8424,7 +8435,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.2":
+"react@npm:17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -8875,7 +8886,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"serve@npm:^12.0.1":
+"serve@npm:12.0.1":
   version: 12.0.1
   resolution: "serve@npm:12.0.1"
   dependencies:
@@ -9633,7 +9644,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@^4.4.4:
+"typescript@npm:4.4.4":
   version: 4.4.4
   resolution: "typescript@npm:4.4.4"
   bin:
@@ -9643,7 +9654,7 @@ typescript@^4.4.4:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.4.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.4.4#~builtin<compat/typescript>":
   version: 4.4.4
   resolution: "typescript@patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=ddd1e8"
   bin:
