@@ -169,14 +169,18 @@ export const EmojiPicker = (props: EmojiProps) => {
 					onClick={e => {
 						e.stopPropagation();
 
-						if ((e.target as HTMLElement).tagName === 'BUTTON') {
-							// eslint-disable-next-line @typescript-eslint/no-unused-vars
-							const coords = (e.target as HTMLButtonElement).dataset
-								.coords!.split(':')
-								.map(item => parseInt(item, 10)) as Coords;
-
-							// TODO: Get element from coords (might need to pass MemoList the currently chunked array to access row, col)
+						if ((e.target as HTMLElement).tagName !== 'BUTTON') {
+							return;
 						}
+
+						// eslint-disable-next-line @typescript-eslint/no-unused-vars
+						const coords = (e.target as HTMLButtonElement).dataset
+							.coords!.split(':')
+							.map(item => parseInt(item, 10)) as Coords;
+
+						console.log(coords);
+
+						// TODO: Get element from coords (might need to pass MemoList the currently chunked array to access row, col)
 					}}
 				>
 					<MemoList search={state} />
