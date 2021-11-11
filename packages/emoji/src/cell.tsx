@@ -21,6 +21,14 @@ export const StyledCell = styled('button', {
 	'color': theme.colors.textTertiary,
 	'boxSizing': 'border-box',
 
+	'&:focus': {
+		borderRadius: theme.radii.sm,
+		transform: 'scale(0.95)',
+		background: theme.colors.textMuted,
+		color: theme.colors.textPrimary,
+		outline: 'none',
+	},
+
 	'> span img': {
 		width: 30,
 		height: 30,
@@ -71,15 +79,3 @@ export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
 		</StyledCell>
 	);
 };
-
-export const activeStyledCell = Object.entries({
-	borderRadius: theme.radii.sm,
-	transform: 'scale(0.95)',
-	background: theme.colors.textMuted,
-	color: theme.colors.textPrimary,
-}).reduce((prev, entry) => {
-	const [key, value] = entry;
-	return `${prev}
-		${key}: ${value};
-	`;
-}, '');

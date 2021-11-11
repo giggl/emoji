@@ -1,9 +1,9 @@
-import React, {memo, useEffect, useMemo, useRef} from 'react';
+import React, {memo, useEffect, useMemo} from 'react';
 import {OnPick, Either, Coords} from './types';
-import {PickerProvider, usePicker} from './context';
+import {PickerProvider} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
-import {activeStyledCell, Cell, StyledCell} from './cell';
+import {Cell} from './cell';
 import {Category} from './category';
 import {columns, Container, EMOJI_SIZE, height, width} from './container';
 import {Search} from './search';
@@ -11,7 +11,6 @@ import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
-import {useHotkeys} from 'react-hotkeys-hook';
 
 export interface EmojiProps {
 	/**
@@ -103,49 +102,18 @@ const MemoList = memo(
 
 const StyledCellProvider = () => {
 	const [x, y] = useAtomValue(atoms.location) ?? [];
-	const picker = usePicker();
-
-	useHotkeys(
-		'Enter',
-		() => {
-			// TODO: {x, y} is not the valid type, just place holder for development
-			picker({x, y} as any);
-		},
-		[x, y],
-	);
-
-	const ref = useRef<HTMLStyleElement | null>(null);
 
 	useEffect(() => {
-		if (typeof window === 'undefined') {
+		if (x === undefined || y === undefined) {
 			return;
 		}
 
-		const element = document.createElement('style');
-		document.head.appendChild(element);
+		const attr = `data-coords="${x}:${y}"`;
+		const button = document.querySelector<HTMLButtonElement>(`button[${attr}]`);
 
-		ref.current = element;
-
-		return () => {
-			if (!ref.current) {
-				return;
-			}
-
-			document.head.removeChild(ref.current);
-			ref.current.remove();
-		};
-	}, []);
-
-	useEffect(() => {
-		if (!ref.current || x === undefined || y === undefined) {
-			return;
+		if (button) {
+			button.focus();
 		}
-
-		ref.current.textContent = ` 
-			.${StyledCell.className}[data-coords="${x}:${y}"] { 
-				${activeStyledCell}
-			}
-		`;
 	}, [x, y]);
 
 	return null;
