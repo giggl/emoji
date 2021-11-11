@@ -3,7 +3,7 @@ import {OnPick, Either, Coords} from './types';
 import {PickerProvider, usePicker} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
-import {Cell, StyledCell} from './cell';
+import {activeStyledCell, Cell, StyledCell} from './cell';
 import {Category} from './category';
 import {columns, Container, EMOJI_SIZE, height, width} from './container';
 import {Search} from './search';
@@ -12,6 +12,7 @@ import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
 import {useHotkeys} from 'react-hotkeys-hook';
+import {theme} from './stitches';
 
 export interface EmojiProps {
 	/**
@@ -57,7 +58,7 @@ const MemoList = memo(
 
 		return (
 			<FixedSizeGrid
-				rowCount={emojis.length / columns}
+				rowCount={Math.ceil(emojis.length / columns)}
 				rowHeight={EMOJI_SIZE}
 				columnCount={columns}
 				columnWidth={EMOJI_SIZE}
@@ -136,13 +137,13 @@ const StyledCellProvider = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!ref.current || !x || !y) {
+		if (!ref.current || x === undefined || y === undefined) {
 			return;
 		}
 
 		ref.current.textContent = ` 
 			.${StyledCell.className}[data-coords="${x}:${y}"] { 
-				background: red;
+				${activeStyledCell}
 			}
 		`;
 	}, [x, y]);
@@ -157,7 +158,10 @@ export const EmojiPicker = (props: EmojiProps) => {
 	return (
 		<PickerProvider picker={props.onPick}>
 			<StyledCellProvider />
-			<DirectionHooks />
+			<DirectionHooks
+				columnCount={columns}
+				rowCount={Math.ceil(emojis.length / columns)}
+			/>
 
 			<Container>
 				<Search value={state} placeholder="🧭 Search" onChange={onChange} />

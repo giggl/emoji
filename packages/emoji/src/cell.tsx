@@ -72,9 +72,14 @@ export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
 	);
 };
 
-export const activeStyledCell = {
+export const activeStyledCell = Object.entries({
 	borderRadius: theme.radii.sm,
 	transform: 'scale(0.95)',
 	background: theme.colors.textMuted,
 	color: theme.colors.textPrimary,
-};
+}).reduce((prev, entry) => {
+	const [key, value] = entry;
+	return `${prev}
+		${key}: ${value};
+	`;
+}, '');

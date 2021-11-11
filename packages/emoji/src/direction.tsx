@@ -9,7 +9,13 @@ const enum Directions {
 	RIGHT,
 }
 
-export const DirectionHooks = () => {
+export const DirectionHooks = ({
+	columnCount,
+	rowCount,
+}: {
+	columnCount: number;
+	rowCount: number;
+}) => {
 	const setter = useUpdateAtom(atoms.location);
 
 	const factory = (direction: Directions) => {
@@ -23,19 +29,19 @@ export const DirectionHooks = () => {
 
 				switch (direction) {
 					case Directions.UP: {
-						return [x, y - 1];
+						return [x, Math.max(y - 1, 0)];
 					}
 
 					case Directions.DOWN: {
-						return [x, y + 1];
+						return [x, Math.max(y + 1, 0)];
 					}
 
 					case Directions.LEFT: {
-						return [x - 1, y];
+						return [Math.max(x - 1, 0), y];
 					}
 
 					case Directions.RIGHT: {
-						return [x + 1, y];
+						return [Math.min(Math.max(x + 1, 0), columnCount - 1), y];
 					}
 
 					default: {
