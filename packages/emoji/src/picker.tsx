@@ -12,7 +12,6 @@ import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
 import {useHotkeys} from 'react-hotkeys-hook';
-import {theme} from './stitches';
 
 export interface EmojiProps {
 	/**
