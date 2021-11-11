@@ -108,6 +108,7 @@ const StyledCellProvider = () => {
 	useHotkeys(
 		'Enter',
 		() => {
+			// TODO: {x, y} is not the valid type, just place holder for development
 			picker({x, y} as any);
 		},
 		[x, y],
