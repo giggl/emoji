@@ -1,5 +1,5 @@
 import React, {memo, useEffect, useMemo} from 'react';
-import {OnPick, Either, Coords} from './types';
+import {OnPickFn, Either, Coords} from './types';
 import {PickerProvider} from './context';
 import {emojis, Emoji} from './emojis';
 import {chunk, useInput} from './util';
@@ -12,11 +12,11 @@ import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
 
-export interface EmojiProps {
+export interface EmojiPickerProps {
 	/**
 	 * Picker function. Please wrap in useCallback if defined inside a component to avoid unnecessary rerenders!
 	 */
-	onPick: OnPick;
+	onPick: OnPickFn;
 }
 
 const MemoList = memo(
@@ -119,7 +119,7 @@ const StyledCellProvider = () => {
 	return null;
 };
 
-export const EmojiPicker = (props: EmojiProps) => {
+export const EmojiPicker = (props: EmojiPickerProps) => {
 	const {onChange, state} = useInput('', value => value.toLowerCase());
 	const activeCategory = useAtomValue(atoms.currentCategory);
 
@@ -142,7 +142,6 @@ export const EmojiPicker = (props: EmojiProps) => {
 							return;
 						}
 
-						// eslint-disable-next-line @typescript-eslint/no-unused-vars
 						const coords = (e.target as HTMLButtonElement).dataset
 							.coords!.split(':')
 							.map(item => parseInt(item, 10)) as Coords;

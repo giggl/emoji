@@ -1,16 +1,16 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {EmojiPicker, OnPick, EmojiProps} from '@giggl/emoji';
+import {EmojiPicker, EmojiPickerProps, OnPickFn} from '@giggl/emoji';
 
 import './index.css';
 
 const mount = document.querySelector<HTMLDivElement>('#mount')!;
 
-const onPick: OnPick = emoji => {
+const onPick: OnPickFn = emoji => {
 	console.log(emoji);
 };
 
-const MountControls = (props: EmojiProps) => {
+const MountControls = (props: EmojiPickerProps) => {
 	const [mount, toggle] = React.useReducer(x => !x, true);
 
 	return (

@@ -41,6 +41,7 @@ const ImageContainer = styled('div', {
 	pointerEvents: 'none',
 });
 
+// TODO: We need to store this locally
 const spriteSheet = `https://unpkg.com/emoji-datasource-twitter@7.0.2/img/twitter/sheets-clean/${SHEET_EMOJI_SIZE}.png`;
 
 export interface Props {
@@ -64,7 +65,7 @@ export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
 			}%`,
 			backgroundRepeat: 'no-repeat',
 			backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
-		};
+		} as const;
 	}, [x, y]);
 
 	const update = useCallback(() => setter([x, y]), [x, y]);
