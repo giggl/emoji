@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useEffect, useMemo, useRef} from 'react';
 import {OnPick, Either, Coords} from './types';
 import {PickerProvider, usePicker} from './context';
 import {emojis, Emoji} from './emojis';
@@ -113,21 +113,41 @@ const StyledCellProvider = () => {
 		[x, y],
 	);
 
-	return (
-		<style
-			// eslint-disable-next-line react/no-danger
-			dangerouslySetInnerHTML={{
-				__html:
-					x !== undefined && y !== undefined
-						? ` 
-								.${StyledCell.className}[data-coords="${x}:${y}"] { 
-									background: red;
-								}
-							`
-						: '',
-			}}
-		/>
-	);
+	const ref = useRef<HTMLStyleElement | null>(null);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
+		const element = document.createElement('style');
+		document.head.appendChild(element);
+
+		ref.current = element;
+
+		return () => {
+			if (!ref.current) {
+				return;
+			}
+
+			document.head.removeChild(ref.current);
+			ref.current.remove();
+		};
+	}, []);
+
+	useEffect(() => {
+		if (!ref.current || !x || !y) {
+			return;
+		}
+
+		ref.current.textContent = ` 
+			.${StyledCell.className}[data-coords="${x}:${y}"] { 
+				background: red;
+			}
+		`;
+	}, [x, y]);
+
+	return null;
 };
 
 export const EmojiPicker = (props: EmojiProps) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {EmojiPicker, OnPick} from '@giggl/emoji';
+import {EmojiPicker, OnPick, EmojiProps} from '@giggl/emoji';
 
 import './index.css';
 
@@ -10,4 +10,20 @@ const onPick: OnPick = emoji => {
 	console.log(emoji);
 };
 
-render(<EmojiPicker onPick={onPick} />, mount);
+const MountControls = (props: EmojiProps) => {
+	const [mount, toggle] = React.useReducer(x => !x, true);
+
+	return (
+		<>
+			<div>
+				<button type="button" onClick={toggle}>
+					Toggle picker (for effects)
+				</button>
+			</div>
+
+			<div>{mount && <EmojiPicker {...props} />}</div>
+		</>
+	);
+};
+
+render(<MountControls onPick={onPick} />, mount);
