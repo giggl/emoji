@@ -18,7 +18,7 @@
 		"eslint-config-xo-react": "0.25.0",
 		"eslint-config-xo-typescript": "0.46.0",
 		"eslint-plugin-react": "7.26.1",
-		"eslint-plugin-react-hooks": "4.2.0",
+		"eslint-plugin-react-hooks": "4.3.0",
 		"prettier": "2.4.1"
 	},
 	"scripts": {
