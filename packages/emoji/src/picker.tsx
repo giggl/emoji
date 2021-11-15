@@ -1,7 +1,7 @@
-import React, {memo, useEffect, useMemo} from 'react';
-import {OnPickFn, Either, Coords} from './types';
+import React, {useEffect, useMemo} from 'react';
+import {Coords, Either, OnPickFn} from './types';
 import {PickerProvider} from './context';
-import {emojis, Emoji} from './emojis';
+import {Emoji, emojis} from './emojis';
 import {chunk, useInput} from './util';
 import {Cell} from './cell';
 import {Category} from './category';
@@ -19,88 +19,70 @@ export interface EmojiPickerProps {
 	onPick: OnPickFn;
 }
 
-const MemoList = memo(
-	(props: {search: string}) => {
-		const setCategory = useUpdateAtom(atoms.currentCategory);
+const MemoList = (props: {emojis: Emoji[][]}) => {
+	const setCategory = useUpdateAtom(atoms.currentCategory);
 
-		const chunked = useMemo(
-			() =>
-				chunk(
-					emojis.filter(emoji => {
-						const str = emoji.name.toLowerCase();
-
-						return (
-							str + emoji.short_names.join(' ').replaceAll('_', ' ')
-						).includes(props.search.toLowerCase());
-					}),
-					columns,
-				),
-			[props.search],
-		);
-
-		if (chunked.length === 0) {
-			return (
-				<div
-					style={{
-						width,
-						height,
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-				>
-					🚫 No emojis match your search!
-				</div>
-			);
-		}
-
+	if (props.emojis.length === 0) {
 		return (
-			<FixedSizeGrid
-				rowCount={Math.ceil(emojis.length / columns)}
-				rowHeight={EMOJI_SIZE}
-				columnCount={columns}
-				columnWidth={EMOJI_SIZE}
-				width={width}
-				height={height}
-				onItemsRendered={render => {
-					const lastEmoji =
-						chunked[render.visibleRowStartIndex]?.[
-							render.visibleColumnStartIndex
-						];
-
-					if (!lastEmoji) {
-						return;
-					}
-
-					setCategory(lastEmoji.category);
+			<div
+				style={{
+					width,
+					height,
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
 				}}
 			>
-				{({columnIndex, rowIndex, style}) => {
-					const emoji = chunked[rowIndex]?.[columnIndex] as Either<
-						Emoji,
-						undefined
-					>;
-
-					if (!emoji) {
-						return null;
-					}
-
-					return (
-						<Cell
-							key={emoji.name}
-							coords={[columnIndex, rowIndex]}
-							emoji={emoji}
-							style={style}
-						/>
-					);
-				}}
-			</FixedSizeGrid>
+				🚫 No emojis match your search!
+			</div>
 		);
-	},
-	(a, b) => a.search === b.search,
-);
+	}
 
-const StyledCellProvider = () => {
+	return (
+		<FixedSizeGrid
+			rowCount={Math.ceil(emojis.length / columns)}
+			rowHeight={EMOJI_SIZE}
+			columnCount={columns}
+			columnWidth={EMOJI_SIZE}
+			width={width}
+			height={height}
+			onItemsRendered={render => {
+				const lastEmoji =
+					props.emojis[render.visibleRowStartIndex]?.[
+						render.visibleColumnStartIndex
+					];
+
+				if (!lastEmoji) {
+					return;
+				}
+
+				setCategory(lastEmoji.category);
+			}}
+		>
+			{({columnIndex, rowIndex, style}) => {
+				const emoji = props.emojis[rowIndex]?.[columnIndex] as Either<
+					Emoji,
+					undefined
+				>;
+
+				if (!emoji) {
+					return null;
+				}
+
+				return (
+					<Cell
+						key={emoji.name}
+						coords={[columnIndex, rowIndex]}
+						emoji={emoji}
+						style={style}
+					/>
+				);
+			}}
+		</FixedSizeGrid>
+	);
+};
+
+const CellFocuser = () => {
 	const [x, y] = useAtomValue(atoms.location) ?? [];
 
 	useEffect(() => {
@@ -123,9 +105,24 @@ export const EmojiPicker = (props: EmojiPickerProps) => {
 	const {onChange, state} = useInput('', value => value.toLowerCase());
 	const activeCategory = useAtomValue(atoms.currentCategory);
 
+	const chunked = useMemo(
+		() =>
+			chunk(
+				emojis.filter(emoji => {
+					const str = emoji.name.toLowerCase();
+
+					return (
+						str + emoji.short_names.join(' ').replaceAll('_', ' ')
+					).includes(state.toLowerCase());
+				}),
+				columns,
+			),
+		[state],
+	);
+
 	return (
 		<PickerProvider picker={props.onPick}>
-			<StyledCellProvider />
+			<CellFocuser />
 			<DirectionHooks
 				columnCount={columns}
 				rowCount={Math.ceil(emojis.length / columns)}
@@ -142,16 +139,21 @@ export const EmojiPicker = (props: EmojiPickerProps) => {
 							return;
 						}
 
-						const coords = (e.target as HTMLButtonElement).dataset
+						const [y, x] = (e.target as HTMLButtonElement).dataset
 							.coords!.split(':')
 							.map(item => parseInt(item, 10)) as Coords;
 
-						console.log(coords);
+						const emoji = chunked[x]?.[y];
 
-						// TODO: Get element from coords (might need to pass MemoList the currently chunked array to access row, col)
+						if (!emoji) {
+							// Wtf
+							return;
+						}
+
+						props.onPick(emoji);
 					}}
 				>
-					<MemoList search={state} />
+					<MemoList emojis={chunked} />
 				</div>
 			</Container>
 		</PickerProvider>
