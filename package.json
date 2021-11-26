@@ -1,7 +1,7 @@
 {
 	"name": "giggl",
 	"private": true,
-	"packageManager": "yarn@3.1.0",
+	"packageManager": "yarn@3.1.1",
 	"devDependencies": {
 		"@babel/core": "7.16.0",
 		"@babel/preset-env": "7.16.4",
