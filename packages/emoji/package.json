@@ -6,8 +6,14 @@
 	"typings": "dist/giggl-emoji.cjs.d.ts",
 	"version": "1.0.0",
 	"homepage": "https://giggl.app",
+	"git": "https://github.com/giggl/emoji",
+	"files": [
+		"dist",
+		"package.json",
+		"LICENSE"
+	],
 	"peerDependencies": {
-		"react": "*"
+		"react": ">=16.8"
 	},
 	"dependencies": {
 		"@stitches/react": "^1.2.5",
@@ -19,5 +25,7 @@
 		"@types/react-window": "1.8.5",
 		"typescript": "4.5.2"
 	},
-	"git": "https://github.com/giggl/emoji"
+	"publishConfig": {
+		"access": "public"
+	}
 }
