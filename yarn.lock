@@ -1682,7 +1682,7 @@ __metadata:
     react-window: ^1.8.6
     typescript: 4.4.4
   peerDependencies:
-    react: "*"
+    react: ">=16.8"
   languageName: unknown
   linkType: soft
 
