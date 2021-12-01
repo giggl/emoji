@@ -1,25 +1,25 @@
 {
 	"name": "giggl",
 	"private": true,
-	"packageManager": "yarn@3.1.0",
+	"packageManager": "yarn@3.1.1",
 	"devDependencies": {
 		"@babel/core": "7.16.0",
-		"@babel/preset-env": "7.16.0",
+		"@babel/preset-env": "7.16.4",
 		"@babel/preset-react": "7.16.0",
 		"@babel/preset-typescript": "7.16.0",
 		"@preconstruct/cli": "2.1.5",
 		"@types/babel__core": "7.1.16",
 		"@types/babel__preset-env": "7.9.2",
 		"@types/prettier": "2.4.2",
-		"@typescript-eslint/eslint-plugin": "5.3.1",
-		"@typescript-eslint/parser": "5.3.1",
-		"eslint": "8.2.0",
+		"@typescript-eslint/eslint-plugin": "5.5.0",
+		"@typescript-eslint/parser": "5.5.0",
+		"eslint": "8.3.0",
 		"eslint-config-xo": "0.39.0",
 		"eslint-config-xo-react": "0.25.0",
 		"eslint-config-xo-typescript": "0.47.1",
-		"eslint-plugin-react": "7.27.0",
+		"eslint-plugin-react": "7.27.1",
 		"eslint-plugin-react-hooks": "4.3.0",
-		"prettier": "2.4.1"
+		"prettier": "2.5.0"
 	},
 	"scripts": {
 		"watch": "preconstruct watch",
