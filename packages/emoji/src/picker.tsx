@@ -11,6 +11,7 @@ import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
+import {forwardRef} from 'react-dom/node_modules/@types/react';
 
 export interface EmojiPickerProps {
 	/**
@@ -101,63 +102,66 @@ const CellFocuser = () => {
 	return null;
 };
 
-export const EmojiPicker = (props: EmojiPickerProps) => {
-	const {onChange, state} = useInput('', value => value.toLowerCase());
-	const activeCategory = useAtomValue(atoms.currentCategory);
+export const EmojiPicker = forwardRef<HTMLDivElement, EmojiPickerProps>(
+	(props, ref) => {
+		const {onChange, state} = useInput('', value => value.toLowerCase());
+		const activeCategory = useAtomValue(atoms.currentCategory);
 
-	const chunked = useMemo(
-		() =>
-			chunk(
-				emojis.filter(emoji => {
-					const str = emoji.name.toLowerCase();
+		const chunked = useMemo(
+			() =>
+				chunk(
+					emojis.filter(emoji => {
+						const str = emoji.name.toLowerCase();
 
-					return (
-						str + emoji.short_names.join(' ').replaceAll('_', ' ')
-					).includes(state.toLowerCase());
-				}),
-				columns,
-			),
-		[state],
-	);
+						return (
+							str + emoji.short_names.join(' ').replaceAll('_', ' ')
+						).includes(state.toLowerCase());
+					}),
+					columns,
+				),
+			[state],
+		);
 
-	return (
-		<PickerProvider picker={props.onPick}>
-			<CellFocuser />
-			<DirectionHooks
-				columnCount={columns}
-				rowCount={Math.ceil(emojis.length / columns)}
-			/>
+		return (
+			<PickerProvider picker={props.onPick}>
+				<CellFocuser />
 
-			<Container>
-				<Search value={state} placeholder="🧭 Search" onChange={onChange} />
-				<Category>{activeCategory}</Category>
-				<div
-					onClick={e => {
-						e.stopPropagation();
+				<DirectionHooks
+					columnCount={columns}
+					rowCount={Math.ceil(emojis.length / columns)}
+				/>
 
-						if ((e.target as HTMLElement).tagName !== 'BUTTON') {
-							return;
-						}
+				<Container ref={ref}>
+					<Search value={state} placeholder="🧭 Search" onChange={onChange} />
+					<Category>{activeCategory}</Category>
+					<div
+						onClick={e => {
+							e.stopPropagation();
 
-						const [y, x] = (e.target as HTMLButtonElement).dataset
-							.coords!.split(':')
-							.map(item => parseInt(item, 10)) as Coords;
+							if ((e.target as HTMLElement).tagName !== 'BUTTON') {
+								return;
+							}
 
-						const emoji = chunked[x]?.[y];
+							const [y, x] = (e.target as HTMLButtonElement).dataset
+								.coords!.split(':')
+								.map(item => parseInt(item, 10)) as Coords;
 
-						if (!emoji) {
-							// Wtf
-							return;
-						}
+							const emoji = chunked[x]?.[y];
 
-						props.onPick(emoji);
-					}}
-				>
-					<MemoList emojis={chunked} />
-				</div>
-			</Container>
-		</PickerProvider>
-	);
-};
+							if (!emoji) {
+								// Wtf
+								return;
+							}
+
+							props.onPick(emoji);
+						}}
+					>
+						<MemoList emojis={chunked} />
+					</div>
+				</Container>
+			</PickerProvider>
+		);
+	},
+);
 
 export {getCssText} from './stitches';
