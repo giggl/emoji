@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, forwardRef} from 'react';
 import {Coords, Either, OnPickFn} from './types';
 import {PickerProvider} from './context';
 import {Emoji, emojis} from './emojis';
@@ -11,7 +11,6 @@ import {FixedSizeGrid} from 'react-window';
 import {useAtomValue, useUpdateAtom} from 'jotai/utils';
 import {atoms} from './state';
 import {DirectionHooks} from './direction';
-import {forwardRef} from 'react-dom/node_modules/@types/react';
 
 export interface EmojiPickerProps {
 	/**
@@ -163,5 +162,7 @@ export const EmojiPicker = forwardRef<HTMLDivElement, EmojiPickerProps>(
 		);
 	},
 );
+
+EmojiPicker.displayName = 'EmojiPicker';
 
 export {getCssText} from './stitches';
