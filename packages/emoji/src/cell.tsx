@@ -42,7 +42,8 @@ const ImageContainer = styled('div', {
 });
 
 // TODO: We need to store this locally
-const spriteSheet = `https://unpkg.com/emoji-datasource-twitter@7.0.2/img/twitter/sheets-clean/${SHEET_EMOJI_SIZE}.png`;
+export const spriteSheet =
+	`https://unpkg.com/emoji-datasource-twitter@7.0.2/img/twitter/sheets-clean/${SHEET_EMOJI_SIZE}.png` as const;
 
 export interface Props {
 	emoji: Emoji;
@@ -57,24 +58,28 @@ export const Cell = (props: Props & Pick<PropsFor<'div'>, 'style'>) => {
 	const setter = useUpdateAtom(atoms.location);
 	const [x, y] = props.coords;
 
-	const style = useMemo(() => {
-		return {
-			background: `url(${spriteSheet})`,
-			backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
-				multiplyY * props.emoji.sheet_y
-			}%`,
-			backgroundRepeat: 'no-repeat',
-			backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
-		} as const;
-	}, [x, y]);
+	const style = useMemo(
+		() =>
+			({
+				background: `url(${spriteSheet})`,
+				backgroundPosition: `${multiplyX * props.emoji.sheet_x}% ${
+					multiplyY * props.emoji.sheet_y
+				}%`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: `${100 * SHEET_COLS}% ${100 * SHEET_ROWS}%`,
+			} as const),
+		[x, y],
+	);
 
-	const update = useCallback(() => setter([x, y]), [x, y]);
+	const update = useCallback(() => {
+		setter([x, y]);
+	}, [x, y, setter]);
 
 	return (
 		<StyledCell
-			onMouseEnter={update}
 			data-coords={`${x}:${y}`}
 			style={props.style}
+			onMouseEnter={update}
 		>
 			<ImageContainer style={style} />
 		</StyledCell>

@@ -18,6 +18,6 @@
 		"typescript": "4.5.2"
 	},
 	"homepage": "https://giggl.app",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"git": "https://github.com/giggl/emoji"
 }

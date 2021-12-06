@@ -32,7 +32,7 @@
 		"serve-example": "yarn workspace @giggl/example s",
 		"fullbuild": "yarn lint&&yarn build && yarn build-example",
 		"start": "yarn dev && yarn example",
-		"release": "yarn lint&&yarn fullbuild&&yarn workspace @giggl/emoji npm publish"
+		"release": "yarn constraints --fix&&yarn run lint&&yarn run fullbuild&&yarn workspace @giggl/emoji npm publish"
 	},
 	"workspaces": [
 		"packages/*",
@@ -44,6 +44,6 @@
 		]
 	},
 	"homepage": "https://giggl.app",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"git": "https://github.com/giggl/emoji"
 }
