@@ -1789,14 +1789,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/emoji@workspace:packages/emoji"
   dependencies:
-    "@stitches/react": ^1.2.5
+    "@stitches/react": ^1.2.6
     "@types/react-window": 1.8.5
-    jotai: ^1.4.1
+    jotai: ^1.4.8
     react-hotkeys-hook: ^3.4.4
     react-window: ^1.8.6
     typescript: 4.5.4
   peerDependencies:
-    react: ">=16.8"
+    react: ">=17.0"
   languageName: unknown
   linkType: soft
 
@@ -2803,12 +2803,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/react@npm:^1.2.5":
-  version: 1.2.5
-  resolution: "@stitches/react@npm:1.2.5"
+"@stitches/react@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "@stitches/react@npm:1.2.6"
   peerDependencies:
     react: ">= 16.3.0"
-  checksum: 96b2ba837aeb36f9ab0479bfcad1a3fae99b3b43966aed7fffe2e32637808a29ed2f7e8d1bfcb7a327b6b39ba82ef822d80efad8f26cabc3f8ff177be095621e
+  checksum: 416088cdde17a22d6cdb04cf1cf756c6e5fc291dd7e41f82ce422bb95432ad32b6d990e7264d996d367c40bbc674d61be087e4e1f7b23eea7f81ef6266373a9c
   languageName: node
   linkType: hard
 
@@ -6626,9 +6626,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"jotai@npm:^1.4.1":
-  version: 1.4.1
-  resolution: "jotai@npm:1.4.1"
+"jotai@npm:^1.4.8":
+  version: 1.4.8
+  resolution: "jotai@npm:1.4.8"
   peerDependencies:
     "@babel/core": "*"
     "@babel/template": "*"
@@ -6659,7 +6659,7 @@ fsevents@~2.3.2:
       optional: true
     xstate:
       optional: true
-  checksum: 0f69a043291d63ba4823e67f6725600fa7ca92002cff0fcb4405d2151a3de6051ade6a398a65f544c5d473bd1aba013aa1e8b0b89be71fde867da3342b8abeba
+  checksum: 98d1c6bcd69271478badc02fae351914c27dbe04b0bf588a65cd0b277f8bbdf82629f4efa62a2146f364a342d8ebe50bccd12f39debe738ff21a6737965122c4
   languageName: node
   linkType: hard
 
