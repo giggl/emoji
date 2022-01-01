@@ -13,7 +13,7 @@
 		"@types/prettier": "2.4.2",
 		"@typescript-eslint/eslint-plugin": "5.8.1",
 		"@typescript-eslint/parser": "5.8.1",
-		"eslint": "8.5.0",
+		"eslint": "8.6.0",
 		"eslint-config-xo": "0.39.0",
 		"eslint-config-xo-react": "0.25.0",
 		"eslint-config-xo-typescript": "0.48.0",
