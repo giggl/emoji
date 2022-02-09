@@ -4159,10 +4159,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"confusing-browser-globals@npm:1.0.10":
-  version: 1.0.10
-  resolution: "confusing-browser-globals@npm:1.0.10"
-  checksum: 7ccdc44c2ca419cf6576c3e4336106e18d1c5337f547e461342f51aec4a10f96fdfe45414b522be3c7d24ea0b62bf4372cd37768022e4d6161707ffb2c0987e6
+"confusing-browser-globals@npm:1.0.11":
+  version: 1.0.11
+  resolution: "confusing-browser-globals@npm:1.0.11"
+  checksum: 3afc635abd37e566477f610e7978b15753f0e84025c25d49236f1f14d480117185516bdd40d2a2167e6bed8048641a9854964b9c067e3dcdfa6b5d0ad3c3a5ef
   languageName: node
   linkType: hard
 
@@ -4919,14 +4919,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-xo@npm:0.39.0":
-  version: 0.39.0
-  resolution: "eslint-config-xo@npm:0.39.0"
+"eslint-config-xo@npm:0.40.0":
+  version: 0.40.0
+  resolution: "eslint-config-xo@npm:0.40.0"
   dependencies:
-    confusing-browser-globals: 1.0.10
+    confusing-browser-globals: 1.0.11
   peerDependencies:
-    eslint: ">=7.20.0"
-  checksum: 735cb6457b3f39f756d35c5ff51b42d0d89dfbeb08c52b1c75e87233aba4838ac87931bab046d652429baff01b319562f8472afbe5b50f4e5bcc21557fa1deb5
+    eslint: ">=8.6.0"
+  checksum: 6a968879727a7c698aa8e91bc4f7e1e76c24bec4d17c1aaffae7c83d09fa72adcf58dc51e11bbc3e1da78af87fc2a3e602cd7d6a6f02ef458ab674ce24ac6757
   languageName: node
   linkType: hard
 
@@ -5522,7 +5522,7 @@ fsevents@~2.3.2:
     "@typescript-eslint/eslint-plugin": 5.11.0
     "@typescript-eslint/parser": 5.11.0
     eslint: 8.8.0
-    eslint-config-xo: 0.39.0
+    eslint-config-xo: 0.40.0
     eslint-config-xo-react: 0.26.0
     eslint-config-xo-typescript: 0.49.0
     eslint-plugin-react: 7.28.0
