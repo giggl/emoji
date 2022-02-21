@@ -1,6 +1,6 @@
 {
 	"name": "@giggl/example",
-	"packageManager": "yarn@3.1.1",
+	"packageManager": "yarn@3.2.0",
 	"scripts": {
 		"dev": "parcel serve src/index.html --lazy",
 		"build": "parcel build src/index.html",
