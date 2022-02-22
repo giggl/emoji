@@ -1,7 +1,7 @@
 {
 	"name": "giggl",
 	"private": true,
-	"version": "1.0.7",
+	"version": "1.0.6",
 	"packageManager": "yarn@3.2.0",
 	"homepage": "https://giggl.app",
 	"git": "https://github.com/giggl/emoji",
