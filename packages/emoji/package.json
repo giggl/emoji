@@ -4,7 +4,7 @@
 	"main": "dist/giggl-emoji.cjs.js",
 	"module": "dist/giggl-emoji.esm.js",
 	"typings": "dist/giggl-emoji.cjs.d.ts",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"homepage": "https://giggl.app",
 	"git": "https://github.com/giggl/emoji",
 	"files": [
