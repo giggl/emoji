@@ -1,10 +1,1 @@
-{
-	"useTabs": true,
-	"singleQuote": true,
-	"printWidth": 80,
-	"bracketSpacing": false,
-	"arrowParens": "avoid",
-	"trailingComma": "all",
-	"quoteProps": "consistent",
-	"endOfLine": "auto"
-}
+"alistair/prettier"

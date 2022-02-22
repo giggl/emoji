@@ -17,7 +17,7 @@
 	},
 	"dependencies": {
 		"@stitches/react": "^1.2.6",
-		"jotai": "^1.4.8",
+		"jotai": "^1.6.0",
 		"react-hotkeys-hook": "^3.4.4",
 		"react-window": "^1.8.6"
 	},

@@ -1866,7 +1866,7 @@ __metadata:
   dependencies:
     "@stitches/react": ^1.2.6
     "@types/react-window": 1.8.5
-    jotai: ^1.4.8
+    jotai: ^1.6.0
     react-hotkeys-hook: ^3.4.4
     react-window: ^1.8.6
     typescript: 4.5.5
@@ -3185,6 +3185,17 @@ __metadata:
     json-schema-traverse: ^0.4.1
     uri-js: ^4.2.2
   checksum: 874972efe5c4202ab0a68379481fbd3d1b5d0a7bd6d3cc21d40d3536ebff3352a2a1fabb632d4fd2cc7fe4cbdcd5ed6782084c9bbf7f32a1536d18f9da5007d4
+  languageName: node
+  linkType: hard
+
+"alistair@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "alistair@npm:1.3.1"
+  dependencies:
+    urlcat: ^2.0.4
+  peerDependencies:
+    react: "*"
+  checksum: 69411e58ec346604be25d534f8dcf966baa5cd6c1ae424d10c5fd483d1fd9cc62998d156dd6fd4052108d82b81d3987bc51cdbbeb017a72d84b5941902fc1365
   languageName: node
   linkType: hard
 
@@ -4821,6 +4832,7 @@ fsevents@~2.3.2:
     "@types/prettier": 2.4.4
     "@typescript-eslint/eslint-plugin": 5.12.1
     "@typescript-eslint/parser": 5.12.1
+    alistair: ^1.3.1
     eslint: 8.9.0
     eslint-config-xo: 0.40.0
     eslint-config-xo-react: 0.26.0
@@ -4828,6 +4840,7 @@ fsevents@~2.3.2:
     eslint-plugin-react: 7.28.0
     eslint-plugin-react-hooks: 4.3.0
     prettier: 2.5.1
+    process: ^0.11.10
   languageName: unknown
   linkType: soft
 
@@ -5469,9 +5482,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"jotai@npm:^1.4.8":
-  version: 1.4.8
-  resolution: "jotai@npm:1.4.8"
+"jotai@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "jotai@npm:1.6.0"
   peerDependencies:
     "@babel/core": "*"
     "@babel/template": "*"
@@ -5502,7 +5515,7 @@ fsevents@~2.3.2:
       optional: true
     xstate:
       optional: true
-  checksum: 98d1c6bcd69271478badc02fae351914c27dbe04b0bf588a65cd0b277f8bbdf82629f4efa62a2146f364a342d8ebe50bccd12f39debe738ff21a6737965122c4
+  checksum: fb8ec6e283f56b063e0bf479f6b4455e843b1ef07e4bf5a25b30f4c31812f1823b6ea035a278f2a317daabc7ae55b8f44e19e23bb75647a1c912b313bc87506e
   languageName: node
   linkType: hard
 
@@ -6915,6 +6928,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"process@npm:^0.11.10":
+  version: 0.11.10
+  resolution: "process@npm:0.11.10"
+  checksum: bfcce49814f7d172a6e6a14d5fa3ac92cc3d0c3b9feb1279774708a719e19acd673995226351a082a9ae99978254e320ccda4240ddc474ba31a76c79491ca7c3
+  languageName: node
+  linkType: hard
+
 "promise-inflight@npm:^1.0.1":
   version: 1.0.1
   resolution: "promise-inflight@npm:1.0.1"
@@ -8033,6 +8053,13 @@ resolve@^2.0.0-next.3:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"urlcat@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "urlcat@npm:2.0.4"
+  checksum: 9f09c87fc565445e0e79ac1c1e0c79526dff2b1bcd48a6c60c079f6b8ca32f54414721f94078ce18a433582762ef12da9306519beaf9b776864cd1a8057c535c
   languageName: node
   linkType: hard
 

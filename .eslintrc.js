@@ -9,5 +9,8 @@ module.exports = {
 
 		// Doesn't work well with forwardRef
 		'react/prop-types': 'off',
+
+		// Updated rule breaks with using `null` over undefined
+		'@typescript-eslint/ban-types': 'off',
 	},
 };

@@ -9,16 +9,16 @@ export function useCell(coords: Coords) {
 
 	const ref = useRef<HTMLButtonElement | null>(null);
 
-	const enter = () => {
-		set(coords);
-		setHovered(true);
-	};
-
-	const leave = () => {
-		setHovered(false);
-	};
-
 	useEffect(() => {
+		const leave = () => {
+			setHovered(false);
+		};
+
+		const enter = () => {
+			set(coords);
+			setHovered(true);
+		};
+
 		if (ref.current) {
 			ref.current.addEventListener('mouseenter', enter);
 			ref.current.addEventListener('mouseleave', leave);
@@ -34,7 +34,7 @@ export function useCell(coords: Coords) {
 			current.removeEventListener('mouseenter', enter);
 			current.removeEventListener('mouseleave', leave);
 		};
-	}, []);
+	}, [coords, set]);
 
 	return [ref, hovered] as const;
 }
