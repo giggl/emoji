@@ -1,28 +1,10 @@
 {
 	"name": "giggl",
 	"private": true,
+	"version": "1.0.7",
 	"packageManager": "yarn@3.2.0",
-	"devDependencies": {
-		"@babel/core": "7.17.5",
-		"@babel/preset-env": "7.16.11",
-		"@babel/preset-react": "7.16.7",
-		"@babel/preset-typescript": "7.16.7",
-		"@preconstruct/cli": "2.1.5",
-		"@types/babel__core": "7.1.18",
-		"@types/babel__preset-env": "7.9.2",
-		"@types/prettier": "2.4.4",
-		"@typescript-eslint/eslint-plugin": "5.12.1",
-		"@typescript-eslint/parser": "5.12.1",
-		"alistair": "^1.3.1",
-		"eslint": "8.9.0",
-		"eslint-config-xo": "0.40.0",
-		"eslint-config-xo-react": "0.26.0",
-		"eslint-config-xo-typescript": "0.50.0",
-		"eslint-plugin-react": "7.28.0",
-		"eslint-plugin-react-hooks": "4.3.0",
-		"prettier": "2.5.1",
-		"process": "^0.11.10"
-	},
+	"homepage": "https://giggl.app",
+	"git": "https://github.com/giggl/emoji",
 	"scripts": {
 		"watch": "preconstruct watch",
 		"dev": "preconstruct dev",
@@ -45,7 +27,24 @@
 			"packages/*"
 		]
 	},
-	"homepage": "https://giggl.app",
-	"version": "1.0.6",
-	"git": "https://github.com/giggl/emoji"
+	"devDependencies": {
+		"@babel/core": "7.17.5",
+		"@babel/preset-env": "7.16.11",
+		"@babel/preset-react": "7.16.7",
+		"@babel/preset-typescript": "7.16.7",
+		"@preconstruct/cli": "2.1.5",
+		"@types/babel__core": "7.1.18",
+		"@types/babel__preset-env": "7.9.2",
+		"@types/prettier": "2.4.4",
+		"@typescript-eslint/eslint-plugin": "5.12.1",
+		"@typescript-eslint/parser": "5.12.1",
+		"alistair": "^1.3.1",
+		"eslint": "8.9.0",
+		"eslint-config-xo": "0.40.0",
+		"eslint-config-xo-react": "0.26.0",
+		"eslint-config-xo-typescript": "0.50.0",
+		"eslint-plugin-react": "7.28.0",
+		"eslint-plugin-react-hooks": "4.3.0",
+		"prettier": "2.5.1"
+	}
 }
