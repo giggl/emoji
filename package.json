@@ -41,7 +41,7 @@
 		"alistair": "1.4.0",
 		"eslint": "8.11.0",
 		"eslint-config-xo": "0.40.0",
-		"eslint-config-xo-react": "0.26.0",
+		"eslint-config-xo-react": "0.27.0",
 		"eslint-config-xo-typescript": "0.50.0",
 		"eslint-plugin-react": "7.29.4",
 		"eslint-plugin-react-hooks": "4.3.0",
