@@ -1907,7 +1907,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@giggl/example@workspace:apps/example"
   dependencies:
-    "@types/react": 17.0.41
+    "@types/react": 17.0.52
     "@types/react-dom": 17.0.14
     parcel: 2.3.2
     react: 17.0.2
@@ -2981,14 +2981,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.41":
-  version: 17.0.41
-  resolution: "@types/react@npm:17.0.41"
+"@types/react@npm:17.0.52":
+  version: 17.0.52
+  resolution: "@types/react@npm:17.0.52"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 1b086ec0ea5d666f05e19e0724e41278d27a2ca29a2cd71b9d9ab3fe27dba233806eb728d744e092c9fe9637ac738d8c5a05983cde84d215342949b47ecba2ef
+  checksum: a51b98dd87838d161278fdf9dd78e6a4ff8c018f406d6647f77963e144fb52a8beee40c89fd0e7e840eaeaa8bd9fe2f34519410540b1a52d43a6f8b4d2fbce33
   languageName: node
   linkType: hard
 
