@@ -5026,10 +5026,10 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"hotkeys-js@npm:3.8.7":
-  version: 3.8.7
-  resolution: "hotkeys-js@npm:3.8.7"
-  checksum: 1eb6df2781e8e49a80c72930d5c69ed50ea16d1dbef0667512059f5b5d1551bfdce3024c25d99275ab567e0b7ae0fbf292971542ea347ed8b7b585eab4e99287
+"hotkeys-js@npm:3.9.4":
+  version: 3.9.4
+  resolution: "hotkeys-js@npm:3.9.4"
+  checksum: 98c3121d458f960c8804f5d8d6be02c4187aaeee5a0b7df28c8d99705e5f65f67b1140658d8128401892bb07b19d18c5e9ea9e84fe170fb06206b639ad53438b
   languageName: node
   linkType: hard
 
@@ -7065,14 +7065,14 @@ fsevents@~2.3.2:
   linkType: hard
 
 "react-hotkeys-hook@npm:^3.4.4":
-  version: 3.4.4
-  resolution: "react-hotkeys-hook@npm:3.4.4"
+  version: 3.4.7
+  resolution: "react-hotkeys-hook@npm:3.4.7"
   dependencies:
-    hotkeys-js: 3.8.7
+    hotkeys-js: 3.9.4
   peerDependencies:
     react: ">=16.8.1"
     react-dom: ">=16.8.1"
-  checksum: c5553e18a0a4d9c642c797e5684f2cc51737d920636d9b6afce5e8c410856068079604eaea9e27648184a7e6566143b4d7b431e45362a8d4b5bf915f4d04c8a5
+  checksum: 1ec5d197377713168454d0c4c3f8d609cf8302afd276b267a219beb956de6df5c9a5baf06c244c45368c64538e0881d65eb844bd56c45823752fc8deeaf41031
   languageName: node
   linkType: hard
 
