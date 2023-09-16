@@ -28,10 +28,10 @@
 		]
 	},
 	"devDependencies": {
-		"@babel/core": "7.17.8",
-		"@babel/preset-env": "7.16.11",
-		"@babel/preset-react": "7.16.7",
-		"@babel/preset-typescript": "7.16.7",
+		"@babel/core": "7.22.20",
+		"@babel/preset-env": "7.22.20",
+		"@babel/preset-react": "7.22.15",
+		"@babel/preset-typescript": "7.22.15",
 		"@preconstruct/cli": "2.1.5",
 		"@types/babel__core": "7.1.19",
 		"@types/babel__preset-env": "7.9.2",
